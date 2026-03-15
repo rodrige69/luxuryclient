@@ -16,8 +16,8 @@
   --gold-pale:#FDF3D0;--cream:#FEFCF7;--white:#FFFFFF;--coral:#D4627A;--green:#2A8C5A;
   --r:16px;--r-lg:28px;--shadow:0 20px 60px rgba(14,11,26,.18);--shadow-sm:0 4px 20px rgba(14,11,26,.1);
 }
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;max-width:100vw;-webkit-font-smoothing:antialiased}
 h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif}
 
 /* ── LANGUAGE TOGGLE ── */
@@ -89,11 +89,15 @@ section{padding:120px 48px}
 .section-header.center .section-sub{max-width:600px;margin:0 auto}
 
 /* ── HERO ── */
-.hero{min-height:100vh;position:relative;overflow:hidden;background:var(--ink);display:flex;align-items:center;padding:140px 48px 100px}
-.hero-orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.35;animation:drift 12s ease-in-out infinite}
+.hero{min-height:100vh;position:relative;overflow:hidden;background:var(--ink);display:flex;align-items:center;padding:140px 48px 100px}.hero-orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.35;animation:drift 12s ease-in-out infinite}
 .hero-orb-1{width:700px;height:700px;background:#3D1F8A;top:-200px;right:-200px;animation-delay:0s}
 .hero-orb-2{width:500px;height:500px;background:#8B1A5C;bottom:-150px;left:-100px;animation-delay:-4s}
 .hero-orb-3{width:300px;height:300px;background:#C9940A;top:40%;left:40%;opacity:.15;animation-delay:-8s}
+@media(max-width:768px){
+  .hero-orb-1{width:300px;height:300px;top:-100px;right:-80px}
+  .hero-orb-2{width:260px;height:260px;bottom:-80px;left:-60px}
+  .hero-orb-3{display:none}
+}
 @keyframes drift{0%,100%{transform:translate(0,0)}33%{transform:translate(40px,-30px)}66%{transform:translate(-25px,35px)}}
 .hero-grain{position:absolute;inset:0;z-index:1;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px}
 .hero-content{position:relative;z-index:2;max-width:760px}
@@ -101,23 +105,35 @@ section{padding:120px 48px}
 .vertical-pill{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);letter-spacing:.08em;text-transform:uppercase;transition:all .25s;cursor:default}
 .vertical-pill.active{background:rgba(201,148,10,.15);border-color:rgba(201,148,10,.4);color:var(--gold-bright)}
 
-/* Mobile: hide all pills, show single fading word instead */
+/* Pills hidden on all sizes — replaced by fading word */
+.hero-verticals{display:none}
 .vertical-word-mobile{display:none}
-@media(max-width:768px){
-  .hero-verticals{display:none}
-  .vertical-word-mobile{
-    display:flex;align-items:center;gap:10px;
-    margin-bottom:24px;animation:fadeUp .8s ease both;
-  }
-  .vwm-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35)}
-  .vwm-word{
-    font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--gold-bright);
-    animation:none;min-width:180px;
-  }
-  @keyframes wordFade{0%{opacity:0;transform:translateY(6px)}15%{opacity:1;transform:translateY(0)}85%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-6px)}}
-  .vwm-word.animating{animation:wordFade 2s ease forwards}
+
+/* Fading word — shown on ALL screen sizes */
+.vertical-word-all{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:32px;animation:fadeUp .8s ease both;
 }
+.vwa-label{
+  font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);white-space:nowrap;
+}
+.vwa-word{
+  font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold-bright);min-width:0;
+}
+@media(min-width:769px){
+  .vwa-word{font-size:14px;letter-spacing:.16em}
+}
+@keyframes wordFadeAll{
+  0%{opacity:0;transform:translateY(8px)}
+  15%{opacity:1;transform:translateY(0)}
+  80%{opacity:1;transform:translateY(0)}
+  100%{opacity:0;transform:translateY(-8px)}
+}
+.vwa-word.animating{animation:wordFadeAll 2.2s ease forwards}
+/* Separator dot */
+.vwa-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0}
 .hero h1{font-size:clamp(44px,7vw,88px);font-weight:600;color:var(--white);line-height:1.0;margin-bottom:28px;animation:fadeUp .8s .1s ease both}
 .hero h1 em{color:var(--gold-bright);font-style:italic}
 .hero-sub{font-size:clamp(16px,2.2vw,21px);color:rgba(255,255,255,.65);line-height:1.65;max-width:580px;margin-bottom:48px;animation:fadeUp .8s .2s ease both}
@@ -401,12 +417,13 @@ section{padding:120px 48px}
   .modal-overlay{padding:0;align-items:flex-end}
   .modal{
     border-radius:20px 20px 0 0;
-    padding:12px 20px 40px;
+    padding:12px 24px 40px;
     transform:translateY(60px);
     max-width:100%;width:100%;
     max-height:85vh;
     overflow-y:auto;
     -webkit-overflow-scrolling:touch;
+    text-align:left;
   }
   .modal::before{
     content:'';display:block;
@@ -417,11 +434,11 @@ section{padding:120px 48px}
   }
   .modal-overlay.open .modal{transform:translateY(0)}
   .modal .modal-close{top:14px;right:14px;width:28px;height:28px;font-size:14px}
-  .modal .modal-icon{font-size:32px;margin-bottom:10px}
-  .modal h3{font-size:22px;margin-bottom:8px}
-  .modal-sub{font-size:13px;margin-bottom:18px;line-height:1.5}
+  .modal .modal-icon{font-size:32px;margin-bottom:10px;text-align:center;display:block}
+  .modal h3{font-size:22px;margin-bottom:8px;text-align:center}
+  .modal-sub{font-size:13px;margin-bottom:18px;line-height:1.5;text-align:center}
   .modal-options{gap:8px}
-  .modal-option{padding:12px 14px;border-radius:12px}
+  .modal-option{padding:14px 16px;border-radius:12px}
   .mo-label{font-size:11px;margin-bottom:3px}
   .mo-desc{font-size:12px;line-height:1.4}
 }
@@ -454,7 +471,7 @@ section{padding:120px 48px}
 .nb-title{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--white);margin-bottom:10px}
 .nb-sub{font-size:15px;color:rgba(255,255,255,.45);margin-bottom:32px}
 .nb-form{display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap}
-.nb-input{flex:1;padding:14px 20px;border-radius:12px;border:1px solid rgba(255,255,255,.12);font-size:14px;font-family:'DM Sans',sans-serif;min-width:200px;outline:none;background:rgba(255,255,255,.08);color:var(--white)}
+.nb-input{flex:1;padding:14px 20px;border-radius:12px;border:1px solid rgba(255,255,255,.12);font-size:14px;font-family:'DM Sans',sans-serif;min-width:0;outline:none;background:rgba(255,255,255,.08);color:var(--white)}
 .nb-input::placeholder{color:rgba(255,255,255,.25)}
 .nb-input:focus{border-color:rgba(201,148,10,.4)}
 
@@ -525,19 +542,11 @@ section{padding:120px 48px}
   </div>
   <div class="container">
     <div class="hero-content">
-      <div class="hero-verticals">
-        <span class="vertical-pill active" data-en="Med Spas" data-es="Clínicas Estéticas">Med Spas</span>
-        <span class="vertical-pill" data-en="Dental" data-es="Dental">Dental</span>
-        <span class="vertical-pill" data-en="Plastic Surgery" data-es="Cirugía Plástica">Plastic Surgery</span>
-        <span class="vertical-pill" data-en="Chiropractic" data-es="Quiropráctica">Chiropractic</span>
-        <span class="vertical-pill" data-en="Wellness Centers" data-es="Centros de Bienestar">Wellness Centers</span>
-        <span class="vertical-pill" data-en="IV Therapy" data-es="Terapia IV">IV Therapy</span>
-        <span class="vertical-pill" data-en="High-End Salons" data-es="Salones de Lujo">High-End Salons</span>
-      </div>
-      <!-- Mobile only: single fading word -->
-      <div class="vertical-word-mobile">
-        <span class="vwm-label" data-en="For:" data-es="Para:">For:</span>
-        <span class="vwm-word animating" id="vwmWord">Med Spas</span>
+      <!-- All screens: single fading word -->
+      <div class="vertical-word-all">
+        <span class="vwa-label" data-en="For:" data-es="Para:">For:</span>
+        <span class="vwa-dot"></span>
+        <span class="vwa-word animating" id="vwaWord">Med Spas</span>
       </div>
       <h1 data-en="Stop Paying<br>the <em>Ghost Tax.</em>" data-es="Deja de Pagar<br>el <em>Impuesto Fantasma.</em>">Stop Paying<br>the <em>Ghost Tax.</em></h1>
       <p class="hero-sub" data-en="Your high-value patients spend $3K–$15K, then disappear.<br><strong>We bring them back</strong> — with bilingual AI follow-up and real luxury vacation rewards that make rebooking irresistible." data-es="Tus pacientes de alto valor gastan $3K–$15K y desaparecen.<br><strong>Los hacemos volver</strong> — con seguimiento de IA bilingüe y recompensas de vacaciones de lujo que hacen que reservar de nuevo sea irresistible.">Your high-value patients spend $3K–$15K, then disappear.<br><strong>We bring them back</strong> — with bilingual AI follow-up and real luxury vacation rewards that make rebooking irresistible.</p>
@@ -1333,6 +1342,15 @@ function setLang(lang) {
     ? 'IA bilingüe + recompensas de vacaciones para clínicas estéticas, dentales, quiropráctica y bienestar.'
     : 'Bilingual AI loyalty + vacation rewards for luxury service businesses.';
 
+  // Refresh fading word in new language
+  const wordEl = document.getElementById('vwaWord');
+  if (wordEl) {
+    wordEl.classList.remove('animating');
+    void wordEl.offsetWidth;
+    wordEl.textContent = verticals[lang][activePill];
+    wordEl.classList.add('animating');
+  }
+
   // Demo buttons
   const miniBtn = document.getElementById('miniNextBtn');
   if (miniBtn) miniBtn.textContent = miniStep === 2 ? (lang==='es'?'Reservar ✓':'Book Audit ✓') : (lang==='es'?'Siguiente →':'Next →');
@@ -1460,8 +1478,7 @@ function renderQR(id) {
 }
 renderQR('fullQR');
 
-// ── VERTICAL CYCLING — desktop pills + mobile fading word ──
-const pills = document.querySelectorAll('.vertical-pill');
+// ── VERTICAL CYCLING — unified fading word ──
 const verticals = {
   en: ['Med Spas','Dental','Plastic Surgery','Chiropractic','Wellness Centers','IV Therapy','High-End Salons'],
   es: ['Clínicas Estéticas','Dental','Cirugía Plástica','Quiropráctica','Centros de Bienestar','Terapia IV','Salones de Lujo']
@@ -1469,13 +1486,8 @@ const verticals = {
 let activePill = 0;
 
 function cycleVerticals() {
-  // Desktop pills
-  pills[activePill]?.classList.remove('active');
-  activePill = (activePill + 1) % pills.length;
-  pills[activePill]?.classList.add('active');
-
-  // Mobile fading word
-  const wordEl = document.getElementById('vwmWord');
+  activePill = (activePill + 1) % verticals.en.length;
+  const wordEl = document.getElementById('vwaWord');
   if (wordEl) {
     wordEl.classList.remove('animating');
     void wordEl.offsetWidth; // force reflow to restart animation
@@ -1483,7 +1495,7 @@ function cycleVerticals() {
     wordEl.classList.add('animating');
   }
 }
-setInterval(cycleVerticals, 2200);
+setInterval(cycleVerticals, 2400);
 
 // ── SCROLL REVEAL ──
 function checkReveals() {
