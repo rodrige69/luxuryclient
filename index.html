@@ -408,7 +408,22 @@ section{padding:120px 48px}
 .gcal-success h4{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--ink);margin-bottom:10px}
 .gcal-success p{font-size:15px;color:#6B6480;line-height:1.65;margin-bottom:24px}
 
-/* ── AUDIT MODAL ── */
+/* ── TERMS MODAL ── */
+.tc-modal{position:fixed;inset:0;z-index:9997;background:rgba(7,5,18,.9);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.tc-modal.open{opacity:1;pointer-events:all}
+.tc-inner{background:var(--white);border-radius:var(--r-lg);max-width:520px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 40px 80px rgba(0,0,0,.4)}
+@media(max-width:768px){.tc-modal{padding:0;align-items:flex-end}.tc-inner{border-radius:20px 20px 0 0;max-height:88vh}}
+.tc-header{background:var(--ink);padding:24px 28px;position:sticky;top:0;display:flex;align-items:center;justify-content:space-between}
+.tc-header h3{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white)}
+.tc-close{background:rgba(255,255,255,.1);border:none;width:30px;height:30px;border-radius:50%;color:rgba(255,255,255,.6);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
+.tc-close:hover{background:rgba(255,255,255,.2);color:var(--white)}
+.tc-body{padding:28px}
+.tc-rule{padding:16px 0;border-bottom:1px solid rgba(91,63,190,.1);display:flex;gap:14px;align-items:flex-start}
+.tc-rule:last-child{border-bottom:none}
+.tc-rule-icon{font-size:20px;flex-shrink:0;width:32px;text-align:center;margin-top:2px}
+.tc-rule-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px;letter-spacing:.02em}
+.tc-rule-desc{font-size:13px;color:#6B6480;line-height:1.55}
+.tc-disclaimer{margin-top:20px;padding:16px;background:var(--lavender);border-radius:var(--r);font-size:12px;color:var(--text-secondary);line-height:1.6;color:#6B6480}
 .modal-overlay{position:fixed;inset:0;z-index:9999;background:rgba(7,5,18,.88);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .4s}
 .modal-overlay.open{opacity:1;pointer-events:all}
 .modal{background:var(--ink2);border-radius:var(--r-lg);padding:56px 48px;max-width:520px;width:100%;position:relative;border:1px solid rgba(201,148,10,.2);box-shadow:0 48px 100px rgba(0,0,0,.6);text-align:center;transform:scale(.95) translateY(16px);transition:transform .4s cubic-bezier(.16,1,.3,1)}
@@ -511,6 +526,8 @@ section{padding:120px 48px}
       <button class="nav-link active" onclick="showPage('home')" data-en="Home" data-es="Inicio">Home</button>
       <button class="nav-link" onclick="showPage('blog')" data-en="Blog" data-es="Blog">Blog</button>
       <button class="nav-link" onclick="showPage('demo')" data-en="Demo" data-es="Demo">Demo</button>
+      <button class="nav-link" onclick="showPage('booking')" data-en="Book a Call" data-es="Reservar">Book a Call</button>
+      <button class="nav-link" onclick="showPage('chat')" data-en="Ask Lazo" data-es="Pregunta a Lazo">Ask Lazo</button>
       <button class="nav-link" onclick="showPage('login')" data-en="Client Login" data-es="Acceso Clientes">Client Login</button>
     </div>
     <div class="lang-toggle">
@@ -551,7 +568,7 @@ section{padding:120px 48px}
       <h1 data-en="Stop Paying<br>the <em>Ghost Tax.</em>" data-es="Deja de Pagar<br>el <em>Impuesto Fantasma.</em>">Stop Paying<br>the <em>Ghost Tax.</em></h1>
       <p class="hero-sub" data-en="Your high-value patients spend $3K–$15K, then disappear.<br><strong>We bring them back</strong> — with bilingual AI follow-up and real luxury vacation rewards that make rebooking irresistible." data-es="Tus pacientes de alto valor gastan $3K–$15K y desaparecen.<br><strong>Los hacemos volver</strong> — con seguimiento de IA bilingüe y recompensas de vacaciones de lujo que hacen que reservar de nuevo sea irresistible.">Your high-value patients spend $3K–$15K, then disappear.<br><strong>We bring them back</strong> — with bilingual AI follow-up and real luxury vacation rewards that make rebooking irresistible.</p>
       <div class="hero-actions">
-        <button class="btn btn-gold btn-lg" onclick="openModal()" data-en="Get a Free Ghost Tax Audit" data-es="Auditoría Gratuita del Impuesto Fantasma">Get a Free Ghost Tax Audit</button>
+        <button class="btn btn-gold btn-lg" onclick="showPage('booking')" data-en="Get a Free Ghost Tax Audit" data-es="Auditoría Gratuita del Impuesto Fantasma">Get a Free Ghost Tax Audit</button>
         <button class="btn btn-ghost btn-lg" onclick="showPage('demo')" data-en="▶ See How It Works" data-es="▶ Ver Cómo Funciona">▶ See How It Works</button>
       </div>
       <div class="proof-strip">
@@ -710,7 +727,7 @@ section{padding:120px 48px}
         <div class="ls-num">3</div>
         <div class="ls-icon">✈️</div>
         <div class="ls-title" data-en="Vacation Reward" data-es="Recompensa de Vacaciones">Vacation Reward</div>
-        <p class="ls-desc" data-en="Rebook and earn a real 3-day getaway — valued at $897. The hook that makes your loyalty program unforgettable." data-es="Reserva y gana una escapada real de 3 días — valorada en $897. El gancho que hace tu programa de lealtad inolvidable.">Rebook and earn a real 3-day getaway — valued at $897. The hook that makes your loyalty program unforgettable.</p>
+        <p class="ls-desc" data-en="Rebook and earn a Complimentary 3-Day Hotel Stay*. The hook that makes your loyalty program unforgettable." data-es="Reserva y gana una Estadía de Hotel Complementaria de 3 Días*. El gancho que hace tu programa de lealtad inolvidable.">Rebook and earn a Complimentary 3-Day Hotel Stay*. The hook that makes your loyalty program unforgettable.</p>
       </div>
       <div class="loop-step reveal d3">
         <div class="ls-num">4</div>
@@ -815,7 +832,7 @@ section{padding:120px 48px}
         <ul class="price-features">
           <li><span class="pf-check">✓</span><span data-en="Bilingual AI follow-up (EN + ES)" data-es="Seguimiento de IA bilingüe (EN + ES)">Bilingual AI follow-up (EN + ES)</span></li>
           <li><span class="pf-check">✓</span><span data-en="Apple/Google Wallet loyalty card" data-es="Tarjeta de lealtad Apple/Google Wallet">Apple/Google Wallet loyalty card</span></li>
-          <li><span class="pf-check">✓</span><span data-en="Vacation reward system activated" data-es="Sistema de recompensas de vacaciones activado">Vacation reward system activated</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Complimentary 3-Day Hotel Stay reward system*" data-es="Sistema de Estadía de Hotel Complementaria de 3 Días*">Complimentary 3-Day Hotel Stay reward system*</span></li>
           <li><span class="pf-check">✓</span><span data-en="Review firewall + 5★ automation" data-es="Escudo de reseñas + automatización 5★">Review firewall + 5★ automation</span></li>
           <li><span class="pf-check">✓</span><span data-en="Live revenue dashboard" data-es="Panel de ingresos en vivo">Live revenue dashboard</span></li>
           <li><span class="pf-check">✓</span><span data-en="Full onboarding + setup included" data-es="Integración completa + configuración incluida">Full onboarding + setup included</span></li>
@@ -840,6 +857,7 @@ section{padding:120px 48px}
           <li><span class="pf-check">✓</span><span data-en="Monthly performance report" data-es="Informe mensual de rendimiento">Monthly performance report</span></li>
           <li><span class="pf-check">✓</span><span data-en="A/B message testing" data-es="Pruebas A/B de mensajes">A/B message testing</span></li>
           <li><span class="pf-check">✓</span><span data-en="Referral tracking module" data-es="Módulo de seguimiento de referidos">Referral tracking module</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Multi-location add-on: +$149–$197/mo per additional office" data-es="Adicional multi-sede: +$149–$197/mes por oficina adicional">Multi-location add-on: +$149–$197/mo per additional office</span></li>
         </ul>
         <button class="btn btn-gold btn-full" onclick="openModal()" data-en="Join the Waitlist →" data-es="Unirse a la Lista de Espera →">Join the Waitlist →</button>
         <p class="price-note" data-en="Available once founding cohort results are published." data-es="Disponible una vez publicados los resultados del cohorte fundador.">Available once founding cohort results are published.</p>
@@ -931,7 +949,7 @@ section{padding:120px 48px}
           </div>
           <div style="display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--lavender);border-radius:var(--r);border:1px solid rgba(91,63,190,.1)">
             <span style="font-size:24px">✈️</span>
-            <div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px" data-en="Real vacation rewards, not gift cards" data-es="Recompensas reales de vacaciones, no tarjetas de regalo">Real vacation rewards, not gift cards</div><div style="font-size:13px;color:#6B6480" data-en="3-day getaways worth $897. Destinations include Orlando, Cancún, Bahamas." data-es="Escapadas de 3 días valoradas en $897. Destinos incluyen Orlando, Cancún, Bahamas.">3-day getaways worth $897. Destinations include Orlando, Cancún, Bahamas.</div></div>
+            <div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px" data-en="Real vacation rewards, not gift cards" data-es="Recompensas reales de vacaciones, no tarjetas de regalo">Real vacation rewards, not gift cards</div><div style="font-size:13px;color:#6B6480" data-en="Complimentary 3-Day Hotel Stays*. Destinations: Cancún, Orlando, or the Bahamas." data-es="Estadías de hotel complementarias de 3 noches*. Destinos: Cancún, Orlando o Bahamas.">Complimentary 3-Day Hotel Stays*. Destinations: Cancún, Orlando, or the Bahamas.</div></div>
           </div>
         </div>
         <button class="btn btn-dark btn-lg" onclick="showPage('demo')" data-en="Open Full Interactive Demo →" data-es="Abrir Demo Interactivo Completo →">Open Full Interactive Demo →</button>
@@ -956,7 +974,7 @@ section{padding:120px 48px}
             <div class="demo-step-content" id="mini-step-2">
               <div class="ai-bubble">
                 <div class="ab-sender">✨ AI · <span data-en="24hrs later" data-es="24 hrs después">24hrs later</span></div>
-                <p class="ab-msg">¡Hola Sarah! 👋 <span data-en="You're just" data-es="¡Solo te faltan">You're just</span> <strong>800 <span data-en="points" data-es="puntos">points</span></strong> <span data-en="away from a FREE 3-day getaway! 🌴 Ready to rebook?" data-es="para una escapada GRATIS de 3 días! 🌴 ¿Lista para reservar?">away from a FREE 3-day getaway! 🌴 Ready to rebook?</span></p>
+                <p class="ab-msg">¡Hola Sarah! 👋 <span data-en="You're just" data-es="¡Solo te faltan">You're just</span> <strong>800 <span data-en="points" data-es="puntos">points</span></strong> <span data-en="away from a Complimentary 3-Day Hotel Stay! 🌴 Ready to rebook?" data-es="para una estadía de hotel complementaria de 3 días! 🌴 ¿Lista para reservar?">away from a Complimentary 3-Day Hotel Stay! 🌴 Ready to rebook?</span></p>
               </div>
               <button style="width:100%;background:var(--gold-bright);color:var(--ink);border:none;border-radius:12px;padding:14px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif" data-en="Yes! Book My Next Visit →" data-es="¡Sí! Reservar Mi Próxima Visita →">Yes! Book My Next Visit →</button>
             </div>
@@ -964,7 +982,7 @@ section{padding:120px 48px}
               <div class="success-card">
                 <div class="sc-stars">⭐⭐⭐⭐⭐</div>
                 <div class="sc-msg" data-en="Review Posted to Google!" data-es="¡Reseña Publicada en Google!">Review Posted to Google!</div>
-                <div class="sc-sub" data-en='"Best practice in Miami! Got a FREE vacation! 🌴"' data-es='"¡La mejor clínica de Miami! ¡Me dieron vacaciones GRATIS! 🌴"'>"Best practice in Miami! Got a FREE vacation! 🌴"</div>
+                <div class="sc-sub" data-en='"Best practice in Miami! Got a complimentary hotel stay! 🌴"' data-es='"¡La mejor clínica de Miami! ¡Me dieron estadía de hotel complementaria! 🌴"'>"Best practice in Miami! Got a complimentary hotel stay! 🌴"</div>
               </div>
               <div style="margin-top:14px;padding:14px 16px;background:rgba(255,255,255,.05);border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,.08)">
                 <div style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:6px" data-en="Reputation firewall active" data-es="Escudo de reputación activo">Reputation firewall active</div>
@@ -994,7 +1012,7 @@ section{padding:120px 48px}
     <h2 class="final-title" data-en="Stop Ghosting.<br><em>Start Growing.</em>" data-es="Sin Más Fantasmas.<br><em>Empieza a Crecer.</em>">Stop Ghosting.<br><em>Start Growing.</em></h2>
     <p class="final-sub" data-en="3x ROI or we work free. No long-term contracts. No tech headaches." data-es="3x ROI o trabajamos gratis. Sin contratos a largo plazo. Sin dolores de cabeza tecnológicos.">3x ROI or we work free. No long-term contracts. No tech headaches.</p>
     <div class="final-actions">
-      <button class="btn btn-gold btn-lg" onclick="openModal()" data-en="📅 Book Free Ghost Tax Audit" data-es="📅 Reservar Auditoría Gratuita">📅 Book Free Ghost Tax Audit</button>
+      <button class="btn btn-gold btn-lg" onclick="showPage('booking')" data-en="📅 Book Free Ghost Tax Audit" data-es="📅 Reservar Auditoría Gratuita">📅 Book Free Ghost Tax Audit</button>
       <button class="btn btn-ghost btn-lg" onclick="showPage('demo')" data-en="▶ Watch Demo" data-es="▶ Ver Demo">▶ Watch Demo</button>
     </div>
     <div class="final-guarantee">
@@ -1029,7 +1047,7 @@ section{padding:120px 48px}
           <div class="bc-body">
             <span class="bc-cat" data-en="Loyalty" data-es="Lealtad">Loyalty</span>
             <h3 class="bc-title" data-en="Why Vacation Rewards Beat Discount Loyalty Programs Every Time" data-es="Por Qué las Recompensas de Vacaciones Superan a los Descuentos Siempre">Why Vacation Rewards Beat Discount Loyalty Programs Every Time</h3>
-            <p class="bc-excerpt" data-en="Points and gift cards feel transactional. A free vacation feels like a gift. Here's the psychology — and the numbers." data-es="Los puntos y las tarjetas de regalo se sienten transaccionales. Unas vacaciones gratis se sienten como un regalo. Aquí está la psicología — y los números.">Points and gift cards feel transactional. A free vacation feels like a gift. Here's the psychology and the numbers.</p>
+            <p class="bc-excerpt" data-en="Points and gift cards feel transactional. A complimentary hotel stay feels like a gift. Here's the psychology — and the numbers." data-es="Los puntos y las tarjetas de regalo se sienten transaccionales. Unas estadía de hotel complementaria se sienten como un regalo. Aquí está la psicología — y los números.">Points and gift cards feel transactional. A complimentary hotel stay feels like a gift. Here's the psychology and the numbers.</p>
             <a href="#" class="bc-link" data-en="Read More →" data-es="Leer Más →">Read More →</a>
           </div>
         </div>
@@ -1095,7 +1113,7 @@ section{padding:120px 48px}
           <div class="demo-step-content" id="full-step-3">
             <div class="ai-bubble" style="margin-bottom:12px">
               <div class="ab-sender">✨ AI · <span data-en="24 hrs after visit" data-es="24 hrs después de la visita">24 hrs after visit</span></div>
-              <p class="ab-msg">¡Hola Sarah! <span data-en="You earned" data-es="Ganaste">You earned</span> <strong>500 <span data-en="points" data-es="puntos">points</span></strong> — <span data-en="just 500 more for your FREE vacation! 🌴 Ready to rebook?" data-es="¡solo 500 más para tus vacaciones GRATIS! 🌴 ¿Lista para reservar?">just 500 more for your FREE vacation! 🌴 Ready to rebook?</span></p>
+              <p class="ab-msg">¡Hola Sarah! <span data-en="You earned" data-es="Ganaste">You earned</span> <strong>500 <span data-en="points" data-es="puntos">points</span></strong> — <span data-en="just 500 more for your complimentary hotel stay! 🌴 Ready to rebook?" data-es="¡solo 500 más para tus estadía de hotel complementaria! 🌴 ¿Lista para reservar?">just 500 more for your complimentary hotel stay! 🌴 Ready to rebook?</span></p>
             </div>
             <div style="display:flex;gap:8px">
               <button style="flex:1;background:var(--gold-bright);color:var(--ink);border:none;border-radius:10px;padding:12px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif" data-en="¡Sí! Book Now 🗓️" data-es="¡Sí! Reservar 🗓️">¡Sí! Book Now 🗓️</button>
@@ -1108,8 +1126,9 @@ section{padding:120px 48px}
               <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold-bright);font-weight:700;margin-bottom:6px" data-en="Vacation Unlocked!" data-es="¡Vacaciones Desbloqueadas!">Vacation Unlocked!</div>
               <div style="font-size:12px;color:rgba(255,255,255,.6);margin-bottom:14px" data-en="Sarah rebooked → 1,000 points reached" data-es="Sarah reservó → 1,000 puntos alcanzados">Sarah rebooked → 1,000 points reached</div>
               <div style="background:rgba(232,185,35,.1);border:1px solid rgba(232,185,35,.25);border-radius:10px;padding:12px">
-                <div style="font-size:13px;font-weight:700;color:var(--gold-bright)" data-en="FREE 3-Day Getaway" data-es="Escapada GRATUITA de 3 Días">FREE 3-Day Getaway</div>
-                <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:4px" data-en="Orlando · Cancún · Bahamas · Your choice" data-es="Orlando · Cancún · Bahamas · Tu elección">Orlando · Cancún · Bahamas · Your choice</div>
+                <div style="font-size:13px;font-weight:700;color:var(--gold-bright)" data-en="Complimentary 3-Day Hotel Stay" data-es="Estadía Complementaria de 3 Noches">Complimentary 3-Day Hotel Stay</div>
+                <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:4px" data-en="Cancún, Orlando, or the Bahamas · Your choice" data-es="Cancún, Orlando o Bahamas · Tu elección">Cancún, Orlando, or the Bahamas · Your choice</div>
+                <div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.4" data-en="*Room rate covered. Flights, taxes &amp; resort fees not included." data-es="*Tarifa de habitación cubierta. Vuelos, impuestos y tarifas de resort no incluidos.">*Room rate covered. Flights, taxes &amp; resort fees not included.</div>
               </div>
             </div>
             <button style="width:100%;background:var(--gold-bright);color:var(--ink);border:none;border-radius:12px;padding:13px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif" data-en="Claim My Vacation →" data-es="Reclamar Mis Vacaciones →">Claim My Vacation →</button>
@@ -1118,7 +1137,7 @@ section{padding:120px 48px}
             <div class="success-card" style="margin-bottom:12px">
               <div class="sc-stars">⭐⭐⭐⭐⭐</div>
               <div class="sc-msg" data-en="Review Auto-Posted to Google!" data-es="¡Reseña Publicada Automáticamente en Google!">Review Auto-Posted to Google!</div>
-              <div class="sc-sub" data-en='"Amazing results + free vacation! 10/10 🌴"' data-es='"¡Resultados increíbles + vacaciones gratis! 10/10 🌴"'>"Amazing results + free vacation! 10/10 🌴"</div>
+              <div class="sc-sub" data-en='"Amazing results + complimentary hotel stay! 10/10 🌴"' data-es='"¡Resultados increíbles + estadía de hotel complementaria! 10/10 🌴"'>"Amazing results + complimentary hotel stay! 10/10 🌴"</div>
             </div>
             <div style="padding:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;margin-bottom:12px">
               <div style="font-size:11px;color:rgba(255,255,255,.3);margin-bottom:5px;text-align:center" data-en="Reputation Firewall Active" data-es="Escudo de Reputación Activo">Reputation Firewall Active</div>
@@ -1169,6 +1188,187 @@ section{padding:120px 48px}
   </div>
 </div>
 
+<!-- ══ BOOKING PAGE ══ -->
+<div id="page-booking" class="page">
+
+  <!-- Hero -->
+  <div style="background:var(--ink);padding:120px 48px 72px;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 50%,rgba(91,63,190,.25) 0%,transparent 65%)"></div>
+    <div class="container" style="position:relative;z-index:1;max-width:800px">
+      <span class="section-eyebrow" style="color:rgba(201,148,10,.7)" data-en="Free · 15 Minutes · No Obligation" data-es="Gratis · 15 Minutos · Sin Compromiso">Free · 15 Minutes · No Obligation</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,60px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:20px" data-en="Book Your Free Ghost Tax<br>Audit + Demo" data-es="Reserva Tu Auditoría Gratuita<br>del Impuesto Fantasma + Demo">Book Your Free Ghost Tax<br>Audit + Demo</h1>
+      <p style="font-size:clamp(16px,2vw,20px);color:rgba(255,255,255,.65);line-height:1.65;max-width:620px;margin-bottom:0" data-en="In 15 minutes, Daniel will calculate your exact Ghost Tax number live — and show you exactly how LuxuryClientFlow fixes it for a practice like yours. Most owners leave knowing what they're losing and how to stop it. Whether you move forward or not, the number is worth knowing." data-es="En 15 minutos, Daniel calculará tu número exacto del Impuesto Fantasma en vivo — y te mostrará exactamente cómo LuxuryClientFlow lo resuelve para una práctica como la tuya. La mayoría de los propietarios salen sabiendo lo que están perdiendo y cómo detenerlo.">In 15 minutes, Daniel will calculate your exact Ghost Tax number live — and show you exactly how LuxuryClientFlow fixes it for a practice like yours. Most owners leave knowing what they're losing and how to stop it. Whether you move forward or not, the number is worth knowing.</p>
+    </div>
+  </div>
+
+  <!-- What happens on the call -->
+  <section style="background:var(--mist);padding:64px 48px">
+    <div class="container" style="max-width:900px">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px">
+        <div style="background:var(--white);border-radius:var(--r-lg);padding:28px 24px;border:1px solid rgba(91,63,190,.1)">
+          <div style="font-size:32px;margin-bottom:12px">🔍</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:8px" data-en="Your Ghost Tax Number" data-es="Tu Número del Impuesto Fantasma">Your Ghost Tax Number</div>
+          <p style="font-size:13px;color:#6B6480;line-height:1.6" data-en="We calculate exactly how much revenue is walking out the door every month from patients who don't rebook." data-es="Calculamos exactamente cuántos ingresos se pierden cada mes de pacientes que no regresan.">We calculate exactly how much revenue is walking out the door every month from patients who don't rebook.</p>
+        </div>
+        <div style="background:var(--white);border-radius:var(--r-lg);padding:28px 24px;border:1px solid rgba(91,63,190,.1)">
+          <div style="font-size:32px;margin-bottom:12px">📱</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:8px" data-en="Live System Demo" data-es="Demo del Sistema en Vivo">Live System Demo</div>
+          <p style="font-size:13px;color:#6B6480;line-height:1.6" data-en="Daniel walks you through the exact four-step loop — QR card, bilingual AI, hotel stay, reputation firewall — as it would work for your practice." data-es="Daniel te muestra el ciclo exacto de cuatro pasos — tarjeta QR, IA bilingüe, estadía de hotel, escudo de reputación — tal como funcionaría para tu práctica.">Daniel walks you through the exact four-step loop as it would work for your practice.</p>
+        </div>
+        <div style="background:var(--white);border-radius:var(--r-lg);padding:28px 24px;border:1px solid rgba(91,63,190,.1)">
+          <div style="font-size:32px;margin-bottom:12px">💬</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:8px" data-en="Real Answers" data-es="Respuestas Reales">Real Answers</div>
+          <p style="font-size:13px;color:#6B6480;line-height:1.6" data-en="Ask Daniel anything — pricing, setup, how it works for your specific situation. No scripts. No pressure. Just honest conversation." data-es="Pregúntale a Daniel cualquier cosa — precios, configuración, cómo funciona para tu situación específica. Sin presión.">Ask Daniel anything — pricing, setup, how it works for your specific situation. No scripts. No pressure.</p>
+        </div>
+      </div>
+      @media(max-width:768px){#booking-cards{grid-template-columns:1fr!important}}
+
+      <!-- Trust line -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;margin-bottom:0">
+        <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:#6B6480"><span style="color:var(--green);font-size:16px">✓</span><span data-en="Bilingual — hablamos español también" data-es="Bilingüe — we also speak English">Bilingual — hablamos español también</span></div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:#6B6480"><span style="color:var(--green);font-size:16px">✓</span><span data-en="3× ROI guarantee or Daniel works free" data-es="Garantía 3× ROI o Daniel trabaja gratis">3× ROI guarantee or Daniel works free</span></div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:#6B6480"><span style="color:var(--green);font-size:16px">✓</span><span data-en="Live in 48 hours, no tech team needed" data-es="En funcionamiento en 48 horas">Live in 48 hours, no tech team needed</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calendar embed -->
+  <section style="background:var(--white);padding:72px 48px">
+    <div class="container" style="max-width:900px">
+      <div style="text-align:center;margin-bottom:40px">
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--ink);margin-bottom:10px" data-en="Pick a Time That Works for You" data-es="Elige un Horario que Te Funcione">Pick a Time That Works for You</h2>
+        <p style="font-size:16px;color:#6B6480" data-en="All times are EST. Daniel confirms within minutes." data-es="Todos los horarios son EST. Daniel confirma en minutos.">All times are EST. Daniel confirms within minutes.</p>
+      </div>
+
+      <!-- Google Calendar embed -->
+      <div style="background:var(--mist);border-radius:var(--r-lg);padding:8px;border:1px solid rgba(91,63,190,.1);overflow:hidden">
+        <iframe
+          src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1dx0EsS6gwlGg5YGMu1ngWW_KotAYT2eaCjV2UZR13hOtSSgmq-dRmWi7f9q_RFYlfHU_OpiYA?gv=true"
+          style="border:0;border-radius:12px;display:block"
+          width="100%"
+          height="650"
+          frameborder="0"
+          title="Book a Free Ghost Tax Audit + Demo with Daniel Rodriguez">
+        </iframe>
+      </div>
+
+      <!-- Reassurance below calendar -->
+      <div style="margin-top:28px;padding:20px 24px;background:var(--gold-pale);border-radius:var(--r);border:1px solid rgba(201,148,10,.25);display:flex;align-items:flex-start;gap:14px">
+        <span style="font-size:24px;flex-shrink:0">🔒</span>
+        <div>
+          <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px" data-en="Zero pressure, zero obligation" data-es="Sin presión, sin compromiso">Zero pressure, zero obligation</div>
+          <div style="font-size:13px;color:#6B6480;line-height:1.55" data-en="This is a working session, not a sales call. Daniel will have your Ghost Tax estimate ready before you even connect. Most practice owners find it genuinely useful whether they move forward or not." data-es="Esta es una sesión de trabajo, no una llamada de ventas. Daniel tendrá tu estimado del Impuesto Fantasma listo antes de que te conectes.">This is a working session, not a sales call. Daniel will have your Ghost Tax estimate ready before you even connect. Most practice owners find it genuinely useful whether they move forward or not.</div>
+        </div>
+      </div>
+
+      <!-- Prefer WhatsApp -->
+      <div style="margin-top:16px;text-align:center">
+        <p style="font-size:14px;color:#6B6480" data-en="Prefer WhatsApp? Message Daniel directly →" data-es="¿Prefieres WhatsApp? Escríbele a Daniel directamente →">Prefer WhatsApp? Message Daniel directly →</p>
+        <a href="https://wa.me/13059999999" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:8px;background:#25D366;color:white;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;padding:12px 24px;border-radius:100px;text-decoration:none;transition:all .2s" onmouseover="this.style.background='#1DAA55'" onmouseout="this.style.background='#25D366'">
+          <svg viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+          <span data-en="Chat on WhatsApp" data-es="Chat por WhatsApp">Chat on WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</div><!-- /page-booking -->
+
+
+<!-- ══ CHAT PAGE ══ -->
+<div id="page-chat" class="page">
+
+  <!-- Hero -->
+  <div style="background:var(--ink);padding:120px 48px 72px;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 40% 60%,rgba(91,63,190,.3) 0%,transparent 60%)"></div>
+    <div class="container" style="position:relative;z-index:1;max-width:760px">
+      <span class="section-eyebrow" style="color:rgba(201,148,10,.7)" data-en="AI Assistant · Available 24/7" data-es="Asistente IA · Disponible 24/7">AI Assistant · Available 24/7</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,60px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:20px">
+        <span data-en="Meet Lazo" data-es="Conoce a Lazo">Meet Lazo</span><br>
+        <span style="color:var(--gold-bright)" data-en="Your Ghost Tax Advisor" data-es="Tu Asesor del Impuesto Fantasma">Your Ghost Tax Advisor</span>
+      </h1>
+      <p style="font-size:clamp(16px,2vw,20px);color:rgba(255,255,255,.65);line-height:1.65;max-width:580px;margin-bottom:0" data-en="Lazo knows everything about LuxuryClientFlow. Ask about pricing, how the system works, whether it's right for your practice — in English or Spanish, any time of day." data-es="Lazo sabe todo sobre LuxuryClientFlow. Pregunta sobre precios, cómo funciona el sistema, si es adecuado para tu práctica — en inglés o español, a cualquier hora del día.">Lazo knows everything about LuxuryClientFlow. Ask about pricing, how the system works, whether it's right for your practice — in English or Spanish, any time of day.</p>
+    </div>
+  </div>
+
+  <!-- What Lazo can do -->
+  <section style="background:var(--mist);padding:56px 48px">
+    <div class="container" style="max-width:860px">
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:48px">
+        <div style="background:var(--white);border-radius:var(--r);padding:20px 22px;border:1px solid rgba(91,63,190,.1);display:flex;align-items:flex-start;gap:14px">
+          <span style="font-size:24px;flex-shrink:0">💬</span>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px" data-en="Ask anything about LuxuryClientFlow" data-es="Pregunta cualquier cosa sobre LuxuryClientFlow">Ask anything about LuxuryClientFlow</div>
+            <div style="font-size:13px;color:#6B6480" data-en="Pricing, how it works, setup, the hotel stay reward — Lazo has the answers." data-es="Precios, cómo funciona, configuración, la recompensa de estadía — Lazo tiene las respuestas.">Pricing, how it works, setup, the hotel stay reward — Lazo has the answers.</div>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--r);padding:20px 22px;border:1px solid rgba(91,63,190,.1);display:flex;align-items:flex-start;gap:14px">
+          <span style="font-size:24px;flex-shrink:0">🧮</span>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px" data-en="Calculate your Ghost Tax" data-es="Calcula tu Impuesto Fantasma">Calculate your Ghost Tax</div>
+            <div style="font-size:13px;color:#6B6480" data-en="Tell Lazo your patient volume and average visit value — get your number instantly." data-es="Dile a Lazo tu volumen de pacientes y valor promedio de visita — obtén tu número al instante.">Tell Lazo your patient volume and average visit value — get your number instantly.</div>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--r);padding:20px 22px;border:1px solid rgba(91,63,190,.1);display:flex;align-items:flex-start;gap:14px">
+          <span style="font-size:24px;flex-shrink:0">🌐</span>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px" data-en="Fully bilingual — EN + ES" data-es="Completamente bilingüe — EN + ES">Fully bilingual — EN + ES</div>
+            <div style="font-size:13px;color:#6B6480" data-en="Start in English or Spanish. Lazo matches your language automatically." data-es="Empieza en inglés o español. Lazo detecta tu idioma automáticamente.">Start in English or Spanish. Lazo matches your language automatically.</div>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--r);padding:20px 22px;border:1px solid rgba(91,63,190,.1);display:flex;align-items:flex-start;gap:14px">
+          <span style="font-size:24px;flex-shrink:0">📅</span>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px" data-en="Book your Audit + Demo" data-es="Reserva tu Auditoría + Demo">Book your Audit + Demo</div>
+            <div style="font-size:13px;color:#6B6480" data-en="When you're ready, Lazo will send you directly to Daniel's calendar." data-es="Cuando estés listo, Lazo te enviará directamente al calendario de Daniel.">When you're ready, Lazo will send you directly to Daniel's calendar.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Suggested questions -->
+      <div style="margin-bottom:40px">
+        <p style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9E9ABB;margin-bottom:14px" data-en="Try asking Lazo:" data-es="Prueba preguntarle a Lazo:">Try asking Lazo:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <button onclick="lazoSuggest(this)" style="background:var(--lavender);border:1px solid rgba(91,63,190,.2);border-radius:100px;padding:8px 16px;font-size:13px;font-weight:500;color:var(--violet);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s" onmouseover="this.style.background='var(--violet)';this.style.color='white'" onmouseout="this.style.background='var(--lavender)';this.style.color='var(--violet)'" data-en="What is the Ghost Tax?" data-es="¿Qué es el Impuesto Fantasma?">"What is the Ghost Tax?"</button>
+          <button onclick="lazoSuggest(this)" style="background:var(--lavender);border:1px solid rgba(91,63,190,.2);border-radius:100px;padding:8px 16px;font-size:13px;font-weight:500;color:var(--violet);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s" onmouseover="this.style.background='var(--violet)';this.style.color='white'" onmouseout="this.style.background='var(--lavender)';this.style.color='var(--violet)'" data-en="How much does it cost?" data-es="¿Cuánto cuesta?">"How much does it cost?"</button>
+          <button onclick="lazoSuggest(this)" style="background:var(--lavender);border:1px solid rgba(91,63,190,.2);border-radius:100px;padding:8px 16px;font-size:13px;font-weight:500;color:var(--violet);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s" onmouseover="this.style.background='var(--violet)';this.style.color='white'" onmouseout="this.style.background='var(--lavender)';this.style.color='var(--violet)'" data-en="Is it right for my dental practice?" data-es="¿Es adecuado para mi consultorio dental?">"Is it right for my dental practice?"</button>
+          <button onclick="lazoSuggest(this)" style="background:var(--lavender);border:1px solid rgba(91,63,190,.2);border-radius:100px;padding:8px 16px;font-size:13px;font-weight:500;color:var(--violet);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s" onmouseover="this.style.background='var(--violet)';this.style.color='white'" onmouseout="this.style.background='var(--lavender)';this.style.color='var(--violet)'" data-en="How does the hotel stay work?" data-es="¿Cómo funciona la estadía de hotel?">"How does the hotel stay work?"</button>
+          <button onclick="lazoSuggest(this)" style="background:var(--lavender);border:1px solid rgba(91,63,190,.2);border-radius:100px;padding:8px 16px;font-size:13px;font-weight:500;color:var(--violet);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s" onmouseover="this.style.background='var(--violet)';this.style.color='white'" onmouseout="this.style.background='var(--lavender)';this.style.color='var(--violet)'" data-en="How fast can we go live?" data-es="¿Qué tan rápido podemos comenzar?">"How fast can we go live?"</button>
+        </div>
+      </div>
+
+      <!-- CTA to booking if they prefer human -->
+      <div style="padding:20px 24px;background:var(--gold-pale);border-radius:var(--r);border:1px solid rgba(201,148,10,.25);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div>
+          <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px" data-en="Prefer to talk to Daniel directly?" data-es="¿Prefieres hablar directamente con Daniel?">Prefer to talk to Daniel directly?</div>
+          <div style="font-size:13px;color:#6B6480" data-en="Book a free 15-minute Audit + Demo call — no bot, just Daniel." data-es="Reserva una llamada gratuita de 15 minutos — sin bot, solo Daniel.">Book a free 15-minute Audit + Demo call — no bot, just Daniel.</div>
+        </div>
+        <button class="btn btn-gold btn-sm" onclick="showPage('booking')" data-en="Book a Call →" data-es="Reservar Llamada →">Book a Call →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chat widget area -->
+  <section style="background:var(--white);padding:64px 48px">
+    <div class="container" style="max-width:860px">
+      <div style="text-align:center;margin-bottom:32px">
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.5vw,38px);font-weight:700;color:var(--ink);margin-bottom:8px" data-en="Chat with Lazo Now" data-es="Chatea con Lazo Ahora">Chat with Lazo Now</h2>
+        <p style="font-size:15px;color:#6B6480" data-en="Available 24/7 · Responds instantly · Bilingual EN + ES" data-es="Disponible 24/7 · Responde al instante · Bilingüe EN + ES">Available 24/7 · Responds instantly · Bilingual EN + ES</p>
+      </div>
+
+      <!-- Lazo chat embed container -->
+      <div id="lazo-chat-container" style="border-radius:var(--r-lg);overflow:hidden;border:1px solid rgba(91,63,190,.15);box-shadow:var(--shadow-sm);min-height:560px;background:var(--mist);display:flex;align-items:center;justify-content:center">
+        <div id="lazo-loading" style="text-align:center;padding:48px 24px">
+          <div style="font-size:48px;margin-bottom:16px">🤖</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--ink);margin-bottom:8px" data-en="Lazo is loading..." data-es="Lazo está cargando...">Lazo is loading...</div>
+          <div style="font-size:14px;color:#6B6480" data-en="Your AI Ghost Tax advisor will appear in a moment." data-es="Tu asesor de IA del Impuesto Fantasma aparecerá en un momento.">Your AI Ghost Tax advisor will appear in a moment.</div>
+        </div>
+      </div>
+
+      <p style="font-size:12px;color:#B0ADCC;text-align:center;margin-top:16px;line-height:1.6" data-en="Lazo is an AI assistant. For complex questions or to get your Ghost Tax calculated live, book a free call with Daniel." data-es="Lazo es un asistente de IA. Para preguntas complejas o para calcular tu Impuesto Fantasma en vivo, reserva una llamada gratuita con Daniel.">Lazo is an AI assistant. For complex questions or to get your Ghost Tax calculated live, book a free call with Daniel.</p>
+    </div>
+  </section>
+</div><!-- /page-chat -->
+
 <!-- FOOTER -->
 <footer style="background:#070512;padding:64px 48px 36px">
   <div class="container">
@@ -1182,7 +1382,8 @@ section{padding:120px 48px}
         <ul style="list-style:none">
           <li style="margin-bottom:10px"><a onclick="showPage('demo')" style="font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;cursor:pointer" data-en="Live Demo" data-es="Demo en Vivo">Live Demo</a></li>
           <li style="margin-bottom:10px"><a onclick="scrollToPricing()" style="font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;cursor:pointer" data-en="Pricing" data-es="Precios">Pricing</a></li>
-          <li style="margin-bottom:10px"><a onclick="openModal()" style="font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;cursor:pointer" data-en="Free Audit" data-es="Auditoría Gratis">Free Audit</a></li>
+          <li style="margin-bottom:10px"><a onclick="showPage('booking')" style="font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;cursor:pointer" data-en="Book a Call" data-es="Reservar Llamada">Book a Call</a></li>
+          <li style="margin-bottom:10px"><a onclick="showPage('chat')" style="font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;cursor:pointer" data-en="Ask Lazo (AI)" data-es="Pregunta a Lazo (IA)">Ask Lazo (AI)</a></li>
           <li style="margin-bottom:10px"><a onclick="showPage('login')" style="font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;cursor:pointer" data-en="Client Login" data-es="Acceso Clientes">Client Login</a></li>
         </ul>
       </div>
@@ -1206,8 +1407,12 @@ section{padding:120px 48px}
     </div>
     <div style="border-top:1px solid rgba(255,255,255,.06);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
       <p style="font-size:12px;color:rgba(255,255,255,.2)" data-en="© 2025 LuxuryClientFlow · Miami, FL · Powered by ClientContactPro" data-es="© 2025 LuxuryClientFlow · Miami, FL · Desarrollado por ClientContactPro">© 2025 LuxuryClientFlow · Miami, FL · Powered by ClientContactPro</p>
-      <p style="font-size:12px;color:rgba(255,255,255,.2)" data-en="Built for luxury service businesses nationwide" data-es="Creado para negocios de servicios de lujo en todo el país">Built for luxury service businesses nationwide</p>
+      <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+        <p style="font-size:12px;color:rgba(255,255,255,.2)" data-en="Built for luxury service businesses nationwide" data-es="Creado para negocios de servicios de lujo en todo el país">Built for luxury service businesses nationwide</p>
+        <button onclick="openTC()" style="font-size:12px;color:rgba(255,255,255,.3);background:none;border:none;cursor:pointer;text-decoration:underline;font-family:'DM Sans',sans-serif;padding:0" data-en="Hotel Stay Terms &amp; Conditions" data-es="Términos y Condiciones de Estadía">Hotel Stay Terms &amp; Conditions</button>
+      </div>
     </div>
+    <p style="font-size:11px;color:rgba(255,255,255,.15);margin-top:16px;line-height:1.6" data-en="*Complimentary 3-Day Hotel Stay: Room rate covered. Flights, taxes, and resort fees not included. Must reside 100+ miles from participating resort. One per household per 12 months. 30-day advance booking required. At least one traveler must be 21+ with valid ID and major credit/debit card." data-es="*Estadía de Hotel Complementaria de 3 Días: Tarifa de habitación cubierta. Vuelos, impuestos y tarifas de resort no incluidos. Debe residir a más de 100 millas del resort participante. Una por hogar por 12 meses. Reserva con 30 días de anticipación requerida. Al menos un viajero debe tener 21+ años con ID válida y tarjeta de crédito/débito.">*Complimentary 3-Day Hotel Stay: Room rate covered. Flights, taxes, and resort fees not included. Must reside 100+ miles from participating resort. One per household per 12 months. 30-day advance booking required. At least one traveler must be 21+ with valid ID and major credit/debit card.</p>
   </div>
 </footer>
 
@@ -1224,9 +1429,13 @@ section{padding:120px 48px}
     <h3 class="serif" data-en="Find Your Ghost Tax" data-es="Encuentra Tu Impuesto Fantasma">Find Your Ghost Tax</h3>
     <p class="modal-sub" data-en="Book a free 15-minute audit with Daniel. We'll calculate your exact revenue leak and show you how to close it in 48 hours." data-es="Reserva una auditoría gratuita de 15 minutos con Daniel. Calcularemos tu fuga de ingresos exacta y te mostraremos cómo cerrarla en 48 horas.">Book a free 15-minute audit with Daniel. We'll calculate your exact revenue leak and show you how to close it in 48 hours.</p>
     <div class="modal-options">
-      <div class="modal-option" onclick="closeModal();openGCal()">
-        <div class="mo-label" data-en="📅 Book a 15-min Audit Call" data-es="📅 Reservar Llamada de Auditoría de 15 min">📅 Book a 15-min Audit Call</div>
-        <div class="mo-desc" data-en="Pick a time — Daniel will walk you through your ghost tax calculation live" data-es="Elige un horario — Daniel te guiará por el cálculo de tu impuesto fantasma en vivo">Pick a time — Daniel will walk you through your ghost tax calculation live</div>
+      <div class="modal-option" onclick="closeModal();showPage('booking')">
+        <div class="mo-label" data-en="📅 Book a 15-min Audit + Demo Call" data-es="📅 Reservar Llamada de Auditoría + Demo de 15 min">📅 Book a 15-min Audit + Demo Call</div>
+        <div class="mo-desc" data-en="Pick a time on Daniel's calendar — he'll have your Ghost Tax number ready before you connect" data-es="Elige un horario en el calendario de Daniel — tendrá tu número listo antes de que te conectes">Pick a time on Daniel's calendar — he'll have your Ghost Tax number ready before you connect</div>
+      </div>
+      <div class="modal-option" onclick="closeModal();showPage('chat')">
+        <div class="mo-label" data-en="🤖 Ask Lazo (AI Assistant)" data-es="🤖 Pregunta a Lazo (Asistente IA)">🤖 Ask Lazo (AI Assistant)</div>
+        <div class="mo-desc" data-en="Get instant answers 24/7 — in English or Spanish — before you commit to a call" data-es="Obtén respuestas instantáneas 24/7 — en inglés o español — antes de comprometerte a una llamada">Get instant answers 24/7 — in English or Spanish — before you commit to a call</div>
       </div>
       <div class="modal-option" onclick="closeModal();showPage('demo')">
         <div class="mo-label" data-en="▶ Watch the Demo First" data-es="▶ Ver el Demo Primero">▶ Watch the Demo First</div>
@@ -1286,6 +1495,86 @@ section{padding:120px 48px}
     </div>
   </div>
 </div>
+
+<!-- TERMS & CONDITIONS MODAL -->
+<div class="tc-modal" id="tcModal">
+  <div class="tc-inner">
+    <div class="tc-header">
+      <h3 data-en="Hotel Stay Terms &amp; Conditions" data-es="Términos y Condiciones de Estadía">Hotel Stay Terms &amp; Conditions</h3>
+      <button class="tc-close" onclick="closeTC()">✕</button>
+    </div>
+    <div class="tc-body">
+      <p style="font-size:14px;color:#6B6480;margin-bottom:20px;line-height:1.6" data-en="The Complimentary 3-Day Hotel Stay is included as part of the LuxuryClientFlow loyalty reward program. The following terms apply to end-users who receive this reward." data-es="La Estadía de Hotel Complementaria de 3 Días se incluye como parte del programa de recompensas de lealtad de LuxuryClientFlow. Los siguientes términos aplican a los usuarios finales que reciben esta recompensa.">The Complimentary 3-Day Hotel Stay is included as part of the LuxuryClientFlow loyalty reward program. The following terms apply to end-users who receive this reward.</p>
+      <div class="tc-rule">
+        <div class="tc-rule-icon">🪪</div>
+        <div>
+          <div class="tc-rule-title" data-en="Age &amp; ID Requirement" data-es="Requisito de Edad e Identificación">Age &amp; ID Requirement</div>
+          <div class="tc-rule-desc" data-en="At least one traveler in the party must be 21 years of age or older and must present a valid government-issued photo ID and a major credit or debit card at hotel check-in." data-es="Al menos un viajero del grupo debe tener 21 años o más y debe presentar una identificación con foto emitida por el gobierno y una tarjeta de crédito o débito principal al momento del check-in en el hotel.">At least one traveler in the party must be 21 years of age or older and must present a valid government-issued photo ID and a major credit or debit card at hotel check-in.</div>
+        </div>
+      </div>
+      <div class="tc-rule">
+        <div class="tc-rule-icon">📍</div>
+        <div>
+          <div class="tc-rule-title" data-en="100-Mile Residency Rule" data-es="Regla de Residencia de 100 Millas">100-Mile Residency Rule</div>
+          <div class="tc-rule-desc" data-en="The recipient must reside at least 100 miles away from the participating resort hotel. This is a required condition of the reward and applies to all destinations including Cancún, Orlando, and the Bahamas." data-es="El destinatario debe residir al menos a 100 millas del hotel resort participante. Esta es una condición requerida de la recompensa y aplica a todos los destinos incluyendo Cancún, Orlando y Bahamas.">The recipient must reside at least 100 miles away from the participating resort hotel. This is a required condition of the reward and applies to all destinations including Cancún, Orlando, and the Bahamas.</div>
+        </div>
+      </div>
+      <div class="tc-rule">
+        <div class="tc-rule-icon">📅</div>
+        <div>
+          <div class="tc-rule-title" data-en="Advance Booking Required" data-es="Reserva con Anticipación Requerida">Advance Booking Required</div>
+          <div class="tc-rule-desc" data-en="A minimum of 30 days advance notice is required to book travel dates. Requests submitted less than 30 days before the desired travel date cannot be accommodated." data-es="Se requiere un mínimo de 30 días de anticipación para reservar las fechas de viaje. Las solicitudes enviadas con menos de 30 días de anticipación a la fecha de viaje deseada no podrán ser acomodadas.">A minimum of 30 days advance notice is required to book travel dates. Requests submitted less than 30 days before the desired travel date cannot be accommodated.</div>
+        </div>
+      </div>
+      <div class="tc-rule">
+        <div class="tc-rule-icon">🏠</div>
+        <div>
+          <div class="tc-rule-title" data-en="One Per Household, Per Year" data-es="Una por Hogar, por Año">One Per Household, Per Year</div>
+          <div class="tc-rule-desc" data-en="This complimentary hotel stay may only be activated once per household per 12-month period. Additional stays within the same household within 12 months are not eligible." data-es="Esta estadía de hotel complementaria solo puede activarse una vez por hogar por período de 12 meses. Estadías adicionales dentro del mismo hogar en 12 meses no son elegibles.">This complimentary hotel stay may only be activated once per household per 12-month period. Additional stays within the same household within 12 months are not eligible.</div>
+        </div>
+      </div>
+      <div class="tc-rule">
+        <div class="tc-rule-icon">✈️</div>
+        <div>
+          <div class="tc-rule-title" data-en="What's Covered &amp; What's Not" data-es="Qué Está Cubierto y Qué No">What's Covered &amp; What's Not</div>
+          <div class="tc-rule-desc" data-en="The room rate is covered for the 3-night stay. Flights, airport transfers, taxes, resort fees, meals, incidentals, and personal expenses are the responsibility of the traveler." data-es="La tarifa de habitación está cubierta para la estadía de 3 noches. Los vuelos, traslados al aeropuerto, impuestos, tarifas de resort, comidas, gastos imprevistos y gastos personales son responsabilidad del viajero.">The room rate is covered for the 3-night stay. Flights, airport transfers, taxes, resort fees, meals, incidentals, and personal expenses are the responsibility of the traveler.</div>
+        </div>
+      </div>
+      <div class="tc-disclaimer" data-en="Destinations are subject to availability. Blackout dates may apply. LuxuryClientFlow reserves the right to modify or discontinue the reward program with reasonable notice." data-es="Los destinos están sujetos a disponibilidad. Pueden aplicarse fechas de exclusión. LuxuryClientFlow se reserva el derecho de modificar o descontinuar el programa de recompensas con aviso razonable.">Destinations are subject to availability. Blackout dates may apply. LuxuryClientFlow reserves the right to modify or discontinue the reward program with reasonable notice.</div>
+    </div>
+  </div>
+</div>
+
+<!-- NOEM.AI LAZO CHATBOT -->
+<script src="https://app.noem.ai/js/ChatBot.js"></script>
+
+<script>
+// ── LAZO CHAT BOT ──
+let lazoInitialized = false;
+function initLazo() {
+  if (lazoInitialized) return;
+  const loading = document.getElementById('lazo-loading');
+  if (loading) loading.style.display = 'none';
+  try {
+    let currentUser = { email: null, displayName: 'Guest', userProfileUrl: '' };
+    const bot = new ChatBot('NjliNzM5YjllMjFlNDU0M2ZmN2MxYTQz', currentUser);
+    bot.init();
+    lazoInitialized = true;
+  } catch(e) {
+    const loading = document.getElementById('lazo-loading');
+    if (loading) {
+      loading.innerHTML = '<div style="font-size:36px;margin-bottom:12px">💬</div><div style="font-family:\'Cormorant Garamond\',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:8px">Chat unavailable right now</div><div style="font-size:13px;color:#6B6480">Please try refreshing, or <button onclick="showPage(\'booking\')" style="color:var(--violet);background:none;border:none;cursor:pointer;font-family:\'DM Sans\',sans-serif;font-size:13px;text-decoration:underline">book a call with Daniel</button> instead.</div>';
+    }
+  }
+}
+
+// Suggested question chips
+function lazoSuggest(btn) {
+  const text = btn.getAttribute('data-en') || btn.textContent.replace(/"/g,'').trim();
+  // Bot will pick up the message if it exposes a send method; otherwise just a UX hint
+  console.log('Lazo suggested:', text);
+}
+</script>
 
 <script>
 // ── LANGUAGE ENGINE ──
@@ -1368,13 +1657,21 @@ window.addEventListener('DOMContentLoaded', () => {
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
+  const page = document.getElementById('page-'+name);
+  if (page) page.classList.add('active');
   document.querySelectorAll('.nav-link').forEach(l => {
-    const enText = l.getAttribute('data-en')||'';
-    if (enText.toLowerCase().includes(name==='home'?'home':name)) l.classList.add('active');
+    const en = l.getAttribute('data-en') || '';
+    const matches = {
+      home: ['home','inicio'], blog: ['blog'], demo: ['demo'],
+      booking: ['book','reservar'], chat: ['lazo','ask'],
+      login: ['login','acceso']
+    };
+    if ((matches[name]||[]).some(k => en.toLowerCase().includes(k))) l.classList.add('active');
   });
-  window.scrollTo(0,0);
-  setTimeout(checkReveals, 100);
+  window.scrollTo(0, 0);
+  setTimeout(() => checkReveals(), 100);
+  // Initialize Lazo when chat page opens
+  if (name === 'chat') setTimeout(initLazo, 400);
 }
 
 function scrollToPricing() {
@@ -1392,6 +1689,10 @@ window.addEventListener('scroll', () => {
 function openModal() { document.getElementById('modal').classList.add('open'); document.body.style.overflow='hidden'; }
 function closeModal() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow=''; }
 document.getElementById('modal').addEventListener('click', e => { if(e.target===document.getElementById('modal')) closeModal(); });
+
+function openTC() { document.getElementById('tcModal').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeTC() { document.getElementById('tcModal').classList.remove('open'); document.body.style.overflow=''; }
+document.getElementById('tcModal').addEventListener('click', e => { if(e.target===document.getElementById('tcModal')) closeTC(); });
 
 let selectedSlot = '';
 function openGCal() {
