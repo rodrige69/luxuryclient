@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LuxuryClientFlow | Stop Losing High-Value Patients</title>
+<meta name="description" content="Bilingual AI loyalty + vacation rewards for luxury service businesses. Med spas, dental, plastic surgery, wellness, chiropractic.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0E0B1A;--ink2:#2C2544;--mist:#F7F5FF;--lavender:#EAE4FF;
+  --violet:#5B3FBE;--violet-light:#7B60D4;--gold:#C9940A;--gold-bright:#E8B923;
+  --gold-pale:#FDF3D0;--cream:#FEFCF7;--white:#FFFFFF;--coral:#D4627A;--green:#2A8C5A;
+  --r:16px;--r-lg:28px;--shadow:0 20px 60px rgba(14,11,26,.18);--shadow-sm:0 4px 20px rgba(14,11,26,.1);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif}
+
+/* ── LANGUAGE TOGGLE ── */
+.lang-toggle{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:4px;margin-right:8px}
+.lang-btn{display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;transition:all .2s;background:transparent;color:rgba(255,255,255,.45)}
+.lang-btn.active{background:var(--gold-bright);color:var(--ink)}
+.lang-btn:not(.active):hover{color:var(--white)}
+.lang-flag{font-size:14px;line-height:1}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:64px;transition:background .3s,box-shadow .3s}
+.nav.scrolled{background:rgba(14,11,26,.96);backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--white);letter-spacing:.02em;cursor:pointer;text-decoration:none;flex-shrink:0}
+.nav-logo span{color:var(--gold-bright)}
+.nav-right{display:flex;align-items:center;gap:4px}
+.nav-links{display:flex;gap:2px}
+.nav-link{background:none;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,.55);padding:8px 14px;border-radius:8px;cursor:pointer;transition:all .2s}
+.nav-link:hover{color:var(--white);background:rgba(255,255,255,.08)}
+.nav-link.active{color:var(--gold-bright);background:rgba(201,148,10,.12)}
+.nav-cta{background:var(--gold-bright);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;padding:9px 18px;border-radius:10px;border:none;cursor:pointer;transition:all .2s;white-space:nowrap}
+.nav-cta:hover{background:#F5CF4A;transform:translateY(-1px)}
+
+/* ── STICKY BAR ── */
+.sticky-bar{position:fixed;top:0;left:0;right:0;z-index:910;background:rgba(14,11,26,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,148,10,.2);padding:11px 48px;display:flex;align-items:center;justify-content:space-between;transform:translateY(-100%);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.sticky-bar.visible{transform:translateY(0)}
+.sticky-bar-msg{color:rgba(255,255,255,.8);font-size:13px;font-weight:500}
+.sticky-bar-msg strong{color:var(--gold-bright)}
+@media(max-width:768px){.nav{padding:0 20px}.sticky-bar{padding:10px 20px}.nav-links{display:none}}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:15px;letter-spacing:.02em;text-decoration:none;border:none;transition:all .3s cubic-bezier(.16,1,.3,1);border-radius:var(--r);padding:15px 30px;min-height:52px;white-space:nowrap}
+.btn-gold{background:var(--gold-bright);color:var(--ink);box-shadow:0 4px 24px rgba(232,185,35,.35)}
+.btn-gold:hover{background:#F5CF4A;transform:translateY(-2px);box-shadow:0 8px 36px rgba(232,185,35,.45)}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--white);border:1px solid rgba(255,255,255,.2)}
+.btn-ghost:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4);transform:translateY(-2px)}
+.btn-dark{background:var(--ink);color:var(--white);box-shadow:var(--shadow-sm)}
+.btn-dark:hover{background:var(--ink2);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--violet);border:1.5px solid var(--violet)}
+.btn-outline:hover{background:var(--violet);color:var(--white);transform:translateY(-2px)}
+.btn-sm{padding:10px 18px;font-size:13px;min-height:38px}
+.btn-lg{padding:18px 36px;font-size:17px}
+.btn-full{width:100%}
+
+/* ── SECTIONS ── */
+section{padding:120px 48px}
+.container{max-width:1160px;margin:0 auto}
+@media(max-width:768px){section{padding:80px 24px}}
+.section-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--violet);margin-bottom:16px;display:block}
+.section-title{font-size:clamp(32px,4.5vw,54px);font-weight:600;color:var(--ink);line-height:1.1;margin-bottom:16px}
+.section-sub{font-size:18px;color:#6B6480;line-height:1.65}
+.section-header{margin-bottom:72px}
+.section-header.center{text-align:center}
+.section-header.center .section-sub{max-width:600px;margin:0 auto}
+
+/* ── HERO ── */
+.hero{min-height:100vh;position:relative;overflow:hidden;background:var(--ink);display:flex;align-items:center;padding:140px 48px 100px}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.35;animation:drift 12s ease-in-out infinite}
+.hero-orb-1{width:700px;height:700px;background:#3D1F8A;top:-200px;right:-200px;animation-delay:0s}
+.hero-orb-2{width:500px;height:500px;background:#8B1A5C;bottom:-150px;left:-100px;animation-delay:-4s}
+.hero-orb-3{width:300px;height:300px;background:#C9940A;top:40%;left:40%;opacity:.15;animation-delay:-8s}
+@keyframes drift{0%,100%{transform:translate(0,0)}33%{transform:translate(40px,-30px)}66%{transform:translate(-25px,35px)}}
+.hero-grain{position:absolute;inset:0;z-index:1;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px}
+.hero-content{position:relative;z-index:2;max-width:760px}
+.hero-verticals{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;animation:fadeUp .8s ease both}
+.vertical-pill{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);letter-spacing:.08em;text-transform:uppercase;transition:all .25s;cursor:default}
+.vertical-pill.active{background:rgba(201,148,10,.15);border-color:rgba(201,148,10,.4);color:var(--gold-bright)}
+.hero h1{font-size:clamp(44px,7vw,88px);font-weight:600;color:var(--white);line-height:1.0;margin-bottom:28px;animation:fadeUp .8s .1s ease both}
+.hero h1 em{color:var(--gold-bright);font-style:italic}
+.hero-sub{font-size:clamp(16px,2.2vw,21px);color:rgba(255,255,255,.65);line-height:1.65;max-width:580px;margin-bottom:48px;animation:fadeUp .8s .2s ease both}
+.hero-sub strong{color:rgba(255,255,255,.9);font-weight:500}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px;animation:fadeUp .8s .3s ease both}
+.proof-strip{display:flex;gap:28px;flex-wrap:wrap;animation:fadeUp .8s .4s ease both}
+.proof-item{display:flex;align-items:center;gap:10px}
+.proof-dot{width:6px;height:6px;border-radius:50%;background:var(--gold-bright);flex-shrink:0}
+.proof-text{font-size:14px;color:rgba(255,255,255,.55);font-weight:500}
+.proof-text strong{color:rgba(255,255,255,.85)}
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUp .8s .8s ease both}
+.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,rgba(255,255,255,.4),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── VERTICALS ── */
+.verticals-section{background:var(--white);padding:100px 48px}
+.verticals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:64px}
+@media(max-width:900px){.verticals-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.verticals-grid{grid-template-columns:1fr}}
+.vertical-card{border:1px solid rgba(91,63,190,.12);border-radius:var(--r-lg);padding:36px 28px;transition:all .3s;position:relative;overflow:hidden}
+.vertical-card:hover{border-color:rgba(91,63,190,.3);transform:translateY(-6px);box-shadow:var(--shadow-sm)}
+.vc-icon{font-size:36px;margin-bottom:20px;display:block}
+.vc-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--ink);margin-bottom:10px}
+.vc-ghost{font-size:13px;font-weight:700;color:var(--coral);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;display:block}
+.vc-desc{font-size:14px;color:#6B6480;line-height:1.65}
+.vc-stat{margin-top:20px;padding-top:16px;border-top:1px solid rgba(91,63,190,.1);font-size:22px;font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--violet)}
+
+/* ── PROBLEM ── */
+.problem-section{background:var(--ink);padding:120px 48px}
+.problem-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:16px;display:block}
+.problem-title{font-size:clamp(36px,5vw,60px);font-weight:600;color:var(--white);line-height:1.1;margin-bottom:24px}
+.problem-sub{font-size:18px;color:rgba(255,255,255,.55);line-height:1.65;max-width:560px;margin-bottom:64px}
+.problem-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+@media(max-width:900px){.problem-layout{grid-template-columns:1fr}}
+.problem-list{display:flex;flex-direction:column;gap:20px}
+.problem-item{display:flex;gap:20px;padding:24px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);transition:all .3s}
+.problem-item:hover{background:rgba(255,255,255,.07);border-color:rgba(201,148,10,.2)}
+.pi-icon{font-size:28px;flex-shrink:0;width:52px;height:52px;background:rgba(201,148,10,.1);border-radius:12px;display:flex;align-items:center;justify-content:center}
+.pi-text h4{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);margin-bottom:6px}
+.pi-text p{font-size:14px;color:rgba(255,255,255,.5);line-height:1.6}
+.loss-calc{background:rgba(255,255,255,.04);border:1px solid rgba(201,148,10,.2);border-radius:var(--r-lg);padding:40px 36px}
+.lc-title{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(201,148,10,.7);margin-bottom:32px}
+.lc-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.lc-row:last-of-type{border-bottom:none}
+.lc-label{font-size:14px;color:rgba(255,255,255,.55)}
+.lc-val{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--white)}
+.lc-val.red{color:#FF7070}
+.lc-total{margin-top:24px;padding:24px;background:rgba(201,148,10,.1);border:1px solid rgba(201,148,10,.3);border-radius:12px;text-align:center}
+.lc-total-label{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(201,148,10,.7);margin-bottom:8px}
+.lc-total-val{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;color:var(--gold-bright)}
+.lc-total-sub{font-size:12px;color:rgba(255,255,255,.4);margin-top:4px}
+
+/* ── LOOP ── */
+.loop-section{background:var(--mist);padding:120px 48px}
+.loop-track{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;margin-bottom:56px}
+@media(max-width:900px){.loop-track{grid-template-columns:repeat(2,1fr);gap:24px}}
+.loop-step{padding:40px 28px;position:relative;text-align:center}
+.loop-step:not(:last-child)::after{content:'';position:absolute;top:64px;right:-1px;width:24px;height:2px;background:linear-gradient(to right,var(--violet),rgba(91,63,190,.2));z-index:2}
+@media(max-width:900px){.loop-step::after{display:none!important}}
+.ls-num{width:32px;height:32px;border-radius:50%;background:var(--violet);color:var(--white);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.ls-icon{width:72px;height:72px;border-radius:20px;background:var(--white);border:1.5px solid rgba(91,63,190,.15);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 20px;transition:all .3s}
+.loop-step:hover .ls-icon{background:var(--violet);transform:scale(1.08) rotate(4deg)}
+.ls-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.ls-desc{font-size:13px;color:#6B6480;line-height:1.6}
+
+/* ── FOUNDER ── */
+.founder-section{background:var(--cream);padding:120px 48px}
+.founder-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+@media(max-width:900px){.founder-layout{grid-template-columns:1fr}}
+.founder-img-wrap{position:relative}
+.founder-img{width:100%;max-width:440px;border-radius:var(--r-lg);object-fit:cover;aspect-ratio:4/5;display:block;box-shadow:var(--shadow)}
+.founder-card-badge{position:absolute;bottom:28px;left:28px;background:var(--ink);border:1px solid rgba(201,148,10,.3);border-radius:14px;padding:18px 22px}
+.fcb-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:2px}
+.fcb-title{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:10px}
+.fcb-links{display:flex;gap:10px}
+.fcb-link{font-size:11px;font-weight:700;color:var(--gold-bright);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(201,148,10,.3);border-radius:100px;padding:4px 12px;transition:all .2s}
+.fcb-link:hover{background:rgba(201,148,10,.15)}
+.origin-badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold-pale);border:1px solid rgba(201,148,10,.3);border-radius:100px;padding:8px 18px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;margin-bottom:24px}
+.founder-quote-block{background:var(--lavender);border-left:3px solid var(--violet);border-radius:0 var(--r) var(--r) 0;padding:24px 28px;margin:32px 0}
+.founder-quote-block p{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--ink2);line-height:1.55}
+.founder-creds{display:flex;gap:20px;flex-wrap:wrap;margin-top:32px}
+.fc-cred{display:flex;align-items:center;gap:8px;font-size:13px;color:#6B6480;font-weight:500}
+.fc-cred-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
+
+/* ── HOW IT WORKS ── */
+.hiw-section{background:var(--mist);padding:120px 48px}
+.hiw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+@media(max-width:900px){.hiw-grid{grid-template-columns:1fr}}
+.hiw-card{background:var(--white);border-radius:var(--r-lg);padding:44px 36px;border:1px solid rgba(91,63,190,.08);position:relative;overflow:hidden;transition:all .3s}
+.hiw-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(91,63,190,.2)}
+.hiw-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--violet),var(--violet-light))}
+.hiw-day{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block}
+.hiw-icon{font-size:44px;margin-bottom:20px;display:block}
+.hiw-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--ink);margin-bottom:14px;line-height:1.3}
+.hiw-desc{font-size:14px;color:#6B6480;line-height:1.7}
+
+/* ── PRICING ── */
+.pricing-section{background:var(--cream);padding:120px 48px}
+.pilot-banner{background:linear-gradient(135deg,var(--ink),#2C1F6E);border-radius:var(--r-lg);padding:36px 40px;margin-bottom:48px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.pb-text h3{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);margin-bottom:6px}
+.pb-text p{font-size:14px;color:rgba(255,255,255,.55)}
+.pb-badge{background:rgba(232,185,35,.15);border:1px solid rgba(232,185,35,.4);border-radius:100px;padding:8px 20px;font-size:12px;font-weight:700;color:var(--gold-bright);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:900px){.pricing-grid{grid-template-columns:1fr;max-width:460px;margin:0 auto}}
+.price-card{background:var(--white);border:1.5px solid rgba(91,63,190,.1);border-radius:var(--r-lg);padding:40px 36px;position:relative;overflow:hidden;transition:all .3s}
+.price-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.price-card.featured{background:var(--ink);border-color:rgba(201,148,10,.3)}
+.price-card.featured::after{content:attr(data-badge);position:absolute;top:20px;right:20px;background:var(--gold-bright);color:var(--ink);font-size:11px;font-weight:700;padding:5px 12px;border-radius:100px;letter-spacing:.06em;text-transform:uppercase}
+.price-card.muted{opacity:.85}
+.price-tier{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--violet);margin-bottom:12px;display:block}
+.price-card.featured .price-tier{color:rgba(201,148,10,.7)}
+.price-card.muted .price-tier{color:#9E9ABB}
+.price-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--ink);margin-bottom:20px}
+.price-card.featured .price-name{color:var(--white)}
+.price-setup{font-size:14px;color:#9E9ABB;margin-bottom:4px}
+.price-card.featured .price-setup{color:rgba(255,255,255,.35)}
+.price-mo{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;color:var(--ink);line-height:1}
+.price-card.featured .price-mo{color:var(--gold-bright)}
+.price-mo sup{font-size:24px;vertical-align:super;margin-right:2px}
+.price-period{font-size:14px;color:#9E9ABB;margin-bottom:6px}
+.price-card.featured .price-period{color:rgba(255,255,255,.35)}
+.price-condition{font-size:12px;font-weight:600;color:var(--green);padding:6px 12px;background:rgba(42,140,90,.08);border-radius:100px;display:inline-block;margin-bottom:28px}
+.price-card.featured .price-condition{color:#6FE0A8;background:rgba(42,140,90,.15)}
+.price-card.muted .price-condition{color:#9E9ABB;background:rgba(158,154,187,.1)}
+.price-divider{height:1px;background:rgba(91,63,190,.08);margin:0 0 24px}
+.price-card.featured .price-divider{background:rgba(255,255,255,.08)}
+.price-features{list-style:none;margin-bottom:32px}
+.price-features li{display:flex;align-items:flex-start;gap:10px;padding:9px 0;font-size:14px;color:#4A4466;border-bottom:1px solid rgba(91,63,190,.06)}
+.price-card.featured .price-features li{color:rgba(255,255,255,.7);border-bottom-color:rgba(255,255,255,.07)}
+.price-card.muted .price-features li{color:#9E9ABB}
+.price-features li:last-child{border-bottom:none}
+.pf-check{color:var(--green);flex-shrink:0;font-size:15px;margin-top:1px}
+.price-card.featured .pf-check{color:#6FE0A8}
+.price-card.muted .pf-check{color:#9E9ABB}
+.price-note{margin-top:20px;text-align:center;font-size:12px;color:#9E9ABB;line-height:1.5}
+.price-card.featured .price-note{color:rgba(255,255,255,.25)}
+.price-coming{display:inline-block;background:rgba(91,63,190,.08);border:1px solid rgba(91,63,190,.15);border-radius:100px;padding:4px 14px;font-size:11px;font-weight:700;color:var(--violet);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+.pricing-footer{margin-top:40px;padding:28px;background:var(--lavender);border-radius:var(--r);border:1px solid rgba(91,63,190,.1);font-size:14px;color:var(--ink2);line-height:1.65}
+.pricing-footer strong{color:var(--violet)}
+
+/* ── TESTIMONIALS ── */
+.testimonial-section{background:var(--ink);padding:120px 48px}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+@media(max-width:900px){.testimonials-grid{grid-template-columns:1fr}}
+.t-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-lg);padding:36px 32px;transition:all .3s}
+.t-card:hover{background:rgba(255,255,255,.07);border-color:rgba(201,148,10,.2);transform:translateY(-4px)}
+.t-stars{color:var(--gold-bright);font-size:16px;margin-bottom:16px;letter-spacing:2px}
+.t-quote{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:rgba(255,255,255,.85);line-height:1.55;margin-bottom:24px}
+.t-quote .gold{color:var(--gold-bright)}
+.t-author{display:flex;align-items:center;gap:14px}
+.t-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#F5CF4A);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.t-name{font-size:14px;font-weight:600;color:var(--white);margin-bottom:2px}
+.t-role{font-size:12px;color:rgba(255,255,255,.35)}
+.t-type{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--violet-light);margin-bottom:10px}
+.t-placeholder-tag{background:rgba(91,63,190,.15);border:1px solid rgba(91,63,190,.25);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:700;color:var(--violet-light);letter-spacing:.08em;text-transform:uppercase;display:inline-block;margin-bottom:16px}
+
+/* ── DEMO ── */
+.demo-section{background:var(--white);padding:120px 48px}
+.demo-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+@media(max-width:900px){.demo-layout{grid-template-columns:1fr}}
+.phone{max-width:320px;margin:0 auto;background:var(--ink);border-radius:44px;border:7px solid #1E1535;overflow:hidden;box-shadow:var(--shadow),0 0 0 1px rgba(255,255,255,.05)}
+.phone-notch{height:32px;background:var(--ink);display:flex;align-items:center;justify-content:center}
+.phone-notch-bar{width:80px;height:8px;background:#1E1535;border-radius:100px}
+.demo-screen{padding:28px 24px}
+.ds-app-header{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+.ds-app-logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--violet),#8B3FA8);display:flex;align-items:center;justify-content:center;font-size:18px}
+.ds-app-name{font-size:14px;font-weight:600;color:rgba(255,255,255,.85)}
+.ds-app-sub{font-size:11px;color:rgba(255,255,255,.35)}
+.demo-step-content{display:none}
+.demo-step-content.active{display:block}
+.wallet-card-demo{background:linear-gradient(135deg,#2D1F6E,#5B3FAB);border-radius:20px;padding:24px 20px;margin-bottom:16px;position:relative;overflow:hidden}
+.wcd-logo{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--gold-bright);margin-bottom:12px}
+.wcd-name{color:rgba(255,255,255,.9);font-size:16px;font-weight:600;margin-bottom:4px}
+.wcd-pts{color:rgba(212,175,255,.6);font-size:12px}
+.wcd-badge{position:absolute;bottom:16px;right:16px;background:var(--gold-bright);color:var(--ink);font-size:10px;font-weight:800;padding:4px 10px;border-radius:100px;letter-spacing:.06em;text-transform:uppercase}
+.ai-bubble{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:16px 16px 16px 4px;padding:16px 18px;margin-bottom:12px}
+.ab-sender{font-size:10px;font-weight:700;color:var(--gold-bright);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.ab-msg{font-size:13px;color:rgba(255,255,255,.8);line-height:1.55}
+.ab-msg strong{color:var(--gold-bright)}
+.success-card{background:rgba(42,140,90,.1);border:1px solid rgba(42,140,90,.25);border-radius:14px;padding:20px;text-align:center}
+.sc-stars{color:var(--gold-bright);font-size:22px;margin-bottom:8px}
+.sc-msg{font-size:13px;color:#6FE0A8;font-weight:600;margin-bottom:4px}
+.sc-sub{font-size:11px;color:rgba(255,255,255,.35)}
+.phone-nav{display:flex;gap:8px;padding:16px 20px;border-top:1px solid rgba(255,255,255,.07)}
+.pn-back{flex:1;background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);border:none;border-radius:10px;padding:10px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;transition:all .2s}
+.pn-next{flex:2;background:var(--gold-bright);color:var(--ink);border:none;border-radius:10px;padding:10px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:700;cursor:pointer;transition:all .2s}
+.pn-next:hover{background:#F5CF4A}
+.demo-steps-list{display:flex;gap:6px;justify-content:center;margin:10px 0 14px}
+.dsl-dot{width:6px;height:6px;border-radius:50%;background:rgba(14,11,26,.15);transition:all .3s;border:none;cursor:pointer;padding:0}
+.dsl-dot.active{background:var(--violet);width:18px;border-radius:3px}
+
+/* ── FINAL CTA ── */
+.final-section{background:linear-gradient(135deg,var(--ink) 0%,#2C1060 50%,#1A0D4B 100%);padding:140px 48px;text-align:center;position:relative;overflow:hidden}
+.final-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center bottom,rgba(201,148,10,.12) 0%,transparent 65%)}
+.final-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,148,10,.7);margin-bottom:20px;display:block;position:relative;z-index:1}
+.final-title{font-size:clamp(40px,6vw,76px);font-weight:600;color:var(--white);line-height:1.05;margin-bottom:20px;position:relative;z-index:1}
+.final-title em{color:var(--gold-bright);font-style:italic}
+.final-sub{font-size:clamp(16px,2vw,22px);color:rgba(255,255,255,.55);margin-bottom:56px;position:relative;z-index:1}
+.final-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;margin-bottom:40px}
+.final-guarantee{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:12px 24px;font-size:14px;color:rgba(255,255,255,.55)}
+.final-guarantee strong{color:rgba(255,255,255,.85)}
+
+/* ── GCAL MODAL ── */
+.gcal-modal{position:fixed;inset:0;z-index:9998;background:rgba(7,5,18,.9);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .4s}
+.gcal-modal.open{opacity:1;pointer-events:all}
+.gcal-inner{background:var(--white);border-radius:var(--r-lg);max-width:560px;width:100%;overflow:hidden;box-shadow:0 48px 100px rgba(0,0,0,.5);transform:scale(.95);transition:transform .4s cubic-bezier(.16,1,.3,1);max-height:90vh;overflow-y:auto}
+.gcal-modal.open .gcal-inner{transform:scale(1)}
+.gcal-header{background:var(--ink);padding:28px 32px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:2}
+.gcal-header h3{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--white)}
+.gcal-header-sub{font-size:12px;color:rgba(255,255,255,.4);margin-top:4px}
+.gcal-close{background:rgba(255,255,255,.1);border:none;width:32px;height:32px;border-radius:50%;color:rgba(255,255,255,.6);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.gcal-close:hover{background:rgba(255,255,255,.2);color:var(--white)}
+.gcal-body{padding:28px 32px}
+.gcal-slots-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#9E9ABB;margin-bottom:14px}
+.gcal-slots{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.gcal-slot{padding:12px 14px;border:1.5px solid rgba(91,63,190,.15);border-radius:var(--r);cursor:pointer;transition:all .2s;background:var(--white)}
+.gcal-slot:hover,.gcal-slot.selected{border-color:var(--violet);background:var(--lavender)}
+.slot-day{font-size:11px;font-weight:700;color:var(--violet);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.slot-time{font-size:14px;font-weight:600;color:var(--ink)}
+.slot-avail{font-size:11px;color:#9E9ABB;margin-top:2px}
+.gcal-form{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.gcal-input,.gcal-select{padding:12px 16px;border:1.5px solid rgba(91,63,190,.15);border-radius:var(--r);font-size:14px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;transition:border-color .2s;background:var(--white)}
+.gcal-input:focus,.gcal-select:focus{border-color:var(--violet)}
+.gcal-input::placeholder{color:#B0ADCC}
+.gcal-submit{background:var(--gold-bright);color:var(--ink);border:none;border-radius:var(--r);padding:15px;font-size:15px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;width:100%}
+.gcal-submit:hover{background:#F5CF4A;transform:translateY(-1px)}
+.gcal-footer-note{font-size:12px;color:#B0ADCC;text-align:center;line-height:1.5;margin-top:12px}
+.gcal-success{padding:48px 32px;text-align:center;display:none}
+.gcal-success-icon{font-size:56px;margin-bottom:16px}
+.gcal-success h4{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--ink);margin-bottom:10px}
+.gcal-success p{font-size:15px;color:#6B6480;line-height:1.65;margin-bottom:24px}
+
+/* ── AUDIT MODAL ── */
+.modal-overlay{position:fixed;inset:0;z-index:9999;background:rgba(7,5,18,.88);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .4s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--ink2);border-radius:var(--r-lg);padding:56px 48px;max-width:520px;width:100%;position:relative;border:1px solid rgba(201,148,10,.2);box-shadow:0 48px 100px rgba(0,0,0,.6);text-align:center;transform:scale(.95) translateY(16px);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.modal-overlay.open .modal{transform:scale(1) translateY(0)}
+.modal-close{position:absolute;top:18px;right:18px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:none;cursor:pointer;color:rgba(255,255,255,.5);font-size:16px;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:rgba(255,255,255,.15);color:var(--white)}
+.modal-icon{font-size:48px;margin-bottom:18px}
+.modal h3{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--white);margin-bottom:12px}
+.modal-sub{font-size:15px;color:rgba(255,255,255,.55);margin-bottom:32px;line-height:1.6}
+.modal-options{display:flex;flex-direction:column;gap:12px}
+.modal-option{padding:16px 20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);cursor:pointer;transition:all .2s;text-align:left}
+.modal-option:hover{background:rgba(201,148,10,.1);border-color:rgba(201,148,10,.3)}
+.mo-label{font-size:13px;font-weight:700;color:var(--gold-bright);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.mo-desc{font-size:14px;color:rgba(255,255,255,.6)}
+
+/* ── BLOG ── */
+.blog-hero{background:var(--ink);padding:140px 48px 80px;text-align:center}
+.blog-hero h1{font-size:clamp(36px,5vw,64px);color:var(--white);margin-bottom:12px}
+.blog-hero p{font-size:18px;color:rgba(255,255,255,.5)}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:64px}
+@media(max-width:900px){.blog-grid{grid-template-columns:1fr}}
+.blog-card{background:var(--white);border-radius:var(--r-lg);overflow:hidden;border:1px solid rgba(91,63,190,.1);transition:all .3s}
+.blog-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.bc-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:56px}
+.bc-body{padding:28px 26px}
+.bc-cat{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block}
+.bc-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);margin-bottom:10px;line-height:1.3}
+.bc-excerpt{font-size:13px;color:#6B6480;line-height:1.65;margin-bottom:16px}
+.bc-link{font-size:13px;font-weight:600;color:var(--violet);text-decoration:none}
+.newsletter-bar{background:var(--ink);padding:80px 48px;text-align:center}
+.nb-title{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--white);margin-bottom:10px}
+.nb-sub{font-size:15px;color:rgba(255,255,255,.45);margin-bottom:32px}
+.nb-form{display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap}
+.nb-input{flex:1;padding:14px 20px;border-radius:12px;border:1px solid rgba(255,255,255,.12);font-size:14px;font-family:'DM Sans',sans-serif;min-width:200px;outline:none;background:rgba(255,255,255,.08);color:var(--white)}
+.nb-input::placeholder{color:rgba(255,255,255,.25)}
+.nb-input:focus{border-color:rgba(201,148,10,.4)}
+
+/* ── LOGIN ── */
+.login-page{min-height:100vh;background:var(--ink);display:flex;align-items:center;justify-content:center;padding:40px 24px}
+.login-card{background:var(--cream);border-radius:var(--r-lg);padding:56px 48px;max-width:460px;width:100%;text-align:center;box-shadow:var(--shadow)}
+.lc-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.lc-logo span{color:var(--gold)}
+.lc-powered{font-size:12px;color:#9E9ABB;margin-bottom:36px}
+.login-card h2{font-size:28px;color:var(--ink);margin-bottom:10px}
+.login-card p{font-size:15px;color:#6B6480;margin-bottom:32px;line-height:1.65}
+.login-support{background:var(--lavender);border-radius:var(--r);padding:20px 24px;text-align:left;margin-top:20px}
+.ls-heading{font-size:12px;font-weight:700;color:var(--ink2);margin-bottom:10px}
+.ls-info{font-size:13px;color:#6B6480;line-height:1.7}
+
+/* ── WHATSAPP ── */
+.wa-btn{position:fixed;bottom:28px;right:28px;z-index:800;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(37,211,102,.4);cursor:pointer;text-decoration:none;transition:all .3s;border:none;animation:waPulse 3s ease-in-out infinite}
+.wa-btn:hover{transform:scale(1.1)}
+@keyframes waPulse{0%,100%{box-shadow:0 8px 24px rgba(37,211,102,.4)}50%{box-shadow:0 8px 24px rgba(37,211,102,.4),0 0 0 10px rgba(37,211,102,.12)}}
+
+/* ── PAGES ── */
+.page{display:none}.page.active{display:block}
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}
+.text-center{text-align:center}.mt-8{margin-top:32px}.mt-12{margin-top:48px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <a class="nav-logo" onclick="showPage('home')">Luxury<span>Client</span>Flow</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <button class="nav-link active" onclick="showPage('home')" data-en="Home" data-es="Inicio">Home</button>
+      <button class="nav-link" onclick="showPage('blog')" data-en="Blog" data-es="Blog">Blog</button>
+      <button class="nav-link" onclick="showPage('demo')" data-en="Demo" data-es="Demo">Demo</button>
+      <button class="nav-link" onclick="showPage('login')" data-en="Client Login" data-es="Acceso Clientes">Client Login</button>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnEN" onclick="setLang('en')"><span class="lang-flag">🇺🇸</span> EN</button>
+      <button class="lang-btn" id="btnES" onclick="setLang('es')"><span class="lang-flag">🇪🇸</span> ES</button>
+    </div>
+    <button class="nav-cta" onclick="openModal()" data-en="Free Audit" data-es="Auditoría Gratis">Free Audit</button>
+  </div>
+</nav>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sticky-bar-msg" data-en="<strong>Founding Pilot — 3 spots left at $297/mo.</strong> Zero setup fee. Case study included." data-es="<strong>Programa Piloto — 3 cupos a $297/mes.</strong> Sin costo de instalación. Caso de estudio incluido."><strong>Founding Pilot — 3 spots left at $297/mo.</strong> Zero setup fee. Case study included.</div>
+  <button class="btn btn-gold btn-sm" onclick="openModal()" data-en="Claim a Spot →" data-es="Reservar Cupo →">Claim a Spot →</button>
+</div>
+
+<!-- ══ HOME PAGE ══ -->
+<div id="page-home" class="page active">
+
+<!-- HERO -->
+<section class="hero">
+  <div style="position:absolute;inset:0;z-index:0">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="hero-grain"></div>
+  </div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-verticals">
+        <span class="vertical-pill active" data-en="Med Spas" data-es="Clínicas Estéticas">Med Spas</span>
+        <span class="vertical-pill" data-en="Dental" data-es="Dental">Dental</span>
+        <span class="vertical-pill" data-en="Plastic Surgery" data-es="Cirugía Plástica">Plastic Surgery</span>
+        <span class="vertical-pill" data-en="Chiropractic" data-es="Quiropráctica">Chiropractic</span>
+        <span class="vertical-pill" data-en="Wellness Centers" data-es="Centros de Bienestar">Wellness Centers</span>
+        <span class="vertical-pill" data-en="IV Therapy" data-es="Terapia IV">IV Therapy</span>
+        <span class="vertical-pill" data-en="High-End Salons" data-es="Salones de Lujo">High-End Salons</span>
+      </div>
+      <h1 data-en="Stop Paying<br>the <em>Ghost Tax.</em>" data-es="Deja de Pagar<br>el <em>Impuesto Fantasma.</em>">Stop Paying<br>the <em>Ghost Tax.</em></h1>
+      <p class="hero-sub" data-en="Your high-value patients spend $3K–$15K, then disappear.<br><strong>We bring them back</strong> — with bilingual AI follow-up and real luxury vacation rewards that make rebooking irresistible." data-es="Tus pacientes de alto valor gastan $3K–$15K y desaparecen.<br><strong>Los hacemos volver</strong> — con seguimiento de IA bilingüe y recompensas de vacaciones de lujo que hacen que reservar de nuevo sea irresistible.">Your high-value patients spend $3K–$15K, then disappear.<br><strong>We bring them back</strong> — with bilingual AI follow-up and real luxury vacation rewards that make rebooking irresistible.</p>
+      <div class="hero-actions">
+        <button class="btn btn-gold btn-lg" onclick="openModal()" data-en="Get a Free Ghost Tax Audit" data-es="Auditoría Gratuita del Impuesto Fantasma">Get a Free Ghost Tax Audit</button>
+        <button class="btn btn-ghost btn-lg" onclick="showPage('demo')" data-en="▶ See How It Works" data-es="▶ Ver Cómo Funciona">▶ See How It Works</button>
+      </div>
+      <div class="proof-strip">
+        <div class="proof-item"><div class="proof-dot"></div><div class="proof-text" data-en="<strong>Built in Miami</strong> — bilingual from day one" data-es="<strong>Construido en Miami</strong> — bilingüe desde el primer día"><strong>Built in Miami</strong> — bilingual from day one</div></div>
+        <div class="proof-item"><div class="proof-dot"></div><div class="proof-text" data-en="No app downloads. <strong>Apple &amp; Google Wallet native.</strong>" data-es="Sin descargas. <strong>Apple &amp; Google Wallet nativo.</strong>">No app downloads. <strong>Apple &amp; Google Wallet native.</strong></div></div>
+        <div class="proof-item"><div class="proof-dot"></div><div class="proof-text" data-en="<strong>3x ROI</strong> guarantee or we work free" data-es="Garantía <strong>3x ROI</strong> o trabajamos gratis"><strong>3x ROI</strong> guarantee or we work free</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div></div>
+</section>
+
+<!-- VERTICALS -->
+<section class="verticals-section">
+  <div class="container">
+    <div class="section-header center reveal">
+      <span class="section-eyebrow" data-en="Who This Is For" data-es="¿Para Quién Es Esto?">Who This Is For</span>
+      <h2 class="section-title" data-en="Every High-Ticket Service Business Has the Same Ghost Problem" data-es="Cada Negocio de Servicios de Alto Valor Tiene el Mismo Problema Fantasma">Every High-Ticket Service Business Has the Same Ghost Problem</h2>
+      <p class="section-sub" data-en="The ghost tax hits any business where patients spend big — once — then vanish. Here's how it shows up in your world." data-es="El impuesto fantasma afecta a cualquier negocio donde los pacientes gastan mucho — una vez — y desaparecen. Así se ve en tu industria.">The ghost tax hits any business where patients spend big — once — then vanish. Here's how it shows up in your world.</p>
+    </div>
+    <div class="verticals-grid">
+      <div class="vertical-card reveal">
+        <span class="vc-icon">💉</span>
+        <div class="vc-title" data-en="Med Spas" data-es="Clínicas Estéticas">Med Spas</div>
+        <span class="vc-ghost" data-en="The Ghost Tax" data-es="El Impuesto Fantasma">The Ghost Tax</span>
+        <p class="vc-desc" data-en="Botox clients spend $800–$2K per visit, but 80%+ don't rebook. You paid $300–$800 to acquire them. The math doesn't work." data-es="Los clientes de Botox gastan $800–$2K por visita, pero más del 80% no vuelve a reservar. Pagaste $300–$800 para adquirirlos. Los números no cuadran.">Botox clients spend $800–$2K per visit, but 80%+ don't rebook. You paid $300–$800 to acquire them. The math doesn't work.</p>
+        <div class="vc-stat">~82% <span data-en="never rebook" data-es="nunca regresan">never rebook</span></div>
+      </div>
+      <div class="vertical-card reveal d1">
+        <span class="vc-icon">🦷</span>
+        <div class="vc-title" data-en="Dental" data-es="Dental">Dental</div>
+        <span class="vc-ghost" data-en="The Ghost Tax" data-es="El Impuesto Fantasma">The Ghost Tax</span>
+        <p class="vc-desc" data-en="Cosmetic dental patients invest $5K–$20K in veneers or implants, then disappear. No maintenance. No referrals. No relationship." data-es="Los pacientes de estética dental invierten $5K–$20K en carillas o implantes, y desaparecen. Sin mantenimiento. Sin referencias. Sin relación.">Cosmetic dental patients invest $5K–$20K in veneers or implants, then disappear. No maintenance. No referrals. No relationship.</p>
+        <div class="vc-stat">60% <span data-en="skip follow-ups" data-es="sin seguimiento">skip follow-ups</span></div>
+      </div>
+      <div class="vertical-card reveal d2">
+        <span class="vc-icon">✨</span>
+        <div class="vc-title" data-en="Plastic Surgery" data-es="Cirugía Plástica">Plastic Surgery</div>
+        <span class="vc-ghost" data-en="The Ghost Tax" data-es="El Impuesto Fantasma">The Ghost Tax</span>
+        <p class="vc-desc" data-en="Post-procedure patients are at peak satisfaction — and peak referral potential. Most practices have zero system to capture it." data-es="Los pacientes post-procedimiento están en su máxima satisfacción — y en su máximo potencial de referidos. La mayoría de las clínicas no tiene sistema para capturarlo.">Post-procedure patients are at peak satisfaction — and peak referral potential. Most practices have zero system to capture it.</p>
+        <div class="vc-stat">1 <span data-en="referral lost per patient" data-es="referido perdido por paciente">referral lost per patient</span></div>
+      </div>
+      <div class="vertical-card reveal">
+        <span class="vc-icon">🦴</span>
+        <div class="vc-title" data-en="Chiropractic" data-es="Quiropráctica">Chiropractic</div>
+        <span class="vc-ghost" data-en="The Ghost Tax" data-es="El Impuesto Fantasma">The Ghost Tax</span>
+        <p class="vc-desc" data-en="Care plans worth $2K–$5K need consistent return visits to deliver results. Patients drop off the moment they feel better — right before the real work starts." data-es="Los planes de cuidado de $2K–$5K requieren visitas constantes para dar resultados. Los pacientes desertan en cuanto sienten mejoría — justo antes de que empiece el trabajo real.">Care plans worth $2K–$5K need consistent return visits to deliver results. Patients drop off the moment they feel better.</p>
+        <div class="vc-stat">50% <span data-en="drop after pain relief" data-es="abandonan tras sentir alivio">drop after pain relief</span></div>
+      </div>
+      <div class="vertical-card reveal d1">
+        <span class="vc-icon">🧘</span>
+        <div class="vc-title" data-en="Wellness Centers" data-es="Centros de Bienestar">Wellness Centers</div>
+        <span class="vc-ghost" data-en="The Ghost Tax" data-es="El Impuesto Fantasma">The Ghost Tax</span>
+        <p class="vc-desc" data-en="Cryotherapy, float tanks, hormone therapy — high-ticket services that need repeat visits to work. Most clients try once and move on." data-es="Crioterapia, tanques de flotación, terapia hormonal — servicios de alto valor que requieren visitas repetidas para funcionar. La mayoría prueba una vez y sigue adelante.">Cryotherapy, float tanks, hormone therapy — high-ticket services that need repeat visits. Most clients try once and move on.</p>
+        <div class="vc-stat">35% <span data-en="visit only once" data-es="solo visitan una vez">visit only once</span></div>
+      </div>
+      <div class="vertical-card reveal d2">
+        <span class="vc-icon">💧</span>
+        <div class="vc-title" data-en="IV Therapy &amp; Aesthetics" data-es="Terapia IV y Estética">IV Therapy &amp; Aesthetics</div>
+        <span class="vc-ghost" data-en="The Ghost Tax" data-es="El Impuesto Fantasma">The Ghost Tax</span>
+        <p class="vc-desc" data-en="Monthly IV drips, laser, body contouring — subscriptions never get sold because there's no system nudging patients back." data-es="Sueros mensuales, láser, contorno corporal — las suscripciones nunca se venden porque no hay un sistema que lleve a los pacientes de regreso.">Monthly IV drips, laser, body contouring — subscriptions never get sold because there's no system nudging patients back.</p>
+        <div class="vc-stat">$300+ <span data-en="per visit never repeated" data-es="por visita sin repetir">per visit never repeated</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem-section">
+  <div class="container">
+    <span class="problem-eyebrow" data-en="The Real Cost" data-es="El Costo Real">The Real Cost</span>
+    <h2 class="problem-title" data-en="Most Practices Spend 5× More Acquiring Than Retaining" data-es="La Mayoría Gasta 5× Más en Adquirir Que en Retener">Most Practices Spend 5× More Acquiring Than Retaining</h2>
+    <p class="problem-sub" data-en="And leave another 40% of their market untouched — because they never communicate in Spanish." data-es="Y dejan otro 40% de su mercado intacto — porque nunca se comunican en español.">And leave another 40% of their market untouched — because they never communicate in Spanish.</p>
+    <div class="problem-layout">
+      <div class="problem-list">
+        <div class="problem-item reveal">
+          <div class="pi-icon">👻</div>
+          <div class="pi-text">
+            <h4 data-en="Patients ghost after the first visit" data-es="Los pacientes desaparecen tras la primera visita">Patients ghost after the first visit</h4>
+            <p data-en="The average high-ticket service business loses over 75% of new clients to forgetfulness. No follow-up system = no second visit." data-es="El negocio de servicios de alto valor promedio pierde más del 75% de sus nuevos clientes al olvido. Sin sistema de seguimiento = sin segunda visita.">The average high-ticket service business loses over 75% of new clients to forgetfulness. No follow-up system = no second visit.</p>
+          </div>
+        </div>
+        <div class="problem-item reveal d1">
+          <div class="pi-icon">📅</div>
+          <div class="pi-text">
+            <h4 data-en="No-shows bleed your schedule dry" data-es="Las ausencias sangran tu agenda">No-shows bleed your schedule dry</h4>
+            <p data-en="Empty treatment rooms are fixed costs at zero revenue. A bilingual reminder system cuts no-shows by up to 40%." data-es="Las salas de tratamiento vacías son costos fijos a cero ingresos. Un sistema de recordatorios bilingüe reduce las ausencias hasta un 40%.">Empty treatment rooms are fixed costs at zero revenue. A bilingual reminder system cuts no-shows by up to 40%.</p>
+          </div>
+        </div>
+        <div class="problem-item reveal d2">
+          <div class="pi-icon">🌐</div>
+          <div class="pi-text">
+            <h4 data-en="English-only = invisible to half your market" data-es="Solo inglés = invisible para la mitad de tu mercado">English-only = invisible to half your market</h4>
+            <p data-en="In South Florida, Texas, California and across the U.S., 30–70% of your potential patients prefer Spanish. Most loyalty platforms ignore them." data-es="En el sur de Florida, Texas, California y todo EE.UU., el 30–70% de tus pacientes potenciales prefiere el español. La mayoría de las plataformas de lealtad los ignora.">In South Florida, Texas, California and across the U.S., 30–70% of potential patients prefer Spanish. Most platforms ignore them.</p>
+          </div>
+        </div>
+        <div class="problem-item reveal d3">
+          <div class="pi-icon">⭐</div>
+          <div class="pi-text">
+            <h4 data-en="Happy patients aren't leaving reviews" data-es="Los pacientes felices no dejan reseñas">Happy patients aren't leaving reviews</h4>
+            <p data-en="Unhappy ones are. Without a reputation system, your Google rating drifts down while your best patients stay silent." data-es="Los insatisfechos sí lo hacen. Sin un sistema de reputación, tu calificación de Google baja mientras tus mejores pacientes guardan silencio.">Unhappy ones are. Without a reputation system, your Google rating drifts down while your best patients stay silent.</p>
+          </div>
+        </div>
+      </div>
+      <div class="loss-calc reveal d1">
+        <div class="lc-title" data-en="Your Ghost Tax Calculator" data-es="Tu Calculadora del Impuesto Fantasma">Your Ghost Tax Calculator</div>
+        <div class="lc-row"><span class="lc-label" data-en="Avg. patient value" data-es="Valor promedio del paciente">Avg. patient value</span><span class="lc-val">$1,200</span></div>
+        <div class="lc-row"><span class="lc-label" data-en="New patients / month" data-es="Pacientes nuevos / mes">New patients / month</span><span class="lc-val">40</span></div>
+        <div class="lc-row"><span class="lc-label" data-en="Patients who don't rebook" data-es="Pacientes que no regresan">Patients who don't rebook</span><span class="lc-val red">~33 (82%)</span></div>
+        <div class="lc-row"><span class="lc-label" data-en="2nd visit revenue lost" data-es="Ingresos perdidos (2ª visita)">2nd visit revenue lost</span><span class="lc-val red">$39,600</span></div>
+        <div class="lc-row"><span class="lc-label" data-en="Referrals not generated" data-es="Referencias no generadas">Referrals not generated</span><span class="lc-val red">~16 <span data-en="patients" data-es="pacientes">patients</span></span></div>
+        <div class="lc-total">
+          <div class="lc-total-label" data-en="Monthly Ghost Tax" data-es="Impuesto Fantasma Mensual">Monthly Ghost Tax</div>
+          <div class="lc-total-val">$58,000+</div>
+          <div class="lc-total-sub" data-en="In lost return visits + referral revenue" data-es="En visitas de retorno perdidas + ingresos por referidos">In lost return visits + referral revenue</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOOP -->
+<section class="loop-section">
+  <div class="container">
+    <div class="section-header center reveal">
+      <span class="section-eyebrow" data-en="The System" data-es="El Sistema">The System</span>
+      <h2 class="section-title" data-en="The Luxury Patient Loop" data-es="El Ciclo del Paciente de Lujo">The Luxury Patient Loop</h2>
+      <p class="section-sub" data-en="Four automated steps that turn one-time visits into a $25K lifetime relationship — bilingual, no app required." data-es="Cuatro pasos automatizados que convierten visitas únicas en relaciones de $25K de por vida — bilingüe, sin aplicación.">Four automated steps that turn one-time visits into a $25K lifetime relationship — bilingual, no app required.</p>
+    </div>
+    <div class="loop-track">
+      <div class="loop-step reveal">
+        <div class="ls-num">1</div>
+        <div class="ls-icon">📲</div>
+        <div class="ls-title" data-en="Wallet Card Scan" data-es="Escaneo de Tarjeta">Wallet Card Scan</div>
+        <p class="ls-desc" data-en="Patient scans QR at checkout. Instant Apple/Google Wallet loyalty card — no app, no friction." data-es="El paciente escanea el QR al pagar. Tarjeta de lealtad instantánea en Apple/Google Wallet — sin aplicación, sin fricción.">Patient scans QR at checkout. Instant Apple/Google Wallet loyalty card — no app, no friction.</p>
+      </div>
+      <div class="loop-step reveal d1">
+        <div class="ls-num">2</div>
+        <div class="ls-icon">🤖</div>
+        <div class="ls-title" data-en="Bilingual AI Follow-Up" data-es="Seguimiento de IA Bilingüe">Bilingual AI Follow-Up</div>
+        <p class="ls-desc" data-en='"Hola Sarah, ¿lista para tu próximo tratamiento?" — personalized, automated, timed perfectly. EN + ES from day one.' data-es='"Hola Sarah, ¿lista para tu próximo tratamiento?" — personalizado, automatizado, en el momento exacto. EN + ES desde el día uno.'>"Hola Sarah, ¿lista para tu próximo tratamiento?" — personalized, automated, timed perfectly. EN + ES from day one.</p>
+      </div>
+      <div class="loop-step reveal d2">
+        <div class="ls-num">3</div>
+        <div class="ls-icon">✈️</div>
+        <div class="ls-title" data-en="Vacation Reward" data-es="Recompensa de Vacaciones">Vacation Reward</div>
+        <p class="ls-desc" data-en="Rebook and earn a real 3-day getaway — valued at $897. The hook that makes your loyalty program unforgettable." data-es="Reserva y gana una escapada real de 3 días — valorada en $897. El gancho que hace tu programa de lealtad inolvidable.">Rebook and earn a real 3-day getaway — valued at $897. The hook that makes your loyalty program unforgettable.</p>
+      </div>
+      <div class="loop-step reveal d3">
+        <div class="ls-num">4</div>
+        <div class="ls-icon">⭐</div>
+        <div class="ls-title" data-en="Auto Review + Firewall" data-es="Reseña Automática + Escudo">Auto Review + Firewall</div>
+        <p class="ls-desc" data-en="Happy patients auto-post 5-star reviews. Unhappy ones route to you privately first. Reputation protects itself." data-es="Los pacientes felices publican reseñas de 5 estrellas automáticamente. Los insatisfechos llegan a ti primero, en privado. La reputación se cuida sola.">Happy patients auto-post 5-star reviews. Unhappy ones route to you privately first. Reputation protects itself.</p>
+      </div>
+    </div>
+    <div class="text-center"><button class="btn btn-outline" onclick="showPage('demo')" data-en="Try the Interactive Demo →" data-es="Ver el Demo Interactivo →">Try the Interactive Demo →</button></div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder-section">
+  <div class="container">
+    <div class="founder-layout">
+      <div class="founder-img-wrap reveal">
+        <img src="daniel-headshot.png" alt="Daniel Rodriguez — Founder, LuxuryClientFlow" class="founder-img">
+        <div class="founder-card-badge">
+          <div class="fcb-name">Daniel Rodriguez</div>
+          <div class="fcb-title" data-en="Founder · LuxuryClientFlow" data-es="Fundador · LuxuryClientFlow">Founder · LuxuryClientFlow</div>
+          <div class="fcb-links">
+            <a href="https://dannyrodriguez.online" class="fcb-link" target="_blank">dannyrodriguez.online</a>
+            <a href="https://clientcontactpro.com" class="fcb-link" target="_blank">ClientContactPro</a>
+          </div>
+        </div>
+      </div>
+      <div class="reveal d1">
+        <div class="origin-badge" data-en="👋 From the Founder" data-es="👋 Del Fundador">👋 From the Founder</div>
+        <h2 class="section-title" data-en="Built by a Miami Entrepreneur Who Got Tired of Watching Great Practices Lose Great Patients" data-es="Creado por un Emprendedor Miamense Que Se Cansó de Ver Cómo Excelentes Clínicas Perdían Excelentes Pacientes">Built by a Miami Entrepreneur Who Got Tired of Watching Great Practices Lose Great Patients</h2>
+        <p style="font-size:16px;color:#6B6480;line-height:1.75;margin-top:20px" data-en="I'm Daniel — Miami native, entrepreneur, and the person behind LuxuryClientFlow and ClientContactPro. I kept seeing the same thing: incredible practices with incredible results losing 80% of their patients to zero follow-up." data-es="Soy Daniel — nativo de Miami, emprendedor, y la persona detrás de LuxuryClientFlow y ClientContactPro. Seguía viendo lo mismo: clínicas increíbles con resultados increíbles perdiendo el 80% de sus pacientes por falta de seguimiento.">I'm Daniel — Miami native, entrepreneur, and the person behind LuxuryClientFlow and ClientContactPro. I kept seeing the same thing: incredible practices losing 80% of their patients to zero follow-up.</p>
+        <p style="font-size:16px;color:#6B6480;line-height:1.75;margin-top:16px" data-en="In a city that's 70% Hispanic, most loyalty platforms were English-only. I built the bilingual-first system I wish existed — and tested it in the hardest market first." data-es="En una ciudad que es 70% hispana, la mayoría de las plataformas de lealtad eran solo en inglés. Construí el sistema bilingüe desde el inicio que deseé que existiera — y lo probé primero en el mercado más difícil.">In a city that's 70% Hispanic, most loyalty platforms were English-only. I built the bilingual-first system I wish existed — and tested it in the hardest market first.</p>
+        <div class="founder-quote-block">
+          <p data-en='"I&apos;m not selling software. I&apos;m offering to be your retention partner. If you don&apos;t win, I don&apos;t win — that&apos;s why founding clients get a 3× ROI guarantee."' data-es='"No vendo software. Ofrezco ser tu socio de retención. Si tú no ganas, yo no gano — por eso los clientes fundadores tienen garantía de 3× ROI."'>"I'm not selling software. I'm offering to be your retention partner. If you don't win, I don't win — that's why founding clients get a 3× ROI guarantee."</p>
+        </div>
+        <div class="founder-creds">
+          <div class="fc-cred"><div class="fc-cred-dot"></div><span data-en="Miami native &amp; entrepreneur" data-es="Nativo de Miami y emprendedor">Miami native &amp; entrepreneur</span></div>
+          <div class="fc-cred"><div class="fc-cred-dot"></div><span data-en="AI &amp; automation specialist" data-es="Especialista en IA y automatización">AI &amp; automation specialist</span></div>
+          <div class="fc-cred"><div class="fc-cred-dot"></div><span data-en="Founder, Shop305Local &amp; ClientContactPro" data-es="Fundador, Shop305Local y ClientContactPro">Founder, Shop305Local &amp; ClientContactPro</span></div>
+        </div>
+        <div style="margin-top:32px"><button class="btn btn-gold btn-lg" onclick="openGCal()" data-en="📅 Book a Call with Daniel →" data-es="📅 Reservar una Llamada con Daniel →">📅 Book a Call with Daniel →</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="hiw-section">
+  <div class="container">
+    <div class="section-header center reveal">
+      <span class="section-eyebrow" data-en="Implementation" data-es="Implementación">Implementation</span>
+      <h2 class="section-title" data-en="Live in 48 Hours. Seriously." data-es="En Funcionamiento en 48 Horas. En Serio.">Live in 48 Hours. Seriously.</h2>
+      <p class="section-sub" data-en="No tech team. No complicated integrations. We handle everything." data-es="Sin equipo técnico. Sin integraciones complicadas. Nosotros manejamos todo.">No tech team. No complicated integrations. We handle everything.</p>
+    </div>
+    <div class="hiw-grid">
+      <div class="hiw-card reveal">
+        <span class="hiw-day" data-en="Day 1" data-es="Día 1">Day 1</span>
+        <span class="hiw-icon">🎯</span>
+        <h3 class="hiw-title" data-en="Branded QR Cards + Bilingual AI Configured" data-es="Tarjetas QR con tu Marca + IA Bilingüe Configurada">Branded QR Cards + Bilingual AI Configured</h3>
+        <p class="hiw-desc" data-en="We design your branded Apple/Google Wallet loyalty card, configure your bilingual AI scripts in English and Spanish, and set up your automation flows." data-es="Diseñamos tu tarjeta de lealtad Apple/Google Wallet con tu marca, configuramos tus scripts de IA bilingüe en inglés y español, y establecemos tus flujos de automatización.">We design your branded Apple/Google Wallet loyalty card, configure your bilingual AI scripts in English and Spanish, and set up your automation flows.</p>
+      </div>
+      <div class="hiw-card reveal d1">
+        <span class="hiw-day" data-en="Day 2" data-es="Día 2">Day 2</span>
+        <span class="hiw-icon">✈️</span>
+        <h3 class="hiw-title" data-en="Vacation Rewards Live + Review Firewall On" data-es="Recompensas de Vacaciones Activas + Escudo de Reseñas">Vacation Rewards Live + Review Firewall On</h3>
+        <p class="hiw-desc" data-en="Your luxury vacation reward system activates. Happy patients get routed to Google for their 5-star review. Unhappy patients go to you privately first." data-es="Tu sistema de recompensas de vacaciones de lujo se activa. Los pacientes felices van a Google para su reseña de 5 estrellas. Los insatisfechos llegan primero a ti, en privado.">Your luxury vacation reward system activates. Happy patients get routed to Google for their 5-star review. Unhappy patients go to you privately first.</p>
+      </div>
+      <div class="hiw-card reveal d2">
+        <span class="hiw-day" data-en="Day 3" data-es="Día 3">Day 3</span>
+        <span class="hiw-icon">📊</span>
+        <h3 class="hiw-title" data-en="First Scans → Live Dashboard → Revenue Tracked" data-es="Primeros Escaneos → Panel en Vivo → Ingresos Rastreados">First Scans → Live Dashboard → Revenue Tracked</h3>
+        <p class="hiw-desc" data-en="Patients start scanning at checkout. Your live dashboard shows every rebook, every review, every dollar recovered. You see the loop working in real time." data-es="Los pacientes comienzan a escanear al pagar. Tu panel en vivo muestra cada reserva, cada reseña, cada dólar recuperado. Ves el ciclo funcionando en tiempo real.">Patients start scanning at checkout. Your live dashboard shows every rebook, every review, every dollar recovered.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="section-header center reveal">
+      <span class="section-eyebrow" data-en="Investment" data-es="Inversión">Investment</span>
+      <h2 class="section-title" data-en="Pricing That Scales With Your Proof" data-es="Precios Que Crecen Con Tu Evidencia">Pricing That Scales With Your Proof</h2>
+      <p class="section-sub" data-en="We're in founding mode. Early clients get the lowest pricing we'll ever offer — in exchange for letting us document your results." data-es="Estamos en modo fundador. Los clientes iniciales obtienen el precio más bajo que ofreceremos — a cambio de documentar sus resultados.">We're in founding mode. Early clients get the lowest pricing we'll ever offer — in exchange for letting us document your results.</p>
+    </div>
+    <div class="pilot-banner reveal">
+      <div class="pb-text">
+        <h3 data-en="Founding Pilot Program" data-es="Programa Piloto Fundador">Founding Pilot Program</h3>
+        <p data-en="First 3–5 clients only. $0 setup, $297/mo, 3-month commitment, case study agreement required." data-es="Solo para los primeros 3–5 clientes. $0 instalación, $297/mes, compromiso de 3 meses, acuerdo de caso de estudio requerido.">First 3–5 clients only. $0 setup, $297/mo, 3-month commitment, case study agreement required.</p>
+      </div>
+      <div class="pb-badge" data-en="⚡ 3 spots available" data-es="⚡ 3 cupos disponibles">⚡ 3 spots available</div>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <span class="price-tier" data-en="Phase 1 · Right Now" data-es="Fase 1 · Ahora Mismo">Phase 1 · Right Now</span>
+        <div class="price-name" data-en="Founding Pilot" data-es="Piloto Fundador">Founding Pilot</div>
+        <div class="price-setup" data-en="$0 setup fee" data-es="$0 costo de instalación">$0 setup fee</div>
+        <div class="price-mo"><sup>$</sup>297</div>
+        <div class="price-period" data-en="per month" data-es="por mes">per month</div>
+        <div class="price-condition" data-en="✓ 3-month minimum · case study required" data-es="✓ Mínimo 3 meses · caso de estudio requerido">✓ 3-month minimum · case study required</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li><span class="pf-check">✓</span><span data-en="Bilingual AI follow-up (EN + ES)" data-es="Seguimiento de IA bilingüe (EN + ES)">Bilingual AI follow-up (EN + ES)</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Apple/Google Wallet loyalty card" data-es="Tarjeta de lealtad Apple/Google Wallet">Apple/Google Wallet loyalty card</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Vacation reward system activated" data-es="Sistema de recompensas de vacaciones activado">Vacation reward system activated</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Review firewall + 5★ automation" data-es="Escudo de reseñas + automatización 5★">Review firewall + 5★ automation</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Live revenue dashboard" data-es="Panel de ingresos en vivo">Live revenue dashboard</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Full onboarding + setup included" data-es="Integración completa + configuración incluida">Full onboarding + setup included</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Direct founder access" data-es="Acceso directo al fundador">Direct founder access</span></li>
+        </ul>
+        <button class="btn btn-dark btn-full" onclick="openModal()" data-en="Claim a Founding Spot →" data-es="Reclamar un Cupo Fundador →">Claim a Founding Spot →</button>
+        <p class="price-note" data-en="You pay the lowest price we'll ever charge.<br>We get real results data to share publicly." data-es="Pagas el precio más bajo que cobraremos.<br>Obtenemos datos reales para compartir públicamente.">You pay the lowest price we'll ever charge.<br>We get real results data to share publicly.</p>
+      </div>
+      <div class="price-card featured reveal d1" data-badge="Most Popular">
+        <span class="price-tier" data-en="Phase 2 · Starting Month 4" data-es="Fase 2 · A partir del Mes 4">Phase 2 · Starting Month 4</span>
+        <div class="price-name" data-en="Solo Practice" data-es="Práctica Individual">Solo Practice</div>
+        <div class="price-setup" data-en="$997 one-time setup" data-es="$997 instalación única">$997 one-time setup</div>
+        <div class="price-mo"><sup>$</sup>497</div>
+        <div class="price-period" data-en="per month" data-es="por mes">per month</div>
+        <div class="price-condition" data-en="✓ No term commitment · cancel anytime" data-es="✓ Sin compromiso de plazo · cancela cuando quieras">✓ No term commitment · cancel anytime</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li><span class="pf-check">✓</span><span data-en="Everything in Founding Pilot" data-es="Todo lo del Piloto Fundador">Everything in Founding Pilot</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Custom branded experience" data-es="Experiencia con tu marca personalizada">Custom branded experience</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Haitian Creole + Portuguese (add-on)" data-es="Criollo haitiano + Portugués (complemento)">Haitian Creole + Portuguese (add-on)</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Priority support" data-es="Soporte prioritario">Priority support</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Monthly performance report" data-es="Informe mensual de rendimiento">Monthly performance report</span></li>
+          <li><span class="pf-check">✓</span><span data-en="A/B message testing" data-es="Pruebas A/B de mensajes">A/B message testing</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Referral tracking module" data-es="Módulo de seguimiento de referidos">Referral tracking module</span></li>
+        </ul>
+        <button class="btn btn-gold btn-full" onclick="openModal()" data-en="Join the Waitlist →" data-es="Unirse a la Lista de Espera →">Join the Waitlist →</button>
+        <p class="price-note" data-en="Available once founding cohort results are published." data-es="Disponible una vez publicados los resultados del cohorte fundador.">Available once founding cohort results are published.</p>
+      </div>
+      <div class="price-card muted reveal d2">
+        <div class="price-coming" data-en="Coming Soon" data-es="Próximamente">Coming Soon</div>
+        <span class="price-tier" data-en="Phase 3 · Future" data-es="Fase 3 · Futuro">Phase 3 · Future</span>
+        <div class="price-name" data-en="Agency / White-Label" data-es="Agencia / Marca Blanca">Agency / White-Label</div>
+        <div class="price-setup" data-en="Setup TBD" data-es="Instalación por confirmar">Setup TBD</div>
+        <div class="price-mo"><sup>$</sup>997</div>
+        <div class="price-period" data-en="per month · unlimited clients" data-es="por mes · clientes ilimitados">per month · unlimited clients</div>
+        <div class="price-condition" data-en="✓ Available once playbook is proven" data-es="✓ Disponible cuando el sistema esté probado">✓ Available once playbook is proven</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li><span class="pf-check">✓</span><span data-en="White-label the full platform" data-es="Plataforma completa con tu marca">White-label the full platform</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Custom domain + branding" data-es="Dominio personalizado + marca">Custom domain + branding</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Unlimited client accounts" data-es="Cuentas de clientes ilimitadas">Unlimited client accounts</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Revenue share dashboard" data-es="Panel de distribución de ingresos">Revenue share dashboard</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Agency sales playbook" data-es="Manual de ventas para agencias">Agency sales playbook</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Dedicated account manager" data-es="Gerente de cuenta dedicado">Dedicated account manager</span></li>
+        </ul>
+        <button class="btn btn-outline btn-full" onclick="openModal()" data-en="Express Interest →" data-es="Expresar Interés →">Express Interest →</button>
+        <p class="price-note" data-en="Founding pilot clients get first access when ready." data-es="Los clientes piloto fundadores tendrán acceso primero cuando esté listo.">Founding pilot clients get first access when ready.</p>
+      </div>
+    </div>
+    <div class="pricing-footer reveal" data-en="<strong>Why are the pilot prices this low?</strong> Because we need real case studies more than we need revenue right now. Founding clients get the lowest pricing we'll ever offer — permanently locked at $297/mo for 12 months if they complete the 3-month pilot. In exchange, we document your results and publish them (with your permission)." data-es="<strong>¿Por qué son tan bajos los precios del piloto?</strong> Porque necesitamos casos de estudio reales más que ingresos ahora mismo. Los clientes fundadores obtienen el precio más bajo que ofreceremos — fijo permanentemente en $297/mes por 12 meses si completan el piloto de 3 meses. A cambio, documentamos sus resultados y los publicamos (con su permiso)."><strong>Why are the pilot prices this low?</strong> Because we need real case studies more than we need revenue right now. Founding clients get the lowest pricing we'll ever offer — permanently locked at $297/mo for 12 months if they complete the 3-month pilot. In exchange, we document your results and publish them (with your permission).</div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonial-section">
+  <div class="container">
+    <div class="section-header center reveal">
+      <span class="section-eyebrow" style="color:rgba(201,148,10,.6)" data-en="Social Proof" data-es="Prueba Social">Social Proof</span>
+      <h2 class="section-title" style="color:var(--white)" data-en="What Early Clients Will Say" data-es="Lo Que Dirán los Primeros Clientes">What Early Clients Will Say</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.4)" data-en="We're building our founding cohort now. Here's the kind of feedback we're going after — and what we're guaranteeing." data-es="Estamos construyendo nuestro cohorte fundador ahora. Esto es el tipo de feedback que buscamos — y lo que garantizamos.">We're building our founding cohort now. Here's the kind of feedback we're going after — and what we're guaranteeing.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="t-card reveal" style="border-style:dashed">
+        <div class="t-placeholder-tag" data-en="Founding Client · Spot Open" data-es="Cliente Fundador · Cupo Disponible">Founding Client · Spot Open</div>
+        <p class="t-quote" data-en='This could be your story. <span class="gold">Your rebooking numbers. Your revenue recovered.</span> Your patients coming back.' data-es='Esta podría ser tu historia. <span class="gold">Tus números de reservas. Tus ingresos recuperados.</span> Tus pacientes regresando.'>This could be your story. <span class="gold">Your rebooking numbers. Your revenue recovered.</span> Your patients coming back.</p>
+        <div class="t-author">
+          <div class="t-avatar">?</div>
+          <div><div class="t-name" data-en="Your Practice Here" data-es="Tu Clínica Aquí">Your Practice Here</div><div class="t-role" data-en="Med Spa · Dental · Wellness · Chiropractic" data-es="Clínica Estética · Dental · Bienestar · Quiropráctica">Med Spa · Dental · Wellness · Chiropractic</div></div>
+        </div>
+      </div>
+      <div class="t-card reveal d1">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-type" data-en="Market Data · Hispanic Patients" data-es="Datos de Mercado · Pacientes Hispanos">Market Data · Hispanic Patients</div>
+        <p class="t-quote" data-en='Spanish-language outreach gets <span class="gold">47% higher response rates</span> than English-only in South Florida markets.' data-es='El alcance en español obtiene <span class="gold">47% más respuesta</span> que el inglés solo en los mercados del sur de Florida.'>Spanish-language outreach gets <span class="gold">47% higher response rates</span> than English-only in South Florida markets.</p>
+        <div class="t-author">
+          <div class="t-avatar">📊</div>
+          <div><div class="t-name" data-en="Healthcare Marketing Research" data-es="Investigación de Marketing en Salud">Healthcare Marketing Research</div><div class="t-role" data-en="Industry benchmark data" data-es="Datos de referencia de la industria">Industry benchmark data</div></div>
+        </div>
+      </div>
+      <div class="t-card reveal d2">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-type" data-en="Industry Benchmark" data-es="Estándar de la Industria">Industry Benchmark</div>
+        <p class="t-quote" data-en='Businesses with loyalty programs <span class="gold">grow revenue 2.5× faster</span> than those without. The key is making the reward feel genuinely luxurious.' data-es='Los negocios con programas de lealtad <span class="gold">crecen 2.5× más rápido</span> que los que no tienen. La clave es que la recompensa se sienta genuinamente lujosa.'>Businesses with loyalty programs <span class="gold">grow revenue 2.5× faster</span> than those without. The key is making the reward feel genuinely luxurious.</p>
+        <div class="t-author">
+          <div class="t-avatar">📈</div>
+          <div><div class="t-name" data-en="Loyalty Program Research" data-es="Investigación de Programas de Lealtad">Loyalty Program Research</div><div class="t-role">Harvard Business Review</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-12 reveal">
+      <p style="color:rgba(255,255,255,.35);font-size:14px;margin-bottom:20px" data-en="Be the first real case study. Help us prove what this system can do." data-es="Sé el primer caso de estudio real. Ayúdanos a demostrar lo que este sistema puede hacer.">Be the first real case study. Help us prove what this system can do.</p>
+      <button class="btn btn-gold btn-lg" onclick="openModal()" data-en="Become a Founding Client →" data-es="Conviértete en Cliente Fundador →">Become a Founding Client →</button>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO PREVIEW -->
+<section class="demo-section">
+  <div class="container">
+    <div class="demo-layout">
+      <div class="reveal">
+        <span class="section-eyebrow" data-en="Live Demo" data-es="Demo en Vivo">Live Demo</span>
+        <h2 class="section-title" data-en="See Exactly What Your Patients Experience" data-es="Ve Exactamente Lo Que Experimentan Tus Pacientes">See Exactly What Your Patients Experience</h2>
+        <p class="section-sub" style="margin-bottom:32px" data-en="From QR scan at checkout to vacation reward to 5-star Google review — fully automated, bilingual, no app required." data-es="Desde el escaneo QR al pagar hasta la recompensa de vacaciones y la reseña de Google de 5 estrellas — completamente automatizado, bilingüe, sin aplicación.">From QR scan at checkout to vacation reward to 5-star Google review — fully automated, bilingual, no app required.</p>
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:36px">
+          <div style="display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--lavender);border-radius:var(--r);border:1px solid rgba(91,63,190,.1)">
+            <span style="font-size:24px">📲</span>
+            <div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px" data-en="Apple &amp; Google Wallet — works on any phone" data-es="Apple &amp; Google Wallet — funciona en cualquier teléfono">Apple &amp; Google Wallet — works on any phone</div><div style="font-size:13px;color:#6B6480" data-en="iPhone uses Apple Wallet. Android uses Google Wallet. Same QR, zero app download." data-es="iPhone usa Apple Wallet. Android usa Google Wallet. El mismo QR, sin descargar aplicación.">iPhone uses Apple Wallet. Android uses Google Wallet. Same QR, zero app download.</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--lavender);border-radius:var(--r);border:1px solid rgba(91,63,190,.1)">
+            <span style="font-size:24px">🌐</span>
+            <div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px" data-en="Bilingual by default — EN + ES" data-es="Bilingüe por defecto — EN + ES">Bilingual by default — EN + ES</div><div style="font-size:13px;color:#6B6480" data-en="English and Spanish from day one. Creole and Portuguese coming soon." data-es="Inglés y español desde el primer día. Criollo y portugués próximamente.">English and Spanish from day one. Creole and Portuguese coming soon.</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--lavender);border-radius:var(--r);border:1px solid rgba(91,63,190,.1)">
+            <span style="font-size:24px">✈️</span>
+            <div><div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px" data-en="Real vacation rewards, not gift cards" data-es="Recompensas reales de vacaciones, no tarjetas de regalo">Real vacation rewards, not gift cards</div><div style="font-size:13px;color:#6B6480" data-en="3-day getaways worth $897. Destinations include Orlando, Cancún, Bahamas." data-es="Escapadas de 3 días valoradas en $897. Destinos incluyen Orlando, Cancún, Bahamas.">3-day getaways worth $897. Destinations include Orlando, Cancún, Bahamas.</div></div>
+          </div>
+        </div>
+        <button class="btn btn-dark btn-lg" onclick="showPage('demo')" data-en="Open Full Interactive Demo →" data-es="Abrir Demo Interactivo Completo →">Open Full Interactive Demo →</button>
+      </div>
+      <div class="reveal d1">
+        <div class="phone">
+          <div class="phone-notch"><div class="phone-notch-bar"></div></div>
+          <div class="demo-screen">
+            <div class="ds-app-header">
+              <div class="ds-app-logo">✨</div>
+              <div><div class="ds-app-name">LuxuryClientFlow</div><div class="ds-app-sub" data-en="Patient loyalty system" data-es="Sistema de lealtad de pacientes">Patient loyalty system</div></div>
+            </div>
+            <div class="demo-step-content active" id="mini-step-1">
+              <div class="wallet-card-demo">
+                <div class="wcd-logo">✨ <span data-en="Your Practice" data-es="Tu Clínica">Your Practice</span></div>
+                <div class="wcd-name">Sarah Martinez</div>
+                <div class="wcd-pts">💎 1,200 <span data-en="Points — 800 to vacation" data-es="Puntos — 800 para vacaciones">Points — 800 to vacation</span></div>
+                <div class="wcd-badge">VIP</div>
+              </div>
+              <div style="background:rgba(42,140,90,.1);border:1px solid rgba(42,140,90,.2);border-radius:12px;padding:12px 16px;text-align:center;color:#6FE0A8;font-size:13px;font-weight:600" data-en="✅ Added to Apple/Google Wallet" data-es="✅ Añadido a Apple/Google Wallet">✅ Added to Apple/Google Wallet</div>
+            </div>
+            <div class="demo-step-content" id="mini-step-2">
+              <div class="ai-bubble">
+                <div class="ab-sender">✨ AI · <span data-en="24hrs later" data-es="24 hrs después">24hrs later</span></div>
+                <p class="ab-msg">¡Hola Sarah! 👋 <span data-en="You're just" data-es="¡Solo te faltan">You're just</span> <strong>800 <span data-en="points" data-es="puntos">points</span></strong> <span data-en="away from a FREE 3-day getaway! 🌴 Ready to rebook?" data-es="para una escapada GRATIS de 3 días! 🌴 ¿Lista para reservar?">away from a FREE 3-day getaway! 🌴 Ready to rebook?</span></p>
+              </div>
+              <button style="width:100%;background:var(--gold-bright);color:var(--ink);border:none;border-radius:12px;padding:14px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif" data-en="Yes! Book My Next Visit →" data-es="¡Sí! Reservar Mi Próxima Visita →">Yes! Book My Next Visit →</button>
+            </div>
+            <div class="demo-step-content" id="mini-step-3">
+              <div class="success-card">
+                <div class="sc-stars">⭐⭐⭐⭐⭐</div>
+                <div class="sc-msg" data-en="Review Posted to Google!" data-es="¡Reseña Publicada en Google!">Review Posted to Google!</div>
+                <div class="sc-sub" data-en='"Best practice in Miami! Got a FREE vacation! 🌴"' data-es='"¡La mejor clínica de Miami! ¡Me dieron vacaciones GRATIS! 🌴"'>"Best practice in Miami! Got a FREE vacation! 🌴"</div>
+              </div>
+              <div style="margin-top:14px;padding:14px 16px;background:rgba(255,255,255,.05);border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,.08)">
+                <div style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:6px" data-en="Reputation firewall active" data-es="Escudo de reputación activo">Reputation firewall active</div>
+                <div style="font-size:12px;font-weight:600;color:var(--gold-bright)" data-en="😊 4–5★ → Google · 1–3★ → You first" data-es="😊 4–5★ → Google · 1–3★ → A ti primero">😊 4–5★ → Google · 1–3★ → You first</div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-nav">
+            <button class="pn-back" onclick="miniPrev()" data-en="← Back" data-es="← Atrás">← Back</button>
+            <button class="pn-next" id="miniNextBtn" onclick="miniNext()" data-en="Next →" data-es="Siguiente →">Next →</button>
+          </div>
+          <div class="demo-steps-list">
+            <button class="dsl-dot active" onclick="miniGoTo(0)"></button>
+            <button class="dsl-dot" onclick="miniGoTo(1)"></button>
+            <button class="dsl-dot" onclick="miniGoTo(2)"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-section">
+  <div class="container">
+    <span class="final-eyebrow" data-en="Ready to Stop the Bleed?" data-es="¿Listo Para Detener la Pérdida?">Ready to Stop the Bleed?</span>
+    <h2 class="final-title" data-en="Stop Ghosting.<br><em>Start Growing.</em>" data-es="Sin Más Fantasmas.<br><em>Empieza a Crecer.</em>">Stop Ghosting.<br><em>Start Growing.</em></h2>
+    <p class="final-sub" data-en="3x ROI or we work free. No long-term contracts. No tech headaches." data-es="3x ROI o trabajamos gratis. Sin contratos a largo plazo. Sin dolores de cabeza tecnológicos.">3x ROI or we work free. No long-term contracts. No tech headaches.</p>
+    <div class="final-actions">
+      <button class="btn btn-gold btn-lg" onclick="openModal()" data-en="📅 Book Free Ghost Tax Audit" data-es="📅 Reservar Auditoría Gratuita">📅 Book Free Ghost Tax Audit</button>
+      <button class="btn btn-ghost btn-lg" onclick="showPage('demo')" data-en="▶ Watch Demo" data-es="▶ Ver Demo">▶ Watch Demo</button>
+    </div>
+    <div class="final-guarantee">
+      <span>🔒</span>
+      <span data-en="<strong>3× ROI guarantee</strong> — or we continue working at no charge until you hit it" data-es="<strong>Garantía 3× ROI</strong> — o seguimos trabajando sin costo hasta que lo logres"><strong>3× ROI guarantee</strong> — or we continue working at no charge until you hit it</span>
+    </div>
+  </div>
+</section>
+</div><!-- /page-home -->
+
+<!-- ══ BLOG PAGE ══ -->
+<div id="page-blog" class="page">
+  <div class="blog-hero">
+    <span class="section-eyebrow" style="color:rgba(201,148,10,.6)" data-en="Resources" data-es="Recursos">Resources</span>
+    <h1 class="serif" data-en="The Ghost Tax Authority" data-es="La Autoridad del Impuesto Fantasma">The Ghost Tax Authority</h1>
+    <p data-en="Retention strategy, bilingual marketing, and loyalty systems for luxury service businesses." data-es="Estrategia de retención, marketing bilingüe y sistemas de lealtad para negocios de servicios de lujo.">Retention strategy, bilingual marketing, and loyalty systems for luxury service businesses.</p>
+  </div>
+  <section style="background:var(--cream);padding:80px 48px">
+    <div class="container">
+      <div class="blog-grid">
+        <div class="blog-card">
+          <div class="bc-img" style="background:linear-gradient(135deg,#1A0D4B,#5B3FAB)">💉</div>
+          <div class="bc-body">
+            <span class="bc-cat" data-en="Med Spas" data-es="Clínicas Estéticas">Med Spas</span>
+            <h3 class="bc-title" data-en="Why 82% of Botox Patients Never Rebook (And the Fix)" data-es="Por Qué el 82% de los Pacientes de Bótox Nunca Vuelve (Y la Solución)">Why 82% of Botox Patients Never Rebook (And the Fix)</h3>
+            <p class="bc-excerpt" data-en="Most med spas think ghosting is about price. It's not. It's about the gap between treatment and follow-up — and how a bilingual AI closes it." data-es="La mayoría cree que el problema es el precio. No lo es. Es la brecha entre el tratamiento y el seguimiento — y cómo la IA bilingüe la cierra.">Most med spas think ghosting is about price. It's not. It's about the gap between treatment and follow-up.</p>
+            <a href="#" class="bc-link" data-en="Read More →" data-es="Leer Más →">Read More →</a>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="bc-img" style="background:linear-gradient(135deg,#0E2A1A,#1A6B4A)">✈️</div>
+          <div class="bc-body">
+            <span class="bc-cat" data-en="Loyalty" data-es="Lealtad">Loyalty</span>
+            <h3 class="bc-title" data-en="Why Vacation Rewards Beat Discount Loyalty Programs Every Time" data-es="Por Qué las Recompensas de Vacaciones Superan a los Descuentos Siempre">Why Vacation Rewards Beat Discount Loyalty Programs Every Time</h3>
+            <p class="bc-excerpt" data-en="Points and gift cards feel transactional. A free vacation feels like a gift. Here's the psychology — and the numbers." data-es="Los puntos y las tarjetas de regalo se sienten transaccionales. Unas vacaciones gratis se sienten como un regalo. Aquí está la psicología — y los números.">Points and gift cards feel transactional. A free vacation feels like a gift. Here's the psychology and the numbers.</p>
+            <a href="#" class="bc-link" data-en="Read More →" data-es="Leer Más →">Read More →</a>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="bc-img" style="background:linear-gradient(135deg,#2A0A0A,#8B1A2A)">🇪🇸</div>
+          <div class="bc-body">
+            <span class="bc-cat" data-en="Bilingual Marketing" data-es="Marketing Bilingüe">Bilingual Marketing</span>
+            <h3 class="bc-title" data-en="The 47% Advantage: Why Spanish Follow-Up Outperforms English" data-es="La Ventaja del 47%: Por Qué el Seguimiento en Español Supera al Inglés">The 47% Advantage: Why Spanish Follow-Up Outperforms English</h3>
+            <p class="bc-excerpt" data-en="In markets where 30–70% of patients prefer Spanish, English-only loyalty programs aren't suboptimal — they're invisible." data-es="En mercados donde el 30–70% prefiere español, los programas de lealtad en solo inglés no son subóptimos — son invisibles.">In markets where 30–70% of patients prefer Spanish, English-only programs aren't suboptimal — they're invisible.</p>
+            <a href="#" class="bc-link" data-en="Read More →" data-es="Leer Más →">Read More →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="newsletter-bar">
+    <div class="container">
+      <h3 class="nb-title" data-en="Ghost Tax Weekly" data-es="Impuesto Fantasma Semanal">Ghost Tax Weekly</h3>
+      <p class="nb-sub" data-en="Patient retention strategy, bilingual marketing tips, and loyalty case studies — every week." data-es="Estrategia de retención de pacientes, consejos de marketing bilingüe y casos de estudio de lealtad — cada semana.">Patient retention strategy, bilingual marketing tips, and loyalty case studies — every week.</p>
+      <div class="nb-form">
+        <input class="nb-input" type="email" id="nbEmail" placeholder="your@practice.com">
+        <button class="btn btn-gold" data-en="Subscribe →" data-es="Suscribirse →">Subscribe →</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══ DEMO PAGE ══ -->
+<div id="page-demo" class="page">
+  <section style="background:var(--mist);min-height:90vh;padding:100px 48px">
+    <div class="container">
+      <div class="section-header center" style="margin-bottom:56px">
+        <span class="section-eyebrow" data-en="Interactive Demo" data-es="Demo Interactivo">Interactive Demo</span>
+        <h2 class="section-title" data-en="The Full Patient Experience" data-es="La Experiencia Completa del Paciente">The Full Patient Experience</h2>
+        <p class="section-sub" style="margin:0 auto" data-en="Exactly what your patients see — from QR scan to vacation earned to Google review posted." data-es="Exactamente lo que ven tus pacientes — desde el escaneo QR hasta las vacaciones ganadas y la reseña de Google publicada.">Exactly what your patients see — from QR scan to vacation earned to Google review posted.</p>
+      </div>
+      <div class="phone" style="max-width:360px;margin:0 auto">
+        <div class="phone-notch"><div class="phone-notch-bar"></div></div>
+        <div class="demo-screen" style="min-height:340px">
+          <div class="ds-app-header">
+            <div class="ds-app-logo">✨</div>
+            <div><div class="ds-app-name">LuxuryClientFlow</div><div class="ds-app-sub"><span data-en="Step" data-es="Paso">Step</span> <span id="stepNum">1</span> <span data-en="of 5" data-es="de 5">of 5</span></div></div>
+          </div>
+          <div class="demo-step-content active" id="full-step-1">
+            <div style="text-align:center;padding:16px 0">
+              <div style="font-size:48px;margin-bottom:12px">📲</div>
+              <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--white);margin-bottom:8px" data-en="Patient Scans QR" data-es="Paciente Escanea QR">Patient Scans QR</h3>
+              <p style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px" data-en="At checkout — takes 3 seconds" data-es="Al pagar — toma 3 segundos">At checkout — takes 3 seconds</p>
+              <div style="width:130px;height:130px;background:var(--white);border-radius:14px;padding:12px;margin:0 auto;display:grid;grid-template-columns:repeat(7,1fr);gap:3px" id="fullQR"></div>
+              <p style="font-size:11px;color:rgba(255,255,255,.3);margin-top:12px" data-en="iPhone → Apple Wallet · Android → Google Wallet" data-es="iPhone → Apple Wallet · Android → Google Wallet">iPhone → Apple Wallet · Android → Google Wallet</p>
+            </div>
+          </div>
+          <div class="demo-step-content" id="full-step-2">
+            <div class="wallet-card-demo" style="margin-bottom:14px">
+              <div class="wcd-logo">✨ Luxe Aesthetics</div>
+              <div class="wcd-name">Sarah Martinez</div>
+              <div class="wcd-pts">💎 500 <span data-en="Points — Treatment #1" data-es="Puntos — Tratamiento #1">Points — Treatment #1</span></div>
+              <div class="wcd-badge">VIP</div>
+            </div>
+            <div style="background:rgba(42,140,90,.1);border:1px solid rgba(42,140,90,.2);border-radius:12px;padding:12px;text-align:center;color:#6FE0A8;font-size:13px;font-weight:600;margin-bottom:10px" data-en="✅ Added to Apple/Google Wallet — no app needed" data-es="✅ Añadido a Apple/Google Wallet — sin aplicación">✅ Added to Apple/Google Wallet — no app needed</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.3);text-align:center" data-en="Works natively on iPhone and Android" data-es="Funciona nativamente en iPhone y Android">Works natively on iPhone and Android</div>
+          </div>
+          <div class="demo-step-content" id="full-step-3">
+            <div class="ai-bubble" style="margin-bottom:12px">
+              <div class="ab-sender">✨ AI · <span data-en="24 hrs after visit" data-es="24 hrs después de la visita">24 hrs after visit</span></div>
+              <p class="ab-msg">¡Hola Sarah! <span data-en="You earned" data-es="Ganaste">You earned</span> <strong>500 <span data-en="points" data-es="puntos">points</span></strong> — <span data-en="just 500 more for your FREE vacation! 🌴 Ready to rebook?" data-es="¡solo 500 más para tus vacaciones GRATIS! 🌴 ¿Lista para reservar?">just 500 more for your FREE vacation! 🌴 Ready to rebook?</span></p>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button style="flex:1;background:var(--gold-bright);color:var(--ink);border:none;border-radius:10px;padding:12px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif" data-en="¡Sí! Book Now 🗓️" data-es="¡Sí! Reservar 🗓️">¡Sí! Book Now 🗓️</button>
+              <button style="flex:1;background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);border:none;border-radius:10px;padding:12px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif" data-en="Maybe later" data-es="Quizás después">Maybe later</button>
+            </div>
+          </div>
+          <div class="demo-step-content" id="full-step-4">
+            <div style="background:linear-gradient(135deg,#1A0D4B,#5B2FA0);border-radius:18px;padding:22px;margin-bottom:12px;text-align:center;border:1px solid rgba(232,185,35,.3)">
+              <div style="font-size:40px;margin-bottom:8px">✈️</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold-bright);font-weight:700;margin-bottom:6px" data-en="Vacation Unlocked!" data-es="¡Vacaciones Desbloqueadas!">Vacation Unlocked!</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.6);margin-bottom:14px" data-en="Sarah rebooked → 1,000 points reached" data-es="Sarah reservó → 1,000 puntos alcanzados">Sarah rebooked → 1,000 points reached</div>
+              <div style="background:rgba(232,185,35,.1);border:1px solid rgba(232,185,35,.25);border-radius:10px;padding:12px">
+                <div style="font-size:13px;font-weight:700;color:var(--gold-bright)" data-en="FREE 3-Day Getaway" data-es="Escapada GRATUITA de 3 Días">FREE 3-Day Getaway</div>
+                <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:4px" data-en="Orlando · Cancún · Bahamas · Your choice" data-es="Orlando · Cancún · Bahamas · Tu elección">Orlando · Cancún · Bahamas · Your choice</div>
+              </div>
+            </div>
+            <button style="width:100%;background:var(--gold-bright);color:var(--ink);border:none;border-radius:12px;padding:13px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif" data-en="Claim My Vacation →" data-es="Reclamar Mis Vacaciones →">Claim My Vacation →</button>
+          </div>
+          <div class="demo-step-content" id="full-step-5">
+            <div class="success-card" style="margin-bottom:12px">
+              <div class="sc-stars">⭐⭐⭐⭐⭐</div>
+              <div class="sc-msg" data-en="Review Auto-Posted to Google!" data-es="¡Reseña Publicada Automáticamente en Google!">Review Auto-Posted to Google!</div>
+              <div class="sc-sub" data-en='"Amazing results + free vacation! 10/10 🌴"' data-es='"¡Resultados increíbles + vacaciones gratis! 10/10 🌴"'>"Amazing results + free vacation! 10/10 🌴"</div>
+            </div>
+            <div style="padding:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;margin-bottom:12px">
+              <div style="font-size:11px;color:rgba(255,255,255,.3);margin-bottom:5px;text-align:center" data-en="Reputation Firewall Active" data-es="Escudo de Reputación Activo">Reputation Firewall Active</div>
+              <div style="font-size:11px;color:var(--gold-bright);font-weight:600;text-align:center" data-en="😊 4–5★ → Google instantly · 😞 1–3★ → You first" data-es="😊 4–5★ → Google instantáneo · 😞 1–3★ → A ti primero">😊 4–5★ → Google instantly · 😞 1–3★ → You first</div>
+            </div>
+            <button class="btn btn-gold btn-full btn-sm" onclick="openModal()" data-en="Get This for My Practice →" data-es="Quiero Esto para Mi Clínica →">Get This for My Practice →</button>
+          </div>
+        </div>
+        <div class="phone-nav">
+          <button class="pn-back" onclick="fullPrev()" data-en="← Back" data-es="← Atrás">← Back</button>
+          <button class="pn-next" id="fullNextBtn" onclick="fullNext()" data-en="Next →" data-es="Siguiente →">Next →</button>
+        </div>
+        <div class="demo-steps-list">
+          <button class="dsl-dot active" onclick="fullGoTo(0)"></button>
+          <button class="dsl-dot" onclick="fullGoTo(1)"></button>
+          <button class="dsl-dot" onclick="fullGoTo(2)"></button>
+          <button class="dsl-dot" onclick="fullGoTo(3)"></button>
+          <button class="dsl-dot" onclick="fullGoTo(4)"></button>
+        </div>
+      </div>
+      <div class="text-center mt-8">
+        <p style="color:#6B6480;font-size:14px;margin-bottom:16px" data-en="Want this running in your practice within 48 hours?" data-es="¿Quieres esto funcionando en tu clínica en 48 horas?">Want this running in your practice within 48 hours?</p>
+        <button class="btn btn-gold btn-lg" onclick="openModal()" data-en="Book a Free Ghost Tax Audit →" data-es="Reservar Auditoría Gratuita del Impuesto Fantasma →">Book a Free Ghost Tax Audit →</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══ LOGIN PAGE ══ -->
+<div id="page-login" class="page">
+  <div class="login-page">
+    <div class="login-card">
+      <div class="lc-logo">Luxury<span>Client</span>Flow</div>
+      <div class="lc-powered" data-en="Powered by ClientContactPro" data-es="Desarrollado por ClientContactPro">Powered by ClientContactPro</div>
+      <h2 class="serif" data-en="Client Dashboard" data-es="Panel de Cliente">Client Dashboard</h2>
+      <p data-en="Access your real-time rebooking stats, AI performance, revenue recovery data, and review firewall." data-es="Accede a tus estadísticas de reservas en tiempo real, rendimiento de IA, datos de recuperación de ingresos y escudo de reseñas.">Access your real-time rebooking stats, AI performance, revenue recovery data, and review firewall.</p>
+      <a href="https://clientcontactpro.com" class="btn btn-dark btn-full btn-lg" style="margin-bottom:12px" data-en="🔐 Login to Dashboard →" data-es="🔐 Acceder al Panel →">🔐 Login to Dashboard →</a>
+      <p style="font-size:12px;color:#9E9ABB;margin-bottom:24px" data-en="Redirects to clientcontactpro.com" data-es="Redirige a clientcontactpro.com">Redirects to clientcontactpro.com</p>
+      <div class="login-support">
+        <div class="ls-heading" data-en="Need help?" data-es="¿Necesitas ayuda?">Need help?</div>
+        <div class="ls-info">
+          📧 support@luxuryclientflow.com<br>
+          💬 <span data-en="WhatsApp chat available below" data-es="Chat de WhatsApp disponible abajo">WhatsApp chat available below</span><br>
+          ⏰ <span data-en="Monday–Friday, 9am–6pm EST" data-es="Lunes–Viernes, 9am–6pm EST">Monday–Friday, 9am–6pm EST</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#070512;padding:64px 48px 36px">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px">
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--white);margin-bottom:14px">Luxury<span style="color:var(--gold-bright)">Client</span>Flow</div>
+        <p style="font-size:13px;color:rgba(255,255,255,.3);line-height:1.7;max-width:280px" data-en="Bilingual AI loyalty + vacation rewards for luxury service businesses. Built in Miami. Proven where it's hardest." data-es="Lealtad de IA bilingüe + recompensas de vacaciones para negocios de servicios de lujo. Construido en Miami. Probado donde es más difícil.">Bilingual AI loyalty + vacation rewards for luxury service businesses. Built in Miami. Proven where it's hardest.</p>
+      </div>
+      <div>
+        <h5 style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:18px" data-en="Product" data-es="Producto">Product</h5>
+        <ul style="list-style:none">
+          <li style="margin-bottom:10px"><a onclick="showPage('demo')" style="font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;cursor:pointer" data-en="Live Demo" data-es="Demo en Vivo">Live Demo</a></li>
+          <li style="margin-bottom:10px"><a onclick="scrollToPricing()" style="font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;cursor:pointer" data-en="Pricing" data-es="Precios">Pricing</a></li>
+          <li style="margin-bottom:10px"><a onclick="openModal()" style="font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;cursor:pointer" data-en="Free Audit" data-es="Auditoría Gratis">Free Audit</a></li>
+          <li style="margin-bottom:10px"><a onclick="showPage('login')" style="font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;cursor:pointer" data-en="Client Login" data-es="Acceso Clientes">Client Login</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:18px" data-en="Who We Serve" data-es="A Quién Servimos">Who We Serve</h5>
+        <ul style="list-style:none">
+          <li style="margin-bottom:10px"><span style="font-size:13px;color:rgba(255,255,255,.35)" data-en="Med Spas" data-es="Clínicas Estéticas">Med Spas</span></li>
+          <li style="margin-bottom:10px"><span style="font-size:13px;color:rgba(255,255,255,.35)" data-en="Dental Practices" data-es="Consultorios Dentales">Dental Practices</span></li>
+          <li style="margin-bottom:10px"><span style="font-size:13px;color:rgba(255,255,255,.35)" data-en="Plastic Surgery" data-es="Cirugía Plástica">Plastic Surgery</span></li>
+          <li style="margin-bottom:10px"><span style="font-size:13px;color:rgba(255,255,255,.35)" data-en="Chiropractic &amp; Wellness" data-es="Quiropráctica y Bienestar">Chiropractic &amp; Wellness</span></li>
+        </ul>
+      </div>
+      <div>
+        <h5 style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:18px" data-en="Resources" data-es="Recursos">Resources</h5>
+        <ul style="list-style:none">
+          <li style="margin-bottom:10px"><a onclick="showPage('blog')" style="font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;cursor:pointer" data-en="Blog" data-es="Blog">Blog</a></li>
+          <li style="margin-bottom:10px"><a style="font-size:13px;color:rgba(255,255,255,.35);cursor:pointer" data-en="Ghost Tax Calculator" data-es="Calculadora del Impuesto Fantasma">Ghost Tax Calculator</a></li>
+          <li style="margin-bottom:10px"><a href="https://dannyrodriguez.online" target="_blank" style="font-size:13px;color:rgba(255,255,255,.35);text-decoration:none">dannyrodriguez.online</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.06);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+      <p style="font-size:12px;color:rgba(255,255,255,.2)" data-en="© 2025 LuxuryClientFlow · Miami, FL · Powered by ClientContactPro" data-es="© 2025 LuxuryClientFlow · Miami, FL · Desarrollado por ClientContactPro">© 2025 LuxuryClientFlow · Miami, FL · Powered by ClientContactPro</p>
+      <p style="font-size:12px;color:rgba(255,255,255,.2)" data-en="Built for luxury service businesses nationwide" data-es="Creado para negocios de servicios de lujo en todo el país">Built for luxury service businesses nationwide</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/13059999999" class="wa-btn" title="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- AUDIT MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-icon">🔍</div>
+    <h3 class="serif" data-en="Find Your Ghost Tax" data-es="Encuentra Tu Impuesto Fantasma">Find Your Ghost Tax</h3>
+    <p class="modal-sub" data-en="Book a free 15-minute audit with Daniel. We'll calculate your exact revenue leak and show you how to close it in 48 hours." data-es="Reserva una auditoría gratuita de 15 minutos con Daniel. Calcularemos tu fuga de ingresos exacta y te mostraremos cómo cerrarla en 48 horas.">Book a free 15-minute audit with Daniel. We'll calculate your exact revenue leak and show you how to close it in 48 hours.</p>
+    <div class="modal-options">
+      <div class="modal-option" onclick="closeModal();openGCal()">
+        <div class="mo-label" data-en="📅 Book a 15-min Audit Call" data-es="📅 Reservar Llamada de Auditoría de 15 min">📅 Book a 15-min Audit Call</div>
+        <div class="mo-desc" data-en="Pick a time — Daniel will walk you through your ghost tax calculation live" data-es="Elige un horario — Daniel te guiará por el cálculo de tu impuesto fantasma en vivo">Pick a time — Daniel will walk you through your ghost tax calculation live</div>
+      </div>
+      <div class="modal-option" onclick="closeModal();showPage('demo')">
+        <div class="mo-label" data-en="▶ Watch the Demo First" data-es="▶ Ver el Demo Primero">▶ Watch the Demo First</div>
+        <div class="mo-desc" data-en="See the full patient experience before you commit to a call" data-es="Ve la experiencia completa del paciente antes de comprometerte a una llamada">See the full patient experience before you commit to a call</div>
+      </div>
+      <div class="modal-option" onclick="closeModal();window.open('https://wa.me/13059999999','_blank')">
+        <div class="mo-label" data-en="💬 WhatsApp Daniel Directly" data-es="💬 WhatsApp Directo con Daniel">💬 WhatsApp Daniel Directly</div>
+        <div class="mo-desc" data-en="Fastest response — real answers in real time, no bot" data-es="Respuesta más rápida — respuestas reales en tiempo real, sin bot">Fastest response — real answers in real time, no bot</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GOOGLE CALENDAR BOOKING MODAL -->
+<div class="gcal-modal" id="gcalModal">
+  <div class="gcal-inner">
+    <div class="gcal-header">
+      <div>
+        <h3 data-en="Book Your Free Ghost Tax Audit" data-es="Reserva Tu Auditoría Gratuita del Impuesto Fantasma">Book Your Free Ghost Tax Audit</h3>
+        <div class="gcal-header-sub" data-en="15 minutes · Free · With Daniel Rodriguez" data-es="15 minutos · Gratis · Con Daniel Rodriguez">15 minutes · Free · With Daniel Rodriguez</div>
+      </div>
+      <button class="gcal-close" onclick="closeGCal()">✕</button>
+    </div>
+    <div class="gcal-body" id="gcalForm">
+      <div class="gcal-slots-label" data-en="Pick a time — this week" data-es="Elige un horario — esta semana">Pick a time — this week</div>
+      <div class="gcal-slots">
+        <div class="gcal-slot" onclick="selectSlot(this,'Mon Mar 17, 10:00 AM')"><div class="slot-day">Mon Mar 17</div><div class="slot-time">10:00 AM EST</div><div class="slot-avail" data-en="Available" data-es="Disponible">Available</div></div>
+        <div class="gcal-slot" onclick="selectSlot(this,'Mon Mar 17, 2:00 PM')"><div class="slot-day">Mon Mar 17</div><div class="slot-time">2:00 PM EST</div><div class="slot-avail" data-en="Available" data-es="Disponible">Available</div></div>
+        <div class="gcal-slot" onclick="selectSlot(this,'Tue Mar 18, 11:00 AM')"><div class="slot-day">Tue Mar 18</div><div class="slot-time">11:00 AM EST</div><div class="slot-avail" data-en="Available" data-es="Disponible">Available</div></div>
+        <div class="gcal-slot" onclick="selectSlot(this,'Wed Mar 19, 9:00 AM')"><div class="slot-day">Wed Mar 19</div><div class="slot-time">9:00 AM EST</div><div class="slot-avail" data-en="2 spots left" data-es="2 cupos disponibles">2 spots left</div></div>
+        <div class="gcal-slot" onclick="selectSlot(this,'Thu Mar 20, 3:00 PM')"><div class="slot-day">Thu Mar 20</div><div class="slot-time">3:00 PM EST</div><div class="slot-avail" data-en="Available" data-es="Disponible">Available</div></div>
+        <div class="gcal-slot" onclick="selectSlot(this,'Fri Mar 21, 10:00 AM')"><div class="slot-day">Fri Mar 21</div><div class="slot-time">10:00 AM EST</div><div class="slot-avail" data-en="Available" data-es="Disponible">Available</div></div>
+      </div>
+      <div class="gcal-form">
+        <input class="gcal-input" type="text" id="gcalName" data-placeholder-en="Your name" data-placeholder-es="Tu nombre" placeholder="Your name">
+        <input class="gcal-input" type="email" id="gcalEmail" data-placeholder-en="Email address" data-placeholder-es="Correo electrónico" placeholder="Email address">
+        <input class="gcal-input" type="tel" id="gcalPhone" data-placeholder-en="Phone / WhatsApp" data-placeholder-es="Teléfono / WhatsApp" placeholder="Phone / WhatsApp">
+        <select class="gcal-select" id="gcalVertical">
+          <option value="" disabled selected data-en="What type of practice?" data-es="¿Qué tipo de clínica?">What type of practice?</option>
+          <option data-en="Med Spa" data-es="Clínica Estética">Med Spa</option>
+          <option data-en="Dental Practice" data-es="Consultorio Dental">Dental Practice</option>
+          <option data-en="Plastic Surgery" data-es="Cirugía Plástica">Plastic Surgery</option>
+          <option data-en="Chiropractic" data-es="Quiropráctica">Chiropractic</option>
+          <option data-en="Wellness Center" data-es="Centro de Bienestar">Wellness Center</option>
+          <option data-en="IV Therapy / Aesthetics" data-es="Terapia IV / Estética">IV Therapy / Aesthetics</option>
+          <option data-en="Other high-ticket service" data-es="Otro servicio de alto valor">Other high-ticket service</option>
+        </select>
+      </div>
+      <button class="gcal-submit" onclick="submitGCal()" data-en="Confirm My Audit Slot →" data-es="Confirmar Mi Horario de Auditoría →">Confirm My Audit Slot →</button>
+      <p class="gcal-footer-note" data-en="You'll receive a Google Calendar invite within 5 minutes. No obligation. No sales pressure. Just math." data-es="Recibirás una invitación de Google Calendar en 5 minutos. Sin obligación. Sin presión de ventas. Solo matemáticas.">You'll receive a Google Calendar invite within 5 minutes. No obligation. No sales pressure. Just math.</p>
+    </div>
+    <div class="gcal-success" id="gcalSuccess">
+      <div class="gcal-success-icon">✅</div>
+      <h4 class="serif" data-en="You're on Daniel's Calendar!" data-es="¡Estás en el Calendario de Daniel!">You're on Daniel's Calendar!</h4>
+      <p data-en="Check your email for the Google Calendar invite. We'll calculate your exact ghost tax number together." data-es="Revisa tu correo para la invitación de Google Calendar. Calcularemos juntos tu impuesto fantasma exacto.">Check your email for the Google Calendar invite. We'll calculate your exact ghost tax number together.</p>
+      <button class="btn btn-dark" onclick="closeGCal()" data-en="Got it — see you then" data-es="Entendido — ¡hasta entonces!">Got it — see you then</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── LANGUAGE ENGINE ──
+let currentLang = (navigator.language||'').toLowerCase().startsWith('es') ? 'es' : 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btnEN').classList.toggle('active', lang==='en');
+  document.getElementById('btnES').classList.toggle('active', lang==='es');
+  document.documentElement.lang = lang;
+
+  // Swap all [data-en] / [data-es] elements
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const val = el.getAttribute('data-'+lang);
+    if (!val) return;
+    // Buttons and inputs: set textContent or value
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.placeholder = val;
+    } else if (el.tagName === 'OPTION') {
+      el.textContent = val;
+    } else {
+      el.innerHTML = val;
+    }
+  });
+
+  // Swap placeholder-specific inputs
+  document.querySelectorAll('[data-placeholder-'+lang+']').forEach(el => {
+    el.placeholder = el.getAttribute('data-placeholder-'+lang);
+  });
+
+  // Update h1 specifically (innerHTML with em tag)
+  const h1 = document.querySelector('.hero h1');
+  if (h1) {
+    const val = h1.getAttribute('data-'+lang);
+    if (val) h1.innerHTML = val;
+  }
+
+  // Update page title
+  document.title = lang === 'es'
+    ? 'LuxuryClientFlow | Deja de Perder Pacientes de Alto Valor'
+    : 'LuxuryClientFlow | Stop Losing High-Value Patients';
+
+  // Update meta description
+  const meta = document.querySelector('meta[name="description"]');
+  if (meta) meta.content = lang === 'es'
+    ? 'IA bilingüe + recompensas de vacaciones para clínicas estéticas, dentales, quiropráctica y bienestar.'
+    : 'Bilingual AI loyalty + vacation rewards for luxury service businesses. Med spas, dental, plastic surgery, wellness, chiropractic.';
+
+  // Update demo next button text
+  const miniBtn = document.getElementById('miniNextBtn');
+  if (miniBtn) miniBtn.textContent = lang === 'es' ? 'Siguiente →' : 'Next →';
+  const fullBtn = document.getElementById('fullNextBtn');
+  if (fullBtn) fullBtn.textContent = lang === 'es' ? 'Siguiente →' : 'Next →';
+}
+
+// Auto-detect Spanish on load
+window.addEventListener('DOMContentLoaded', () => {
+  if (currentLang === 'es') setLang('es');
+});
+
+// ── PAGE NAVIGATION ──
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l => {
+    const enText = l.getAttribute('data-en')||'';
+    if (enText.toLowerCase().includes(name==='home'?'home':name)) l.classList.add('active');
+  });
+  window.scrollTo(0,0);
+  setTimeout(checkReveals, 100);
+}
+
+function scrollToPricing() {
+  showPage('home');
+  setTimeout(() => document.getElementById('pricing')?.scrollIntoView({behavior:'smooth'}), 150);
+}
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 40);
+  document.getElementById('stickyBar').classList.toggle('visible', window.scrollY > 500);
+});
+
+// ── MODALS ──
+function openModal() { document.getElementById('modal').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeModal() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow=''; }
+document.getElementById('modal').addEventListener('click', e => { if(e.target===document.getElementById('modal')) closeModal(); });
+
+let selectedSlot = '';
+function openGCal() {
+  closeModal();
+  document.getElementById('gcalModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeGCal() {
+  document.getElementById('gcalModal').classList.remove('open');
+  document.body.style.overflow='';
+  setTimeout(() => {
+    document.getElementById('gcalSuccess').style.display='none';
+    document.getElementById('gcalForm').style.display='block';
+    document.querySelectorAll('.gcal-slot').forEach(s=>s.classList.remove('selected'));
+    selectedSlot='';
+  }, 400);
+}
+document.getElementById('gcalModal').addEventListener('click', e => { if(e.target===document.getElementById('gcalModal')) closeGCal(); });
+
+function selectSlot(el, slot) {
+  document.querySelectorAll('.gcal-slot').forEach(s=>s.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedSlot = slot;
+}
+
+function submitGCal() {
+  const name = document.getElementById('gcalName').value.trim();
+  const email = document.getElementById('gcalEmail').value.trim();
+  const vertical = document.getElementById('gcalVertical').value;
+  if (!name || !email || !selectedSlot || !vertical) {
+    alert(currentLang==='es' ? 'Por favor completa todos los campos y selecciona un horario.' : 'Please fill in all fields and select a time slot.');
+    return;
+  }
+  // Production: POST to n8n webhook → Google Calendar event → confirmation email
+  document.getElementById('gcalForm').style.display='none';
+  document.getElementById('gcalSuccess').style.display='block';
+}
+
+// ── EXIT INTENT ──
+let exitShown = false;
+document.addEventListener('mouseleave', e => { if(e.clientY<8&&!exitShown){openModal();exitShown=true;} });
+setTimeout(() => { if(!exitShown){openModal();exitShown=true;} }, 45000);
+
+// ── MINI DEMO ──
+let miniStep = 0;
+function miniGoTo(n) {
+  document.querySelectorAll('[id^="mini-step-"]').forEach(s=>s.classList.remove('active'));
+  document.getElementById('mini-step-'+(n+1)).classList.add('active');
+  document.querySelectorAll('#page-home .phone .dsl-dot').forEach((d,i)=>d.classList.toggle('active',i===n));
+  miniStep = n;
+  const btn = document.getElementById('miniNextBtn');
+  btn.setAttribute('data-en', n===2 ? 'Book Audit ✓' : 'Next →');
+  btn.setAttribute('data-es', n===2 ? 'Reservar Auditoría ✓' : 'Siguiente →');
+  btn.textContent = n===2 ? (currentLang==='es'?'Reservar Auditoría ✓':'Book Audit ✓') : (currentLang==='es'?'Siguiente →':'Next →');
+}
+function miniNext() { if(miniStep<2){miniGoTo(miniStep+1);}else{openGCal();} }
+function miniPrev() { if(miniStep>0) miniGoTo(miniStep-1); }
+
+// ── FULL DEMO ──
+let fullStep = 0;
+function fullGoTo(n) {
+  document.querySelectorAll('[id^="full-step-"]').forEach(s=>s.classList.remove('active'));
+  document.getElementById('full-step-'+(n+1)).classList.add('active');
+  document.querySelectorAll('#page-demo .dsl-dot').forEach((d,i)=>d.classList.toggle('active',i===n));
+  document.getElementById('stepNum').textContent = n+1;
+  fullStep = n;
+  const btn = document.getElementById('fullNextBtn');
+  btn.textContent = n===4 ? (currentLang==='es'?'Reservar Auditoría ✓':'Book Audit ✓') : (currentLang==='es'?'Siguiente →':'Next →');
+}
+function fullNext() { if(fullStep<4){fullGoTo(fullStep+1);}else{openGCal();} }
+function fullPrev() { if(fullStep>0) fullGoTo(fullStep-1); }
+
+// ── QR ──
+function renderQR(id) {
+  const el = document.getElementById(id); if(!el) return;
+  el.innerHTML='';
+  for(let i=0;i<49;i++){
+    const d=document.createElement('div');
+    const r=Math.floor(i/7),c=i%7;
+    const fill=(r<3&&c<3)||(r<3&&c>3)||(r>3&&c<3)||Math.random()>.45;
+    d.style.cssText=`background:${fill?'#0E0B1A':'transparent'};border-radius:2px;aspect-ratio:1`;
+    el.appendChild(d);
+  }
+}
+renderQR('fullQR');
+
+// ── VERTICAL PILLS CYCLE ──
+const pills = document.querySelectorAll('.vertical-pill');
+let activePill = 0;
+setInterval(() => {
+  pills[activePill]?.classList.remove('active');
+  activePill = (activePill+1) % pills.length;
+  pills[activePill]?.classList.add('active');
+}, 1800);
+
+// ── SCROLL REVEAL ──
+function checkReveals() {
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => {
+    if(el.getBoundingClientRect().top < window.innerHeight-80) el.classList.add('in');
+  });
+}
+window.addEventListener('scroll', checkReveals, {passive:true});
+checkReveals();
+</script>
+</body>
+</html>
