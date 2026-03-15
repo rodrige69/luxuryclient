@@ -48,8 +48,8 @@ h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif}
   .nav{padding:0 16px}
   .sticky-bar{padding:10px 16px}
   .nav-links{display:none}
-  .nav-right{gap:8px}
-  .nav-cta{padding:8px 14px;font-size:12px}
+  .nav-right{gap:6px}
+  .nav-cta{display:none}
 }
 
 /* ── BUTTONS ── */
@@ -72,12 +72,13 @@ section{padding:120px 48px}
 @media(max-width:768px){
   section{padding:64px 20px}
   .verticals-section{padding:64px 20px}
-  .hero{padding:100px 20px 72px}
+  .hero{padding:100px 20px 72px;overflow:hidden}
+  .hero-content{width:100%;max-width:100%}
   .hero-verticals{gap:6px}
   .vertical-pill{font-size:11px;padding:5px 12px}
   .hero-actions{flex-direction:column}
   .hero-actions .btn{width:100%;justify-content:center}
-  .proof-strip{gap:16px}
+  .proof-strip{gap:14px;flex-direction:column}
   .proof-text{font-size:13px}
 }
 .section-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--violet);margin-bottom:16px;display:block}
@@ -99,6 +100,24 @@ section{padding:120px 48px}
 .hero-verticals{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;animation:fadeUp .8s ease both}
 .vertical-pill{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);letter-spacing:.08em;text-transform:uppercase;transition:all .25s;cursor:default}
 .vertical-pill.active{background:rgba(201,148,10,.15);border-color:rgba(201,148,10,.4);color:var(--gold-bright)}
+
+/* Mobile: hide all pills, show single fading word instead */
+.vertical-word-mobile{display:none}
+@media(max-width:768px){
+  .hero-verticals{display:none}
+  .vertical-word-mobile{
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:24px;animation:fadeUp .8s ease both;
+  }
+  .vwm-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+  .vwm-word{
+    font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--gold-bright);
+    animation:none;min-width:180px;
+  }
+  @keyframes wordFade{0%{opacity:0;transform:translateY(6px)}15%{opacity:1;transform:translateY(0)}85%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-6px)}}
+  .vwm-word.animating{animation:wordFade 2s ease forwards}
+}
 .hero h1{font-size:clamp(44px,7vw,88px);font-weight:600;color:var(--white);line-height:1.0;margin-bottom:28px;animation:fadeUp .8s .1s ease both}
 .hero h1 em{color:var(--gold-bright);font-style:italic}
 .hero-sub{font-size:clamp(16px,2.2vw,21px);color:rgba(255,255,255,.65);line-height:1.65;max-width:580px;margin-bottom:48px;animation:fadeUp .8s .2s ease both}
@@ -514,6 +533,11 @@ section{padding:120px 48px}
         <span class="vertical-pill" data-en="Wellness Centers" data-es="Centros de Bienestar">Wellness Centers</span>
         <span class="vertical-pill" data-en="IV Therapy" data-es="Terapia IV">IV Therapy</span>
         <span class="vertical-pill" data-en="High-End Salons" data-es="Salones de Lujo">High-End Salons</span>
+      </div>
+      <!-- Mobile only: single fading word -->
+      <div class="vertical-word-mobile">
+        <span class="vwm-label" data-en="For:" data-es="Para:">For:</span>
+        <span class="vwm-word animating" id="vwmWord">Med Spas</span>
       </div>
       <h1 data-en="Stop Paying<br>the <em>Ghost Tax.</em>" data-es="Deja de Pagar<br>el <em>Impuesto Fantasma.</em>">Stop Paying<br>the <em>Ghost Tax.</em></h1>
       <p class="hero-sub" data-en="Your high-value patients spend $3K–$15K, then disappear.<br><strong>We bring them back</strong> — with bilingual AI follow-up and real luxury vacation rewards that make rebooking irresistible." data-es="Tus pacientes de alto valor gastan $3K–$15K y desaparecen.<br><strong>Los hacemos volver</strong> — con seguimiento de IA bilingüe y recompensas de vacaciones de lujo que hacen que reservar de nuevo sea irresistible.">Your high-value patients spend $3K–$15K, then disappear.<br><strong>We bring them back</strong> — with bilingual AI follow-up and real luxury vacation rewards that make rebooking irresistible.</p>
@@ -1436,14 +1460,30 @@ function renderQR(id) {
 }
 renderQR('fullQR');
 
-// ── VERTICAL PILLS CYCLE ──
+// ── VERTICAL CYCLING — desktop pills + mobile fading word ──
 const pills = document.querySelectorAll('.vertical-pill');
+const verticals = {
+  en: ['Med Spas','Dental','Plastic Surgery','Chiropractic','Wellness Centers','IV Therapy','High-End Salons'],
+  es: ['Clínicas Estéticas','Dental','Cirugía Plástica','Quiropráctica','Centros de Bienestar','Terapia IV','Salones de Lujo']
+};
 let activePill = 0;
-setInterval(() => {
+
+function cycleVerticals() {
+  // Desktop pills
   pills[activePill]?.classList.remove('active');
-  activePill = (activePill+1) % pills.length;
+  activePill = (activePill + 1) % pills.length;
   pills[activePill]?.classList.add('active');
-}, 1800);
+
+  // Mobile fading word
+  const wordEl = document.getElementById('vwmWord');
+  if (wordEl) {
+    wordEl.classList.remove('animating');
+    void wordEl.offsetWidth; // force reflow to restart animation
+    wordEl.textContent = verticals[currentLang][activePill];
+    wordEl.classList.add('animating');
+  }
+}
+setInterval(cycleVerticals, 2200);
 
 // ── SCROLL REVEAL ──
 function checkReveals() {
