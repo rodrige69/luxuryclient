@@ -423,7 +423,7 @@ section{padding:120px 48px}
 .tc-rule-icon{font-size:20px;flex-shrink:0;width:32px;text-align:center;margin-top:2px}
 .tc-rule-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px;letter-spacing:.02em}
 .tc-rule-desc{font-size:13px;color:#6B6480;line-height:1.55}
-.tc-disclaimer{margin-top:20px;padding:16px;background:var(--lavender);border-radius:var(--r);font-size:12px;color:var(--text-secondary);line-height:1.6;color:#6B6480}
+.tc-disclaimer{margin-top:20px;padding:16px;background:var(--lavender);border-radius:var(--r);font-size:12px;color:#6B6480;line-height:1.6}
 .modal-overlay{position:fixed;inset:0;z-index:9999;background:rgba(7,5,18,.88);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .4s}
 .modal-overlay.open{opacity:1;pointer-events:all}
 .modal{background:var(--ink2);border-radius:var(--r-lg);padding:56px 48px;max-width:520px;width:100%;position:relative;border:1px solid rgba(201,148,10,.2);box-shadow:0 48px 100px rgba(0,0,0,.6);text-align:center;transform:scale(.95) translateY(16px);transition:transform .4s cubic-bezier(.16,1,.3,1)}
@@ -1705,42 +1705,33 @@ function openTC() { document.getElementById('tcModal').classList.add('open'); do
 function closeTC() { document.getElementById('tcModal').classList.remove('open'); document.body.style.overflow=''; }
 document.getElementById('tcModal').addEventListener('click', e => { if(e.target===document.getElementById('tcModal')) closeTC(); });
 
-let selectedSlot = '';
-function showPage('booking') {
-  closeModal();
-  document.getElementById('gcalModal').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeGCal() {
-  document.getElementById('gcalModal').classList.remove('open');
-  document.body.style.overflow='';
-  setTimeout(() => {
-    document.getElementById('gcalSuccess').style.display='none';
-    document.getElementById('gcalForm').style.display='block';
-    document.querySelectorAll('.gcal-slot').forEach(s=>s.classList.remove('selected'));
-    selectedSlot='';
-  }, 400);
-}
-document.getElementById('gcalModal').addEventListener('click', e => { if(e.target===document.getElementById('gcalModal')) closeGCal(); });
 
+// ── GCAL MODAL (legacy - kept for closeGCal reference) ──
+let selectedSlot = '';
+function closeGCal() {
+  const m = document.getElementById('gcalModal');
+  if (m) { m.classList.remove('open'); document.body.style.overflow=''; }
+}
+const gcalModalEl = document.getElementById('gcalModal');
+if (gcalModalEl) gcalModalEl.addEventListener('click', e => { if(e.target===gcalModalEl) closeGCal(); });
 function selectSlot(el, slot) {
   document.querySelectorAll('.gcal-slot').forEach(s=>s.classList.remove('selected'));
-  el.classList.add('selected');
-  selectedSlot = slot;
+  el.classList.add('selected'); selectedSlot = slot;
 }
-
 function submitGCal() {
-  const name = document.getElementById('gcalName').value.trim();
-  const email = document.getElementById('gcalEmail').value.trim();
-  const vertical = document.getElementById('gcalVertical').value;
+  const name = document.getElementById('gcalName')?.value.trim();
+  const email = document.getElementById('gcalEmail')?.value.trim();
+  const vertical = document.getElementById('gcalVertical')?.value;
   if (!name || !email || !selectedSlot || !vertical) {
-    alert(currentLang==='es' ? 'Por favor completa todos los campos y selecciona un horario.' : 'Please fill in all fields and select a time slot.');
+    alert(currentLang==='es' ? 'Por favor completa todos los campos.' : 'Please fill in all fields and select a time slot.');
     return;
   }
-  // Production: POST to n8n webhook → Google Calendar event → confirmation email
-  document.getElementById('gcalForm').style.display='none';
-  document.getElementById('gcalSuccess').style.display='block';
+  const f = document.getElementById('gcalForm');
+  const s = document.getElementById('gcalSuccess');
+  if (f) f.style.display='none';
+  if (s) s.style.display='block';
 }
+
 
 // ── EXIT INTENT ──
 let exitShown = false;
