@@ -2575,6 +2575,20 @@ let exitShown = false;
 document.addEventListener('mouseleave', e => { if(e.clientY<8&&!exitShown){openModal();exitShown=true;} });
 setTimeout(() => { if(!exitShown){openModal();exitShown=true;} }, 45000);
 
+// ── SECRET ADMIN SHORTCUT — hold Shift and press A twice ──
+let adminKeyCount = 0, adminKeyTimer = null;
+document.addEventListener('keydown', e => {
+  if (e.key === 'A' && e.shiftKey) {
+    adminKeyCount++;
+    clearTimeout(adminKeyTimer);
+    adminKeyTimer = setTimeout(() => { adminKeyCount = 0; }, 800);
+    if (adminKeyCount >= 2) {
+      adminKeyCount = 0;
+      showPage('admin');
+    }
+  }
+});
+
 // ── MINI DEMO ──
 let miniStep = 0;
 function miniGoTo(n) {
