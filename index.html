@@ -503,9 +503,9 @@ section{padding:120px 48px}
 .ls-info{font-size:13px;color:#6B6480;line-height:1.7}
 
 /* ── WHATSAPP ── */
-.wa-btn{position:fixed;bottom:28px;right:28px;z-index:800;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(37,211,102,.4);cursor:pointer;text-decoration:none;transition:all .3s;border:none;animation:waPulse 3s ease-in-out infinite}
+.wa-btn{position:fixed;bottom:28px;right:28px;z-index:800;width:56px;height:56px;border-radius:50%;background:var(--violet);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(91,63,190,.5);cursor:pointer;text-decoration:none;transition:all .3s;border:none;animation:waPulse 3s ease-in-out infinite}
 .wa-btn:hover{transform:scale(1.1)}
-@keyframes waPulse{0%,100%{box-shadow:0 8px 24px rgba(37,211,102,.4)}50%{box-shadow:0 8px 24px rgba(37,211,102,.4),0 0 0 10px rgba(37,211,102,.12)}}
+@keyframes waPulse{0%,100%{box-shadow:0 8px 24px rgba(91,63,190,.5)}50%{box-shadow:0 8px 24px rgba(91,63,190,.5),0 0 0 10px rgba(91,63,190,.12)}}
 
 /* ── PAGES ── */
 .page{display:none}.page.active{display:block}
@@ -1180,7 +1180,7 @@ section{padding:120px 48px}
         <div class="ls-heading" data-en="Need help?" data-es="¿Necesitas ayuda?">Need help?</div>
         <div class="ls-info">
           📧 support@luxuryclientflow.com<br>
-          💬 <span data-en="WhatsApp chat available below" data-es="Chat de WhatsApp disponible abajo">WhatsApp chat available below</span><br>
+          💬 <span data-en="Chat with Lazo (AI) — available 24/7" data-es="Chat con Lazo (IA) — disponible 24/7">Chat with Lazo (AI) — available 24/7</span><br>
           ⏰ <span data-en="Monday–Friday, 9am–6pm EST" data-es="Lunes–Viernes, 9am–6pm EST">Monday–Friday, 9am–6pm EST</span>
         </div>
       </div>
@@ -1359,23 +1359,44 @@ section{padding:120px 48px}
   </section>
 
   <!-- Chat widget area -->
-  <section style="background:var(--white);padding:64px 48px">
+  <section style="background:var(--white);padding:48px 24px 80px">
     <div class="container" style="max-width:860px">
-      <div style="text-align:center;margin-bottom:32px">
+      <div style="text-align:center;margin-bottom:36px">
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.5vw,38px);font-weight:700;color:var(--ink);margin-bottom:8px" data-en="Chat with Lazo Now" data-es="Chatea con Lazo Ahora">Chat with Lazo Now</h2>
         <p style="font-size:15px;color:#6B6480" data-en="Available 24/7 · Responds instantly · Bilingual EN + ES" data-es="Disponible 24/7 · Responde al instante · Bilingüe EN + ES">Available 24/7 · Responds instantly · Bilingual EN + ES</p>
       </div>
 
-      <!-- Lazo chat embed container -->
-      <div id="lazo-chat-container" style="border-radius:var(--r-lg);overflow:hidden;border:1px solid rgba(91,63,190,.15);box-shadow:var(--shadow-sm);min-height:560px;background:var(--mist);display:flex;align-items:center;justify-content:center">
-        <div id="lazo-loading" style="text-align:center;padding:48px 24px">
-          <div style="font-size:48px;margin-bottom:16px">🤖</div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--ink);margin-bottom:8px" data-en="Lazo is loading..." data-es="Lazo está cargando...">Lazo is loading...</div>
-          <div style="font-size:14px;color:#6B6480" data-en="Your AI Ghost Tax advisor will appear in a moment." data-es="Tu asesor de IA del Impuesto Fantasma aparecerá en un momento.">Your AI Ghost Tax advisor will appear in a moment.</div>
+      <!-- Launch button — opens Noem.ai widget -->
+      <div style="text-align:center;margin-bottom:40px">
+        <button id="lazo-open-btn" onclick="openLazoChat()" style="display:inline-flex;align-items:center;gap:12px;background:var(--violet);color:white;font-family:'DM Sans',sans-serif;font-size:17px;font-weight:700;padding:18px 40px;border-radius:100px;border:none;cursor:pointer;box-shadow:0 8px 32px rgba(91,63,190,.4);transition:all .3s">
+          <span style="font-size:24px">🤖</span>
+          <span data-en="Start Chatting with Lazo →" data-es="Comenzar Chat con Lazo →">Start Chatting with Lazo →</span>
+        </button>
+        <p style="font-size:13px;color:#9E9ABB;margin-top:12px" data-en="Opens in a chat window · No account needed" data-es="Se abre en una ventana de chat · Sin cuenta requerida">Opens in a chat window · No account needed</p>
+      </div>
+
+      <!-- What to ask guide -->
+      <div style="background:var(--mist);border-radius:var(--r-lg);padding:32px;margin-bottom:32px">
+        <p style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9E9ABB;margin-bottom:16px" data-en="Not sure what to ask? Try one of these:" data-es="¿No sabes qué preguntar? Prueba uno de estos:">Not sure what to ask? Try one of these:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <div onclick="openLazoChat()" style="background:var(--white);border:1px solid rgba(91,63,190,.15);border-radius:100px;padding:9px 18px;font-size:13px;font-weight:500;color:var(--violet);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--violet)';this.style.color='white'" onmouseout="this.style.background='var(--white)';this.style.color='var(--violet)'" data-en="What is the Ghost Tax?" data-es="¿Qué es el Impuesto Fantasma?">"What is the Ghost Tax?"</div>
+          <div onclick="openLazoChat()" style="background:var(--white);border:1px solid rgba(91,63,190,.15);border-radius:100px;padding:9px 18px;font-size:13px;font-weight:500;color:var(--violet);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--violet)';this.style.color='white'" onmouseout="this.style.background='var(--white)';this.style.color='var(--violet)'" data-en="How much does it cost?" data-es="¿Cuánto cuesta?">"How much does it cost?"</div>
+          <div onclick="openLazoChat()" style="background:var(--white);border:1px solid rgba(91,63,190,.15);border-radius:100px;padding:9px 18px;font-size:13px;font-weight:500;color:var(--violet);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--violet)';this.style.color='white'" onmouseout="this.style.background='var(--white)';this.style.color='var(--violet)'" data-en="Is it right for my practice?" data-es="¿Es adecuado para mi práctica?">"Is it right for my practice?"</div>
+          <div onclick="openLazoChat()" style="background:var(--white);border:1px solid rgba(91,63,190,.15);border-radius:100px;padding:9px 18px;font-size:13px;font-weight:500;color:var(--violet);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--violet)';this.style.color='white'" onmouseout="this.style.background='var(--white)';this.style.color='var(--violet)'" data-en="How does the hotel stay work?" data-es="¿Cómo funciona la estadía de hotel?">"How does the hotel stay work?"</div>
+          <div onclick="openLazoChat()" style="background:var(--white);border:1px solid rgba(91,63,190,.15);border-radius:100px;padding:9px 18px;font-size:13px;font-weight:500;color:var(--violet);cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--violet)';this.style.color='white'" onmouseout="this.style.background='var(--white)';this.style.color='var(--violet)'" data-en="How fast can we go live?" data-es="¿Qué tan rápido podemos comenzar?">"How fast can we go live?"</div>
         </div>
       </div>
 
-      <p style="font-size:12px;color:#B0ADCC;text-align:center;margin-top:16px;line-height:1.6" data-en="Lazo is an AI assistant. For complex questions or to get your Ghost Tax calculated live, book a free call with Daniel." data-es="Lazo es un asistente de IA. Para preguntas complejas o para calcular tu Impuesto Fantasma en vivo, reserva una llamada gratuita con Daniel.">Lazo is an AI assistant. For complex questions or to get your Ghost Tax calculated live, book a free call with Daniel.</p>
+      <!-- Prefer human -->
+      <div style="padding:20px 24px;background:var(--gold-pale);border-radius:var(--r);border:1px solid rgba(201,148,10,.25);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div>
+          <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px" data-en="Prefer to talk to Daniel directly?" data-es="¿Prefieres hablar directamente con Daniel?">Prefer to talk to Daniel directly?</div>
+          <div style="font-size:13px;color:#6B6480" data-en="Book a free 15-min Audit + Demo — no bot, just Daniel." data-es="Reserva una llamada gratuita de 15 min — sin bot, solo Daniel.">Book a free 15-min Audit + Demo — no bot, just Daniel.</div>
+        </div>
+        <button class="btn btn-gold btn-sm" onclick="showPage('booking')" data-en="Book a Call →" data-es="Reservar Llamada →">Book a Call →</button>
+      </div>
+
+      <p style="font-size:12px;color:#B0ADCC;text-align:center;margin-top:20px;line-height:1.6" data-en="Lazo is an AI assistant. For complex questions or to get your Ghost Tax calculated live, book a free call with Daniel." data-es="Lazo es un asistente de IA. Para preguntas complejas o para calcular tu Impuesto Fantasma en vivo, reserva una llamada gratuita con Daniel.">Lazo is an AI assistant. For complex questions or to get your Ghost Tax calculated live, book a free call with Daniel.</p>
     </div>
   </section>
 </div><!-- /page-chat -->
@@ -1427,10 +1448,11 @@ section{padding:120px 48px}
   </div>
 </footer>
 
-<!-- WHATSAPP -->
-<a href="https://wa.me/13059999999" class="wa-btn" title="WhatsApp">
-  <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
+
+<!-- ASK LAZO FLOATING BUTTON -->
+<button onclick="showPage('chat');openLazoChat()" class="wa-btn" title="Chat with Lazo" style="background:var(--violet);animation:waPulse 3s ease-in-out infinite">
+  <span style="font-size:26px;line-height:1">🤖</span>
+</button>
 
 <!-- AUDIT MODAL -->
 <div class="modal-overlay" id="modal">
@@ -1452,7 +1474,7 @@ section{padding:120px 48px}
         <div class="mo-label" data-en="▶ Watch the Demo First" data-es="▶ Ver el Demo Primero">▶ Watch the Demo First</div>
         <div class="mo-desc" data-en="See the full patient experience before you commit to a call" data-es="Ve la experiencia completa del paciente antes de comprometerte a una llamada">See the full patient experience before you commit to a call</div>
       </div>
-      <div class="modal-option" onclick="closeModal();window.open('https://wa.me/13059999999','_blank')">
+      <div class="modal-option" onclick="closeModal();window.open('https://wa.me/17865312879','_blank')">
         <div class="mo-label" data-en="💬 WhatsApp Daniel Directly" data-es="💬 WhatsApp Directo con Daniel">💬 WhatsApp Daniel Directly</div>
         <div class="mo-desc" data-en="Fastest response — real answers in real time, no bot" data-es="Respuesta más rápida — respuestas reales en tiempo real, sin bot">Fastest response — real answers in real time, no bot</div>
       </div>
@@ -1562,28 +1584,54 @@ section{padding:120px 48px}
 <script>
 // ── LAZO CHAT BOT ──
 let lazoInitialized = false;
+let lazoBot = null;
+
 function initLazo() {
   if (lazoInitialized) return;
-  const loading = document.getElementById('lazo-loading');
-  if (loading) loading.style.display = 'none';
   try {
     let currentUser = { email: null, displayName: 'Guest', userProfileUrl: '' };
-    const bot = new ChatBot('NjliNzM5YjllMjFlNDU0M2ZmN2MxYTQz', currentUser);
-    bot.init();
+    lazoBot = new ChatBot('NjliNzM5YjllMjFlNDU0M2ZmN2MxYTQz', currentUser);
+    lazoBot.init();
     lazoInitialized = true;
   } catch(e) {
-    const loading = document.getElementById('lazo-loading');
-    if (loading) {
-      loading.innerHTML = '<div style="font-size:36px;margin-bottom:12px">💬</div><div style="font-family:\'Cormorant Garamond\',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:8px">Chat unavailable right now</div><div style="font-size:13px;color:#6B6480">Please try refreshing, or <button onclick="showPage(\'booking\')" style="color:var(--violet);background:none;border:none;cursor:pointer;font-family:\'DM Sans\',sans-serif;font-size:13px;text-decoration:underline">book a call with Daniel</button> instead.</div>';
-    }
+    console.warn('Lazo init error:', e);
   }
 }
 
+function openLazoChat() {
+  // Init if not already done
+  if (!lazoInitialized) initLazo();
+  // Try to open/show the widget — Noem.ai typically creates a button or iframe
+  // Attempt common patterns: click the bot's own toggle button
+  setTimeout(() => {
+    const btns = document.querySelectorAll(
+      '[class*="chat-button"],[class*="chatbot-btn"],[class*="noem"],[id*="noem"],[id*="chat-btn"],[class*="launcher"]'
+    );
+    if (btns.length > 0) {
+      btns[btns.length - 1].click();
+    } else {
+      // Fallback: look for any fixed-position button added by the script
+      const allBtns = document.querySelectorAll('button, a');
+      for (const b of allBtns) {
+        const style = window.getComputedStyle(b);
+        if (style.position === 'fixed' && b !== document.querySelector('.wa-btn') && b !== document.querySelector('.nav-cta') && b !== document.querySelector('#langToggleBtn')) {
+          b.click();
+          break;
+        }
+      }
+    }
+  }, 300);
+}
+
+// Pre-load Lazo script as soon as the page is ready (but don't open the widget yet)
+window.addEventListener('DOMContentLoaded', () => {
+  // Small delay so the page renders first
+  setTimeout(initLazo, 1000);
+});
+
 // Suggested question chips
 function lazoSuggest(btn) {
-  const text = btn.getAttribute('data-en') || btn.textContent.replace(/"/g,'').trim();
-  // Bot will pick up the message if it exposes a send method; otherwise just a UX hint
-  console.log('Lazo suggested:', text);
+  openLazoChat();
 }
 </script>
 
@@ -1681,8 +1729,6 @@ function showPage(name) {
   });
   window.scrollTo(0, 0);
   setTimeout(() => checkReveals(), 100);
-  // Initialize Lazo when chat page opens
-  if (name === 'chat') setTimeout(initLazo, 400);
 }
 
 function scrollToPricing() {
