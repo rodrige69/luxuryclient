@@ -377,7 +377,7 @@
 :root{
   --ink:#0E0B1A;--ink2:#2C2544;--mist:#F7F5FF;--lavender:#EAE4FF;
   --violet:#5B3FBE;--violet-light:#7B60D4;--gold:#C9940A;--gold-bright:#E8B923;
-  --gold-pale:#FDF3D0;--cream:#FEFCF7;--white:#FFFFFF;--coral:#D4627A;--green:#2A8C5A;
+  --gold-pale:#FDF3D0;--cream:#FEFCF7;--white:#FFFFFF;--coral:#D4627A;--green:#2A8C5A;--gray:#6B6480;
   --r:16px;--r-lg:28px;--shadow:0 20px 60px rgba(14,11,26,.18);--shadow-sm:0 4px 20px rgba(14,11,26,.1);
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
@@ -838,8 +838,45 @@ section{padding:120px 48px}
 .blog-hero p{font-size:18px;color:rgba(255,255,255,.5)}
 .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:64px}
 @media(max-width:900px){.blog-grid{grid-template-columns:1fr}}
-.blog-card{background:var(--white);border-radius:var(--r-lg);overflow:hidden;border:1px solid rgba(91,63,190,.1);transition:all .3s}
+.blog-card{background:var(--white);border-radius:var(--r-lg);overflow:hidden;border:1px solid rgba(91,63,190,.1);transition:all .3s;cursor:pointer}
 .blog-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+
+/* ── BLOG LOADING / EMPTY STATES ── */
+.blog-loading{text-align:center;padding:80px 24px;color:var(--gray,#6B6480)}
+.blog-loading .spin{display:inline-block;width:36px;height:36px;border:3px solid var(--lavender);border-top-color:var(--violet);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── ARTICLE READER ── */
+.article-hero{background:var(--ink);padding:120px 48px 64px;position:relative;overflow:hidden}
+.article-hero-orb{position:absolute;width:400px;height:400px;border-radius:50%;filter:blur(80px);opacity:.25;background:var(--violet);top:-100px;right:-100px}
+.article-back{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.5);font-size:13px;font-weight:600;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;margin-bottom:24px;transition:color .2s}
+.article-back:hover{color:var(--gold-bright)}
+.article-body{max-width:740px;margin:0 auto;padding:64px 48px}
+@media(max-width:768px){.article-body{padding:40px 24px}}
+.article-body h2{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,34px);font-weight:700;color:var(--ink);margin:40px 0 14px;line-height:1.2}
+.article-body h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--violet);margin:28px 0 10px}
+.article-body p{font-size:17px;line-height:1.8;color:#3A3550;margin-bottom:20px}
+.article-body ul{padding-left:24px;margin-bottom:20px}
+.article-body ul li{font-size:17px;line-height:1.8;color:#3A3550;margin-bottom:8px}
+.article-body strong{color:var(--ink);font-weight:700}
+.article-body blockquote{border-left:4px solid var(--violet);padding:16px 24px;background:var(--mist);border-radius:0 var(--r) var(--r) 0;margin:24px 0;font-style:italic;color:var(--ink)}
+.article-cta{background:var(--ink);border-radius:var(--r-lg);padding:40px;text-align:center;margin-top:48px}
+
+/* ── ADMIN DASHBOARD ── */
+.admin-wrap{max-width:860px;margin:0 auto;padding:40px 24px}
+.admin-field{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.admin-field label{font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.04em;text-transform:uppercase}
+.admin-input{border:1.5px solid rgba(91,63,190,.2);border-radius:var(--r);padding:12px 16px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);background:var(--white);transition:border .2s;outline:none;width:100%}
+.admin-input:focus{border-color:var(--violet)}
+.admin-textarea{min-height:320px;resize:vertical;font-size:14px;line-height:1.7}
+.admin-select{appearance:none;background:var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%235B3FBE' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 14px center}
+.admin-posts-list{background:var(--white);border-radius:var(--r-lg);border:1px solid rgba(91,63,190,.1);overflow:hidden;margin-top:12px}
+.admin-post-row{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid rgba(91,63,190,.06);gap:12px;flex-wrap:wrap}
+.admin-post-row:last-child{border-bottom:none}
+.admin-post-row:hover{background:var(--mist)}
+.admin-status{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.admin-status.published{background:#E8F5EE;color:var(--green)}
+.admin-status.draft{background:var(--lavender);color:var(--violet)}
 .bc-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:56px}
 .bc-body{padding:28px 26px}
 .bc-cat{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block}
@@ -1396,47 +1433,181 @@ section{padding:120px 48px}
   </div>
   <section style="background:var(--cream);padding:80px 48px">
     <div class="container">
-      <div class="blog-grid">
-        <div class="blog-card">
-          <div class="bc-img" style="background:linear-gradient(135deg,#1A0D4B,#5B3FAB)">💉</div>
-          <div class="bc-body">
-            <span class="bc-cat" data-en="Med Spas" data-es="Clínicas Estéticas">Med Spas</span>
-            <h3 class="bc-title" data-en="Why 82% of Botox Patients Never Rebook (And the Fix)" data-es="Por Qué el 82% de los Pacientes de Bótox Nunca Vuelve (Y la Solución)">Why 82% of Botox Patients Never Rebook (And the Fix)</h3>
-            <p class="bc-excerpt" data-en="Most med spas think ghosting is about price. It's not. It's about the gap between treatment and follow-up — and how a bilingual AI closes it." data-es="La mayoría cree que el problema es el precio. No lo es. Es la brecha entre el tratamiento y el seguimiento — y cómo la IA bilingüe la cierra.">Most med spas think ghosting is about price. It's not. It's about the gap between treatment and follow-up.</p>
-            <a href="#" class="bc-link" data-en="Read More →" data-es="Leer Más →">Read More →</a>
-          </div>
+      <!-- Category filters -->
+      <div id="blog-filters" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px;justify-content:center"></div>
+      <!-- Dynamic grid — filled by JS -->
+      <div class="blog-grid" id="blog-grid">
+        <div class="blog-loading" style="grid-column:1/-1">
+          <div class="spin"></div>
+          <p style="font-size:15px;color:var(--gray,#6B6480)" data-en="Loading articles..." data-es="Cargando artículos...">Loading articles...</p>
         </div>
-        <div class="blog-card">
-          <div class="bc-img" style="background:linear-gradient(135deg,#0E2A1A,#1A6B4A)">✈️</div>
-          <div class="bc-body">
-            <span class="bc-cat" data-en="Loyalty" data-es="Lealtad">Loyalty</span>
-            <h3 class="bc-title" data-en="Why Vacation Rewards Beat Discount Loyalty Programs Every Time" data-es="Por Qué las Recompensas de Vacaciones Superan a los Descuentos Siempre">Why Vacation Rewards Beat Discount Loyalty Programs Every Time</h3>
-            <p class="bc-excerpt" data-en="Points and gift cards feel transactional. A complimentary hotel stay feels like a gift. Here's the psychology — and the numbers." data-es="Los puntos y las tarjetas de regalo se sienten transaccionales. Unas estadía de hotel complementaria se sienten como un regalo. Aquí está la psicología — y los números.">Points and gift cards feel transactional. A complimentary hotel stay feels like a gift. Here's the psychology and the numbers.</p>
-            <a href="#" class="bc-link" data-en="Read More →" data-es="Leer Más →">Read More →</a>
-          </div>
-        </div>
-        <div class="blog-card">
-          <div class="bc-img" style="background:linear-gradient(135deg,#2A0A0A,#8B1A2A)">🇪🇸</div>
-          <div class="bc-body">
-            <span class="bc-cat" data-en="Bilingual Marketing" data-es="Marketing Bilingüe">Bilingual Marketing</span>
-            <h3 class="bc-title" data-en="The 47% Advantage: Why Spanish Follow-Up Outperforms English" data-es="La Ventaja del 47%: Por Qué el Seguimiento en Español Supera al Inglés">The 47% Advantage: Why Spanish Follow-Up Outperforms English</h3>
-            <p class="bc-excerpt" data-en="In markets where 30–70% of patients prefer Spanish, English-only loyalty programs aren't suboptimal — they're invisible." data-es="En mercados donde el 30–70% prefiere español, los programas de lealtad en solo inglés no son subóptimos — son invisibles.">In markets where 30–70% of patients prefer Spanish, English-only programs aren't suboptimal — they're invisible.</p>
-            <a href="#" class="bc-link" data-en="Read More →" data-es="Leer Más →">Read More →</a>
-          </div>
-        </div>
+      </div>
+      <!-- Load more -->
+      <div style="text-align:center;margin-top:48px">
+        <button id="blog-load-more" onclick="loadMorePosts()" class="btn btn-outline" style="display:none" data-en="Load More Articles →" data-es="Cargar Más Artículos →">Load More Articles →</button>
       </div>
     </div>
   </section>
   <section class="newsletter-bar">
     <div class="container">
       <h3 class="nb-title" data-en="Ghost Tax Weekly" data-es="Impuesto Fantasma Semanal">Ghost Tax Weekly</h3>
-      <p class="nb-sub" data-en="Patient retention strategy, bilingual marketing tips, and loyalty case studies — every week." data-es="Estrategia de retención de pacientes, consejos de marketing bilingüe y casos de estudio de lealtad — cada semana.">Patient retention strategy, bilingual marketing tips, and loyalty case studies — every week.</p>
+      <p class="nb-sub" data-en="Patient retention strategy, bilingual marketing tips, and loyalty case studies — every week." data-es="Estrategia de retención de pacientes, consejos de marketing bilingüe y casos de estudio — cada semana.">Patient retention strategy, bilingual marketing tips, and loyalty case studies — every week.</p>
       <div class="nb-form">
         <input class="nb-input" type="email" id="nbEmail" placeholder="your@practice.com">
         <button class="btn btn-gold" data-en="Subscribe →" data-es="Suscribirse →">Subscribe →</button>
       </div>
     </div>
   </section>
+</div>
+
+<!-- ══ ARTICLE READER PAGE ══ -->
+<div id="page-article" class="page">
+  <div class="article-hero">
+    <div class="article-hero-orb"></div>
+    <div class="container" style="max-width:740px;position:relative;z-index:1">
+      <button class="article-back" onclick="showPage('blog')">← <span data-en="Back to Blog" data-es="Volver al Blog">Back to Blog</span></button>
+      <div id="article-category" style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(201,148,10,.8);margin-bottom:12px"></div>
+      <h1 id="article-title" style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,58px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:20px"></h1>
+      <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:10px">
+          <img src="daniel-headshot.png" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.2)" alt="Daniel Rodriguez">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--white)">Daniel Rodriguez</div>
+            <div id="article-date" style="font-size:12px;color:rgba(255,255,255,.4)"></div>
+          </div>
+        </div>
+        <div id="article-read-time" style="font-size:12px;color:rgba(255,255,255,.4)"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Article body -->
+  <div style="background:var(--white)">
+    <div class="article-body">
+      <div id="article-content"></div>
+      <!-- CTA at end of every article -->
+      <div class="article-cta">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--white);margin-bottom:8px" data-en="Ready to stop the Ghost Tax?" data-es="¿Listo para detener el Impuesto Fantasma?">Ready to stop the Ghost Tax?</div>
+        <p style="color:rgba(255,255,255,.6);font-size:15px;margin-bottom:24px" data-en="Book a free 15-minute Audit + Demo. We'll calculate your number live." data-es="Reserva una auditoría gratuita de 15 minutos. Calcularemos tu número en vivo.">Book a free 15-minute Audit + Demo. We'll calculate your number live.</p>
+        <button class="btn btn-gold btn-lg" onclick="showPage('booking')" data-en="Book Free Audit →" data-es="Reservar Auditoría Gratuita →">Book Free Audit →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ADMIN DASHBOARD PAGE ══ -->
+<div id="page-admin" class="page">
+  <div style="background:var(--ink);padding:80px 48px 48px">
+    <div style="max-width:860px;margin:0 auto">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(201,148,10,.7);margin-bottom:8px">LuxuryClientFlow</div>
+          <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--white)">Blog Admin</h1>
+        </div>
+        <button onclick="showPage('blog')" class="btn btn-ghost btn-sm">← Back to Blog</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin login gate -->
+  <div id="admin-login-gate" style="background:var(--mist);min-height:60vh;display:flex;align-items:center;justify-content:center;padding:48px 24px">
+    <div style="background:var(--white);border-radius:var(--r-lg);padding:40px;max-width:400px;width:100%;border:1px solid rgba(91,63,190,.1);box-shadow:var(--shadow-sm)">
+      <div style="font-size:48px;text-align:center;margin-bottom:16px">🔐</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--ink);text-align:center;margin-bottom:24px">Admin Access</h2>
+      <div class="admin-field">
+        <label>Password</label>
+        <input type="password" id="admin-password" class="admin-input" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')checkAdminPass()">
+      </div>
+      <button onclick="checkAdminPass()" class="btn btn-gold" style="width:100%">Sign In →</button>
+      <p id="admin-login-error" style="color:var(--coral);font-size:13px;text-align:center;margin-top:12px;display:none">Incorrect password. Try again.</p>
+    </div>
+  </div>
+
+  <!-- Admin panel (shown after login) -->
+  <div id="admin-panel" style="display:none;background:var(--cream)">
+    <div class="admin-wrap">
+
+      <!-- Tabs -->
+      <div style="display:flex;gap:4px;margin-bottom:32px;background:var(--lavender);border-radius:var(--r);padding:4px;width:fit-content">
+        <button id="tab-write-btn" onclick="adminTab('write')" style="background:var(--violet);color:white;border:none;border-radius:8px;padding:10px 24px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s">✏️ Write Post</button>
+        <button id="tab-posts-btn" onclick="adminTab('posts')" style="background:transparent;color:var(--violet);border:none;border-radius:8px;padding:10px 24px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s">📋 All Posts</button>
+      </div>
+
+      <!-- WRITE TAB -->
+      <div id="admin-tab-write">
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--ink);margin-bottom:24px" id="admin-form-title">New Post</h2>
+
+        <input type="hidden" id="admin-editing-id">
+
+        <div class="admin-field">
+          <label>Title (English) *</label>
+          <input type="text" id="admin-title-en" class="admin-input" placeholder="Why 82% of Botox Patients Never Rebook (And the Fix)">
+        </div>
+        <div class="admin-field">
+          <label>Title (Spanish)</label>
+          <input type="text" id="admin-title-es" class="admin-input" placeholder="Por Qué el 82% de los Pacientes de Bótox Nunca Vuelve">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="admin-field">
+            <label>Category</label>
+            <select id="admin-category" class="admin-input admin-select">
+              <option value="Med Spas">Med Spas</option>
+              <option value="Dental">Dental</option>
+              <option value="Loyalty">Loyalty</option>
+              <option value="Bilingual Marketing">Bilingual Marketing</option>
+              <option value="Ghost Tax">Ghost Tax</option>
+              <option value="Wellness">Wellness</option>
+              <option value="Case Study">Case Study</option>
+              <option value="Strategy">Strategy</option>
+            </select>
+          </div>
+          <div class="admin-field">
+            <label>Card Emoji / Icon</label>
+            <input type="text" id="admin-emoji" class="admin-input" placeholder="💉" maxlength="4">
+          </div>
+        </div>
+        <div class="admin-field">
+          <label>Card Gradient (CSS)</label>
+          <input type="text" id="admin-gradient" class="admin-input" placeholder="linear-gradient(135deg,#1A0D4B,#5B3FAB)">
+          <div style="font-size:12px;color:var(--gray,#6B6480);margin-top:4px">This is the colored banner on the blog card. Use two hex colors.</div>
+        </div>
+        <div class="admin-field">
+          <label>Excerpt (English) * — shown on blog card</label>
+          <textarea id="admin-excerpt-en" class="admin-input" style="min-height:80px;resize:vertical" placeholder="One or two sentences that make someone want to click..."></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Excerpt (Spanish)</label>
+          <textarea id="admin-excerpt-es" class="admin-input" style="min-height:80px;resize:vertical" placeholder="Una o dos frases que inviten a hacer clic..."></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Article Body (English) * — supports basic Markdown</label>
+          <div style="font-size:12px;color:var(--gray,#6B6480);margin-bottom:6px">## Heading 2 &nbsp;|&nbsp; ### Heading 3 &nbsp;|&nbsp; **bold** &nbsp;|&nbsp; - bullet &nbsp;|&nbsp; > blockquote</div>
+          <textarea id="admin-body-en" class="admin-input admin-textarea" placeholder="## Why Patients Ghost&#10;&#10;Most practice owners assume..."></textarea>
+        </div>
+        <div class="admin-field">
+          <label>Article Body (Spanish)</label>
+          <textarea id="admin-body-es" class="admin-input admin-textarea" placeholder="## Por Qué los Pacientes Desaparecen&#10;&#10;La mayoría de los dueños de clínicas asumen..."></textarea>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap">
+          <button onclick="adminSavePost('published')" class="btn btn-gold btn-lg">🚀 Publish Now</button>
+          <button onclick="adminSavePost('draft')" class="btn btn-outline">Save as Draft</button>
+          <button onclick="adminClearForm()" class="btn btn-ghost" style="background:var(--lavender);color:var(--violet)">Clear Form</button>
+        </div>
+        <div id="admin-save-msg" style="margin-top:16px;font-size:14px;font-weight:600;display:none"></div>
+      </div>
+
+      <!-- POSTS TAB -->
+      <div id="admin-tab-posts" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--ink)">All Posts</h2>
+          <button onclick="adminTab('write')" class="btn btn-gold btn-sm">+ New Post</button>
+        </div>
+        <div id="admin-posts-list">
+          <div style="text-align:center;padding:48px;color:var(--gray,#6B6480)">Loading posts...</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <!-- ══ DEMO PAGE ══ -->
@@ -1950,6 +2121,289 @@ section{padding:120px 48px}
 <!-- LAZO: embedded via iframe at app.noem.ai/cb/luxuryclientflow -->
 
 <script>
+// ── BLOG SYSTEM — SUPABASE POWERED ──
+// ⚠️  REPLACE THESE TWO VALUES WITH YOUR REAL SUPABASE CREDENTIALS
+const SUPA_URL  = 'https://gcpyxqyacqvxaglfwiuz.supabase.co';
+const SUPA_KEY  = 'sb_publishable_v4Rzd2mDC1C95dQ68XaWAQ_YUDQmXWd';
+const SUPA_HEADERS = {
+  'apikey': SUPA_KEY,
+  'Authorization': `Bearer ${SUPA_KEY}`,
+  'Content-Type': 'application/json'
+};
+
+// Blog state
+let allPosts = [];
+let filteredPosts = [];
+let activeCategory = 'All';
+let postsPage = 0;
+const POSTS_PER_PAGE = 6;
+
+// ── FETCH POSTS ──
+async function fetchPosts() {
+  try {
+    const res = await fetch(
+      `${SUPA_URL}/rest/v1/blog_posts?status=eq.published&order=published_at.desc&select=*`,
+      { headers: SUPA_HEADERS }
+    );
+    if (!res.ok) throw new Error('Fetch failed');
+    allPosts = await res.json();
+    filteredPosts = allPosts;
+    renderBlogFilters();
+    renderBlogGrid(true);
+  } catch(e) {
+    document.getElementById('blog-grid').innerHTML = `
+      <div class="blog-loading" style="grid-column:1/-1">
+        <p style="font-size:15px;color:var(--coral)">⚠️ Could not load articles. Check your Supabase credentials.</p>
+        <p style="font-size:13px;color:var(--gray,#6B6480);margin-top:8px">${e.message}</p>
+      </div>`;
+  }
+}
+
+// ── RENDER CATEGORY FILTER CHIPS ──
+function renderBlogFilters() {
+  const cats = ['All', ...new Set(allPosts.map(p => p.category).filter(Boolean))];
+  const container = document.getElementById('blog-filters');
+  if (!container) return;
+  container.innerHTML = cats.map(cat => `
+    <button onclick="filterByCategory('${cat}')"
+      style="background:${cat===activeCategory?'var(--violet)':'var(--white)'};
+             color:${cat===activeCategory?'white':'var(--violet)'};
+             border:1.5px solid ${cat===activeCategory?'var(--violet)':'rgba(91,63,190,.2)'};
+             border-radius:100px;padding:7px 18px;font-size:13px;font-weight:600;
+             cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s">
+      ${cat}
+    </button>`).join('');
+}
+
+function filterByCategory(cat) {
+  activeCategory = cat;
+  filteredPosts = cat === 'All' ? allPosts : allPosts.filter(p => p.category === cat);
+  postsPage = 0;
+  renderBlogFilters();
+  renderBlogGrid(true);
+}
+
+// ── RENDER BLOG GRID ──
+function renderBlogGrid(reset = false) {
+  const grid = document.getElementById('blog-grid');
+  if (reset) { grid.innerHTML = ''; postsPage = 0; }
+  const start = postsPage * POSTS_PER_PAGE;
+  const slice = filteredPosts.slice(start, start + POSTS_PER_PAGE);
+  if (slice.length === 0 && postsPage === 0) {
+    grid.innerHTML = `<div class="blog-loading" style="grid-column:1/-1">
+      <p style="font-size:15px;color:var(--gray,#6B6480)">No articles yet in this category.</p></div>`;
+    document.getElementById('blog-load-more').style.display = 'none';
+    return;
+  }
+  slice.forEach(post => {
+    const card = document.createElement('div');
+    card.className = 'blog-card';
+    card.onclick = () => openArticle(post);
+    const titleKey   = currentLang === 'es' && post.title_es   ? post.title_es   : post.title_en;
+    const excerptKey = currentLang === 'es' && post.excerpt_es ? post.excerpt_es : post.excerpt_en;
+    const dateStr    = post.published_at ? new Date(post.published_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '';
+    const readMins   = post.body_en ? Math.max(1, Math.round(post.body_en.split(' ').length / 200)) : 3;
+    card.innerHTML = `
+      <div class="bc-img" style="background:${post.gradient||'linear-gradient(135deg,#1A0D4B,#5B3FAB)'}">
+        <span style="font-size:40px">${post.emoji||'📝'}</span>
+      </div>
+      <div class="bc-body">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <span class="bc-cat">${post.category||''}</span>
+          <span style="font-size:12px;color:var(--gray,#6B6480)">${readMins} min read</span>
+        </div>
+        <h3 class="bc-title">${titleKey}</h3>
+        <p class="bc-excerpt">${excerptKey}</p>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px">
+          <span style="font-size:12px;color:var(--gray,#6B6480)">${dateStr}</span>
+          <span class="bc-link">${currentLang==='es'?'Leer Más →':'Read More →'}</span>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+  postsPage++;
+  const btn = document.getElementById('blog-load-more');
+  btn.style.display = filteredPosts.length > postsPage * POSTS_PER_PAGE ? 'inline-flex' : 'none';
+}
+
+function loadMorePosts() { renderBlogGrid(false); }
+
+// ── ARTICLE READER ──
+function openArticle(post) {
+  const lang = currentLang;
+  document.getElementById('article-category').textContent = post.category || '';
+  document.getElementById('article-title').textContent = (lang==='es'&&post.title_es) ? post.title_es : post.title_en;
+  const dateStr = post.published_at ? new Date(post.published_at).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}) : '';
+  document.getElementById('article-date').textContent = dateStr;
+  const words = ((lang==='es'&&post.body_es) ? post.body_es : post.body_en)||'';
+  const readMins = Math.max(1, Math.round(words.split(' ').length / 200));
+  document.getElementById('article-read-time').textContent = `${readMins} min read`;
+  const body = (lang==='es'&&post.body_es) ? post.body_es : post.body_en;
+  document.getElementById('article-content').innerHTML = parseMarkdown(body||'');
+  showPage('article');
+}
+
+// ── SIMPLE MARKDOWN PARSER ──
+function parseMarkdown(md) {
+  if (!md) return '';
+  return md
+    .replace(/^## (.+)$/gm,  '<h2>$1</h2>')
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
+    .replace(/^- (.+)$/gm, '<li>$1</li>')
+    .replace(/(<li>.*<\/li>\n?)+/g, m => `<ul>${m}</ul>`)
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/^(?!<[hublp])(.+)$/gm, '<p>$1</p>')
+    .replace(/<p><\/p>/g, '')
+    .replace(/<p>(<[hublp])/g, '$1')
+    .replace(/(<\/[hublp][^>]*>)<\/p>/g, '$1');
+}
+
+// Load blog posts when blog page is opened
+const _origShowPage = showPage;
+
+// ── ADMIN DASHBOARD ──
+const ADMIN_PASS = 'lcf2026admin'; // ⚠️ CHANGE THIS before going live
+
+function checkAdminPass() {
+  const val = document.getElementById('admin-password').value;
+  if (val === ADMIN_PASS) {
+    document.getElementById('admin-login-gate').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
+    loadAdminPosts();
+  } else {
+    document.getElementById('admin-login-error').style.display = 'block';
+  }
+}
+
+function adminTab(tab) {
+  document.getElementById('admin-tab-write').style.display = tab==='write' ? 'block' : 'none';
+  document.getElementById('admin-tab-posts').style.display = tab==='posts' ? 'block' : 'none';
+  document.getElementById('tab-write-btn').style.background = tab==='write' ? 'var(--violet)' : 'transparent';
+  document.getElementById('tab-write-btn').style.color     = tab==='write' ? 'white' : 'var(--violet)';
+  document.getElementById('tab-posts-btn').style.background = tab==='posts' ? 'var(--violet)' : 'transparent';
+  document.getElementById('tab-posts-btn').style.color     = tab==='posts' ? 'white' : 'var(--violet)';
+  if (tab === 'posts') loadAdminPosts();
+}
+
+async function adminSavePost(status) {
+  const titleEn = document.getElementById('admin-title-en').value.trim();
+  const bodyEn  = document.getElementById('admin-body-en').value.trim();
+  if (!titleEn || !bodyEn) {
+    showAdminMsg('⚠️ Title (English) and Article Body (English) are required.', 'var(--coral)');
+    return;
+  }
+  const editingId = document.getElementById('admin-editing-id').value;
+  const payload = {
+    title_en:   titleEn,
+    title_es:   document.getElementById('admin-title-es').value.trim() || null,
+    excerpt_en: document.getElementById('admin-excerpt-en').value.trim(),
+    excerpt_es: document.getElementById('admin-excerpt-es').value.trim() || null,
+    body_en:    bodyEn,
+    body_es:    document.getElementById('admin-body-es').value.trim() || null,
+    category:   document.getElementById('admin-category').value,
+    emoji:      document.getElementById('admin-emoji').value.trim() || '📝',
+    gradient:   document.getElementById('admin-gradient').value.trim() || 'linear-gradient(135deg,#1A0D4B,#5B3FAB)',
+    status:     status,
+    published_at: status === 'published' ? new Date().toISOString() : null
+  };
+  try {
+    showAdminMsg('Saving...', 'var(--violet)');
+    let res;
+    if (editingId) {
+      res = await fetch(`${SUPA_URL}/rest/v1/blog_posts?id=eq.${editingId}`, {
+        method: 'PATCH', headers: {...SUPA_HEADERS, Prefer:'return=minimal'}, body: JSON.stringify(payload)
+      });
+    } else {
+      res = await fetch(`${SUPA_URL}/rest/v1/blog_posts`, {
+        method: 'POST', headers: {...SUPA_HEADERS, Prefer:'return=minimal'}, body: JSON.stringify(payload)
+      });
+    }
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    showAdminMsg(status==='published' ? '✅ Post published! Live on the blog.' : '✅ Draft saved.', 'var(--green)');
+    adminClearForm();
+    allPosts = []; fetchPosts(); // refresh blog grid
+  } catch(e) {
+    showAdminMsg(`❌ Error: ${e.message}. Check your Supabase credentials.`, 'var(--coral)');
+  }
+}
+
+function showAdminMsg(msg, color) {
+  const el = document.getElementById('admin-save-msg');
+  el.textContent = msg;
+  el.style.color = color;
+  el.style.display = 'block';
+  if (msg.includes('✅')) setTimeout(() => el.style.display='none', 4000);
+}
+
+async function loadAdminPosts() {
+  const list = document.getElementById('admin-posts-list');
+  list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--gray,#6B6480)">Loading...</div>';
+  try {
+    const res = await fetch(`${SUPA_URL}/rest/v1/blog_posts?order=created_at.desc&select=id,title_en,category,status,published_at`,{headers:SUPA_HEADERS});
+    const posts = await res.json();
+    if (!posts.length) {
+      list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--gray,#6B6480)">No posts yet. Write your first one!</div>';
+      return;
+    }
+    list.innerHTML = '<div class="admin-posts-list">' + posts.map(p => `
+      <div class="admin-post-row">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.title_en}</div>
+          <div style="font-size:12px;color:var(--gray,#6B6480);margin-top:2px">${p.category||'—'} · ${p.published_at?new Date(p.published_at).toLocaleDateString():'Draft'}</div>
+        </div>
+        <span class="admin-status ${p.status}">${p.status}</span>
+        <div style="display:flex;gap:8px">
+          <button onclick="adminEditPost('${p.id}')" style="background:var(--lavender);color:var(--violet);border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">Edit</button>
+          <button onclick="adminDeletePost('${p.id}','${p.title_en.replace(/'/g,'')}')" style="background:#FDECEA;color:var(--coral);border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">Delete</button>
+        </div>
+      </div>`).join('') + '</div>';
+  } catch(e) {
+    list.innerHTML = `<div style="text-align:center;padding:40px;color:var(--coral)">Error loading posts: ${e.message}</div>`;
+  }
+}
+
+async function adminEditPost(id) {
+  const res = await fetch(`${SUPA_URL}/rest/v1/blog_posts?id=eq.${id}&select=*`,{headers:SUPA_HEADERS});
+  const [p] = await res.json();
+  document.getElementById('admin-editing-id').value    = p.id;
+  document.getElementById('admin-title-en').value      = p.title_en || '';
+  document.getElementById('admin-title-es').value      = p.title_es || '';
+  document.getElementById('admin-excerpt-en').value    = p.excerpt_en || '';
+  document.getElementById('admin-excerpt-es').value    = p.excerpt_es || '';
+  document.getElementById('admin-body-en').value       = p.body_en || '';
+  document.getElementById('admin-body-es').value       = p.body_es || '';
+  document.getElementById('admin-category').value      = p.category || 'Strategy';
+  document.getElementById('admin-emoji').value         = p.emoji || '';
+  document.getElementById('admin-gradient').value      = p.gradient || '';
+  document.getElementById('admin-form-title').textContent = 'Editing: ' + p.title_en;
+  adminTab('write');
+  document.querySelector('.admin-wrap').scrollIntoView({behavior:'smooth'});
+}
+
+async function adminDeletePost(id, title) {
+  if (!confirm(`Delete "${title}"? This cannot be undone.`)) return;
+  await fetch(`${SUPA_URL}/rest/v1/blog_posts?id=eq.${id}`,{method:'DELETE',headers:SUPA_HEADERS});
+  loadAdminPosts();
+  allPosts = []; fetchPosts();
+}
+
+function adminClearForm() {
+  ['admin-editing-id','admin-title-en','admin-title-es','admin-excerpt-en','admin-excerpt-es',
+   'admin-body-en','admin-body-es','admin-emoji','admin-gradient'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('admin-category').value = 'Med Spas';
+  document.getElementById('admin-form-title').textContent = 'New Post';
+}
+
+// Init blog on page load
+window.addEventListener('DOMContentLoaded', () => {
+  fetchPosts();
+});
+
 // ── GA4 EVENT TRACKING ──
 function track(event, params = {}) {
   if (typeof gtag === 'function') {
@@ -2060,6 +2514,8 @@ function showPage(name) {
   track('page_view', { page_title: 'LCF — ' + name, page_location: location.href });
   if (name === 'booking') track('cta_click', { cta_name: 'book_call', cta_location: 'nav' });
   if (name === 'chat')    track('cta_click', { cta_name: 'ask_lazo', cta_location: 'nav' });
+  // Refresh blog grid language on navigate
+  if (name === 'blog' && allPosts.length > 0) renderBlogGrid(true);
 }
 
 function scrollToPricing() {
