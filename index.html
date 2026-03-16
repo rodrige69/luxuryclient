@@ -1614,15 +1614,13 @@ section{padding:120px 48px}
         <div style="margin-bottom:20px">
           <div style="font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Gradient Presets — click to use</div>
           <div style="display:flex;flex-wrap:wrap;gap:8px">
-            ${[
-              ['Med Spas','linear-gradient(135deg,#1A0D4B,#5B3FAB)','#5B3FAB'],
-              ['Dental','linear-gradient(135deg,#0A1A3A,#1A4A8A)','#1A4A8A'],
-              ['Chiropractic','linear-gradient(135deg,#0A1A2A,#1A4A6B)','#1A4A6B'],
-              ['Wellness','linear-gradient(135deg,#0E2A1A,#1A6B4A)','#1A6B4A'],
-              ['Bilingual','linear-gradient(135deg,#2A0A0A,#8B1A2A)','#8B1A2A'],
-              ['Loyalty','linear-gradient(135deg,#1A1A0A,#6B5A1A)','#6B5A1A'],
-              ['Strategy','linear-gradient(135deg,#1A0D4B,#3A1A6B)','#3A1A6B'],
-            ].map(([name,grad,color])=>`<button type="button" onclick="document.getElementById('admin-gradient').value='${grad}'" style="background:${grad};color:white;border:none;border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">${name}</button>`).join('')}
+            <button type="button" onclick="document.getElementById('admin-gradient').value='linear-gradient(135deg,#1A0D4B,#5B3FAB)'" style="background:linear-gradient(135deg,#1A0D4B,#5B3FAB);color:white;border:none;border-radius:100px;padding:7px 18px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">💉 Med Spas</button>
+            <button type="button" onclick="document.getElementById('admin-gradient').value='linear-gradient(135deg,#0A1A3A,#1A4A8A)'" style="background:linear-gradient(135deg,#0A1A3A,#1A4A8A);color:white;border:none;border-radius:100px;padding:7px 18px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">🦷 Dental</button>
+            <button type="button" onclick="document.getElementById('admin-gradient').value='linear-gradient(135deg,#0A1A2A,#1A4A6B)'" style="background:linear-gradient(135deg,#0A1A2A,#1A4A6B);color:white;border:none;border-radius:100px;padding:7px 18px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">🦴 Chiropractic</button>
+            <button type="button" onclick="document.getElementById('admin-gradient').value='linear-gradient(135deg,#0E2A1A,#1A6B4A)'" style="background:linear-gradient(135deg,#0E2A1A,#1A6B4A);color:white;border:none;border-radius:100px;padding:7px 18px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">🌿 Wellness</button>
+            <button type="button" onclick="document.getElementById('admin-gradient').value='linear-gradient(135deg,#2A0A0A,#8B1A2A)'" style="background:linear-gradient(135deg,#2A0A0A,#8B1A2A);color:white;border:none;border-radius:100px;padding:7px 18px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">🌐 Bilingual</button>
+            <button type="button" onclick="document.getElementById('admin-gradient').value='linear-gradient(135deg,#1A1A0A,#6B5A1A)'" style="background:linear-gradient(135deg,#1A1A0A,#6B5A1A);color:white;border:none;border-radius:100px;padding:7px 18px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">✈️ Loyalty</button>
+            <button type="button" onclick="document.getElementById('admin-gradient').value='linear-gradient(135deg,#1A0D4B,#3A1A6B)'" style="background:linear-gradient(135deg,#1A0D4B,#3A1A6B);color:white;border:none;border-radius:100px;padding:7px 18px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">🧠 Strategy</button>
           </div>
         </div>
         <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap">
