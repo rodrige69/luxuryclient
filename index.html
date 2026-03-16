@@ -768,7 +768,7 @@ section{padding:120px 48px}
           <div class="fc-cred"><div class="fc-cred-dot"></div><span data-en="AI &amp; automation specialist" data-es="Especialista en IA y automatización">AI &amp; automation specialist</span></div>
           <div class="fc-cred"><div class="fc-cred-dot"></div><span data-en="Founder, Shop305Local &amp; ClientContactPro" data-es="Fundador, Shop305Local y ClientContactPro">Founder, Shop305Local &amp; ClientContactPro</span></div>
         </div>
-        <div style="margin-top:32px"><button class="btn btn-gold btn-lg" onclick="openGCal()" data-en="📅 Book a Call with Daniel →" data-es="📅 Reservar una Llamada con Daniel →">📅 Book a Call with Daniel →</button></div>
+        <div style="margin-top:32px"><button class="btn btn-gold btn-lg" onclick="showPage('booking')" data-en="📅 Book a Call with Daniel →" data-es="📅 Reservar una Llamada con Daniel →">📅 Book a Call with Daniel →</button></div>
       </div>
     </div>
   </div>
@@ -1204,27 +1204,38 @@ section{padding:120px 48px}
   <!-- What happens on the call -->
   <section style="background:var(--mist);padding:64px 48px">
     <div class="container" style="max-width:900px">
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:28px">
         <div style="background:var(--white);border-radius:var(--r-lg);padding:28px 24px;border:1px solid rgba(91,63,190,.1)">
           <div style="font-size:32px;margin-bottom:12px">🔍</div>
           <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:8px" data-en="Your Ghost Tax Number" data-es="Tu Número del Impuesto Fantasma">Your Ghost Tax Number</div>
           <p style="font-size:13px;color:#6B6480;line-height:1.6" data-en="We calculate exactly how much revenue is walking out the door every month from patients who don't rebook." data-es="Calculamos exactamente cuántos ingresos se pierden cada mes de pacientes que no regresan.">We calculate exactly how much revenue is walking out the door every month from patients who don't rebook.</p>
         </div>
-        <div style="background:var(--white);border-radius:var(--r-lg);padding:28px 24px;border:1px solid rgba(91,63,190,.1)">
+        <div style="background:var(--violet);border-radius:var(--r-lg);padding:28px 24px;position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(91,63,190,.35)">
+          <div style="position:absolute;top:14px;right:14px;background:var(--gold-bright);color:var(--ink);font-size:10px;font-weight:800;padding:4px 11px;border-radius:100px;letter-spacing:.06em;text-transform:uppercase" data-en="LIVE on the call" data-es="EN VIVO">LIVE on the call</div>
           <div style="font-size:32px;margin-bottom:12px">📱</div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:8px" data-en="Live System Demo" data-es="Demo del Sistema en Vivo">Live System Demo</div>
-          <p style="font-size:13px;color:#6B6480;line-height:1.6" data-en="Daniel walks you through the exact four-step loop — QR card, bilingual AI, hotel stay, reputation firewall — as it would work for your practice." data-es="Daniel te muestra el ciclo exacto de cuatro pasos — tarjeta QR, IA bilingüe, estadía de hotel, escudo de reputación — tal como funcionaría para tu práctica.">Daniel walks you through the exact four-step loop as it would work for your practice.</p>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:8px" data-en="Live System Demo" data-es="Demo del Sistema en Vivo">Live System Demo</div>
+          <p style="font-size:13px;color:rgba(255,255,255,.8);line-height:1.6" data-en="You'll see the exact patient experience — QR scan, bilingual AI, hotel stay reward, and reputation firewall — live, as it would run in your practice." data-es="Verás la experiencia exacta del paciente — escaneo QR, IA bilingüe, recompensa de estadía y escudo de reputación — en vivo.">You'll see the exact patient experience — QR scan, bilingual AI, hotel stay reward, and reputation firewall — live, as it would run in your practice.</p>
         </div>
         <div style="background:var(--white);border-radius:var(--r-lg);padding:28px 24px;border:1px solid rgba(91,63,190,.1)">
           <div style="font-size:32px;margin-bottom:12px">💬</div>
           <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:8px" data-en="Real Answers" data-es="Respuestas Reales">Real Answers</div>
-          <p style="font-size:13px;color:#6B6480;line-height:1.6" data-en="Ask Daniel anything — pricing, setup, how it works for your specific situation. No scripts. No pressure. Just honest conversation." data-es="Pregúntale a Daniel cualquier cosa — precios, configuración, cómo funciona para tu situación específica. Sin presión.">Ask Daniel anything — pricing, setup, how it works for your specific situation. No scripts. No pressure.</p>
+          <p style="font-size:13px;color:#6B6480;line-height:1.6" data-en="Ask Daniel anything — pricing, setup, how it works for your specific situation. No scripts. No pressure." data-es="Pregúntale a Daniel cualquier cosa — precios, configuración, cómo funciona para tu situación. Sin presión.">Ask Daniel anything — pricing, setup, how it works for your specific situation. No scripts. No pressure.</p>
         </div>
       </div>
-      @media(max-width:768px){#booking-cards{grid-template-columns:1fr!important}}
+
+      <!-- Demo breakdown strip -->
+      <div style="background:var(--ink);border-radius:var(--r-lg);padding:20px 24px;margin-bottom:28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+        <div style="font-size:14px;font-weight:700;color:var(--gold-bright);letter-spacing:.06em;text-transform:uppercase;flex-shrink:0" data-en="👀 On the demo you'll see:" data-es="👀 En la demo verás:">👀 On the demo you'll see:</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.7)" data-en="📲 QR scan → wallet card (3 sec)" data-es="📲 QR scan → tarjeta (3 seg)">📲 QR scan → wallet card (3 sec)</span>
+          <span style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.7)" data-en="🤖 Bilingual AI follow-up" data-es="🤖 Seguimiento de IA bilingüe">🤖 Bilingual AI follow-up</span>
+          <span style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.7)" data-en="✈️ Hotel stay reward unlock" data-es="✈️ Desbloqueo de estadía de hotel">✈️ Hotel stay reward unlock</span>
+          <span style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.7)" data-en="⭐ 5-star review auto-posted" data-es="⭐ Reseña de 5 estrellas automática">⭐ 5-star review auto-posted</span>
+        </div>
+      </div>
 
       <!-- Trust line -->
-      <div style="display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;margin-bottom:0">
+      <div style="display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap">
         <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:#6B6480"><span style="color:var(--green);font-size:16px">✓</span><span data-en="Bilingual — hablamos español también" data-es="Bilingüe — we also speak English">Bilingual — hablamos español también</span></div>
         <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:#6B6480"><span style="color:var(--green);font-size:16px">✓</span><span data-en="3× ROI guarantee or Daniel works free" data-es="Garantía 3× ROI o Daniel trabaja gratis">3× ROI guarantee or Daniel works free</span></div>
         <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:#6B6480"><span style="color:var(--green);font-size:16px">✓</span><span data-en="Live in 48 hours, no tech team needed" data-es="En funcionamiento en 48 horas">Live in 48 hours, no tech team needed</span></div>
@@ -1257,17 +1268,17 @@ section{padding:120px 48px}
         <span style="font-size:24px;flex-shrink:0">🔒</span>
         <div>
           <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px" data-en="Zero pressure, zero obligation" data-es="Sin presión, sin compromiso">Zero pressure, zero obligation</div>
-          <div style="font-size:13px;color:#6B6480;line-height:1.55" data-en="This is a working session, not a sales call. Daniel will have your Ghost Tax estimate ready before you even connect. Most practice owners find it genuinely useful whether they move forward or not." data-es="Esta es una sesión de trabajo, no una llamada de ventas. Daniel tendrá tu estimado del Impuesto Fantasma listo antes de que te conectes.">This is a working session, not a sales call. Daniel will have your Ghost Tax estimate ready before you even connect. Most practice owners find it genuinely useful whether they move forward or not.</div>
+          <div style="font-size:13px;color:#6B6480;line-height:1.55" data-en="This is a working session, not a sales call. We'll calculate your Ghost Tax number together live and walk through exactly how the system works — so you leave with real clarity, whether you move forward or not." data-es="Esta es una sesión de trabajo, no una llamada de ventas. Calcularemos juntos tu número del Impuesto Fantasma en vivo y veremos exactamente cómo funciona el sistema — para que salgas con claridad real, sin importar si avanzas o no.">This is a working session, not a sales call. We'll calculate your Ghost Tax number together live and walk through exactly how the system works — so you leave with real clarity, whether you move forward or not.</div>
         </div>
       </div>
 
-      <!-- Prefer WhatsApp -->
+      <!-- Prefer chat -->
       <div style="margin-top:16px;text-align:center">
-        <p style="font-size:14px;color:#6B6480" data-en="Prefer WhatsApp? Message Daniel directly →" data-es="¿Prefieres WhatsApp? Escríbele a Daniel directamente →">Prefer WhatsApp? Message Daniel directly →</p>
-        <a href="https://wa.me/13059999999" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:8px;background:#25D366;color:white;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;padding:12px 24px;border-radius:100px;text-decoration:none;transition:all .2s" onmouseover="this.style.background='#1DAA55'" onmouseout="this.style.background='#25D366'">
-          <svg viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
-          <span data-en="Chat on WhatsApp" data-es="Chat por WhatsApp">Chat on WhatsApp</span>
-        </a>
+        <p style="font-size:14px;color:#6B6480;margin-bottom:10px" data-en="Have questions before booking? Chat with Lazo first →" data-es="¿Tienes preguntas antes de reservar? Chatea primero con Lazo →">Have questions before booking? Chat with Lazo first →</p>
+        <button onclick="showPage('chat')" style="display:inline-flex;align-items:center;gap:8px;background:var(--violet);color:white;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;padding:12px 24px;border-radius:100px;border:none;cursor:pointer;transition:all .2s" onmouseover="this.style.background='var(--ink)'" onmouseout="this.style.background='var(--violet)'">
+          <span>🤖</span>
+          <span data-en="Ask Lazo — AI Assistant (EN + ES)" data-es="Pregunta a Lazo — Asistente IA (EN + ES)">Ask Lazo — AI Assistant (EN + ES)</span>
+        </button>
       </div>
     </div>
   </section>
@@ -1695,7 +1706,7 @@ function closeTC() { document.getElementById('tcModal').classList.remove('open')
 document.getElementById('tcModal').addEventListener('click', e => { if(e.target===document.getElementById('tcModal')) closeTC(); });
 
 let selectedSlot = '';
-function openGCal() {
+function showPage('booking') {
   closeModal();
   document.getElementById('gcalModal').classList.add('open');
   document.body.style.overflow='hidden';
@@ -1748,7 +1759,7 @@ function miniGoTo(n) {
   btn.setAttribute('data-es', n===2 ? 'Reservar Auditoría ✓' : 'Siguiente →');
   btn.textContent = n===2 ? (currentLang==='es'?'Reservar Auditoría ✓':'Book Audit ✓') : (currentLang==='es'?'Siguiente →':'Next →');
 }
-function miniNext() { if(miniStep<2){miniGoTo(miniStep+1);}else{openGCal();} }
+function miniNext() { if(miniStep<2){miniGoTo(miniStep+1);}else{showPage('booking');} }
 function miniPrev() { if(miniStep>0) miniGoTo(miniStep-1); }
 
 // ── FULL DEMO ──
@@ -1762,7 +1773,7 @@ function fullGoTo(n) {
   const btn = document.getElementById('fullNextBtn');
   btn.textContent = n===4 ? (currentLang==='es'?'Reservar Auditoría ✓':'Book Audit ✓') : (currentLang==='es'?'Siguiente →':'Next →');
 }
-function fullNext() { if(fullStep<4){fullGoTo(fullStep+1);}else{openGCal();} }
+function fullNext() { if(fullStep<4){fullGoTo(fullStep+1);}else{showPage('booking');} }
 function fullPrev() { if(fullStep>0) fullGoTo(fullStep-1); }
 
 // ── QR ──
