@@ -859,7 +859,16 @@ section{padding:120px 48px}
 .article-body ul{padding-left:24px;margin-bottom:20px}
 .article-body ul li{font-size:17px;line-height:1.8;color:#3A3550;margin-bottom:8px}
 .article-body strong{color:var(--ink);font-weight:700}
-.article-body blockquote{border-left:4px solid var(--violet);padding:16px 24px;background:var(--mist);border-radius:0 var(--r) var(--r) 0;margin:24px 0;font-style:italic;color:var(--ink)}
+/* ── ARTICLE VISUALS ── */
+.article-hero-img{width:100%;max-height:480px;object-fit:cover;display:block;border-radius:0 0 var(--r-lg) var(--r-lg);margin-bottom:-2px}
+.article-body img{width:100%;border-radius:var(--r-lg);margin:28px 0;box-shadow:0 8px 32px rgba(14,11,26,.12);display:block}
+.article-stat-box{background:linear-gradient(135deg,var(--violet),#3A2890);border-radius:var(--r-lg);padding:32px;margin:32px 0;text-align:center}
+.article-stat-box .stat-number{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,8vw,80px);font-weight:700;color:var(--gold-bright);line-height:1;display:block;margin-bottom:8px}
+.article-stat-box .stat-label{font-size:16px;color:rgba(255,255,255,.85);line-height:1.5}
+.article-highlight{background:var(--gold-pale);border-left:4px solid var(--gold-bright);border-radius:0 var(--r) var(--r) 0;padding:20px 24px;margin:24px 0}
+.article-highlight p{font-size:17px;font-weight:600;color:var(--ink);margin:0;line-height:1.6}
+.article-body blockquote{border-left:4px solid var(--violet);padding:16px 24px;background:var(--mist);border-radius:0 var(--r) var(--r) 0;margin:24px 0;font-style:italic;color:var(--ink);font-size:18px;line-height:1.6}
+.article-divider{border:none;border-top:2px solid var(--lavender);margin:36px 0}
 .article-cta{background:var(--ink);border-radius:var(--r-lg);padding:40px;text-align:center;margin-top:48px}
 
 /* ── ADMIN DASHBOARD ── */
@@ -1482,6 +1491,10 @@ section{padding:120px 48px}
   </div>
   <!-- Article body -->
   <div style="background:var(--white)">
+    <!-- Hero image (shown only if post has one) -->
+    <div id="article-hero-img-wrap" style="display:none;max-width:860px;margin:0 auto;padding:32px 48px 0">
+      <img id="article-hero-img" src="" alt="" class="article-hero-img" style="border-radius:var(--r-lg)">
+    </div>
     <div class="article-body">
       <div id="article-content"></div>
       <!-- CTA at end of every article -->
@@ -1568,7 +1581,12 @@ section{padding:120px 48px}
         <div class="admin-field">
           <label>Card Gradient (CSS)</label>
           <input type="text" id="admin-gradient" class="admin-input" placeholder="linear-gradient(135deg,#1A0D4B,#5B3FAB)">
-          <div style="font-size:12px;color:var(--gray,#6B6480);margin-top:4px">This is the colored banner on the blog card. Use two hex colors.</div>
+          <div style="font-size:12px;color:var(--gray,#6B6480);margin-top:4px">Colored banner on the blog card. Pick from the gradient presets below.</div>
+        </div>
+        <div class="admin-field">
+          <label>Hero Image URL (optional) — shown at top of full article</label>
+          <input type="url" id="admin-hero-image" class="admin-input" placeholder="https://i.imgur.com/your-ai-image.jpg">
+          <div style="font-size:12px;color:var(--gray,#6B6480);margin-top:4px">Generate with ChatGPT / DALL-E / Midjourney → upload to Imgur or Google Drive → paste the direct image URL here.</div>
         </div>
         <div class="admin-field">
           <label>Excerpt (English) * — shown on blog card</label>
@@ -1579,13 +1597,33 @@ section{padding:120px 48px}
           <textarea id="admin-excerpt-es" class="admin-input" style="min-height:80px;resize:vertical" placeholder="Una o dos frases que inviten a hacer clic..."></textarea>
         </div>
         <div class="admin-field">
-          <label>Article Body (English) * — supports basic Markdown</label>
-          <div style="font-size:12px;color:var(--gray,#6B6480);margin-bottom:6px">## Heading 2 &nbsp;|&nbsp; ### Heading 3 &nbsp;|&nbsp; **bold** &nbsp;|&nbsp; - bullet &nbsp;|&nbsp; > blockquote</div>
-          <textarea id="admin-body-en" class="admin-input admin-textarea" placeholder="## Why Patients Ghost&#10;&#10;Most practice owners assume..."></textarea>
+          <label>Article Body (English) * — Markdown + special tags</label>
+          <div style="background:var(--lavender);border-radius:var(--r);padding:12px 16px;margin-bottom:8px;font-size:12px;line-height:1.8;color:var(--ink)">
+            <strong>Text:</strong> ## H2 &nbsp;|&nbsp; ### H3 &nbsp;|&nbsp; **bold** &nbsp;|&nbsp; - bullet &nbsp;|&nbsp; ---  (divider)<br>
+            <strong>Visuals:</strong> &gt; blockquote &nbsp;|&nbsp; [stat]82% never rebook[/stat] &nbsp;|&nbsp; [highlight]Key insight here[/highlight]<br>
+            <strong>Images:</strong> ![Description](https://image-url.jpg)
+          </div>
+          <textarea id="admin-body-en" class="admin-input admin-textarea" placeholder="## Why Patients Ghost&#10;&#10;Most practice owners assume...&#10;&#10;[stat]82% of patients never rebook[/stat]&#10;&#10;![Patient at med spa](https://your-image-url.jpg)"></textarea>
         </div>
         <div class="admin-field">
           <label>Article Body (Spanish)</label>
           <textarea id="admin-body-es" class="admin-input admin-textarea" placeholder="## Por Qué los Pacientes Desaparecen&#10;&#10;La mayoría de los dueños de clínicas asumen..."></textarea>
+        </div>
+
+        <!-- Gradient presets -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Gradient Presets — click to use</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            ${[
+              ['Med Spas','linear-gradient(135deg,#1A0D4B,#5B3FAB)','#5B3FAB'],
+              ['Dental','linear-gradient(135deg,#0A1A3A,#1A4A8A)','#1A4A8A'],
+              ['Chiropractic','linear-gradient(135deg,#0A1A2A,#1A4A6B)','#1A4A6B'],
+              ['Wellness','linear-gradient(135deg,#0E2A1A,#1A6B4A)','#1A6B4A'],
+              ['Bilingual','linear-gradient(135deg,#2A0A0A,#8B1A2A)','#8B1A2A'],
+              ['Loyalty','linear-gradient(135deg,#1A1A0A,#6B5A1A)','#6B5A1A'],
+              ['Strategy','linear-gradient(135deg,#1A0D4B,#3A1A6B)','#3A1A6B'],
+            ].map(([name,grad,color])=>`<button type="button" onclick="document.getElementById('admin-gradient').value='${grad}'" style="background:${grad};color:white;border:none;border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">${name}</button>`).join('')}
+          </div>
         </div>
         <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap">
           <button onclick="adminSavePost('published')" class="btn btn-gold btn-lg">🚀 Publish Now</button>
@@ -2238,27 +2276,59 @@ function openArticle(post) {
   const words = ((lang==='es'&&post.body_es) ? post.body_es : post.body_en)||'';
   const readMins = Math.max(1, Math.round(words.split(' ').length / 200));
   document.getElementById('article-read-time').textContent = `${readMins} min read`;
+  // Hero image
+  const heroWrap = document.getElementById('article-hero-img-wrap');
+  const heroImg  = document.getElementById('article-hero-img');
+  if (post.hero_image) {
+    heroImg.src = post.hero_image;
+    heroImg.alt = (lang==='es'&&post.title_es) ? post.title_es : post.title_en;
+    heroWrap.style.display = 'block';
+  } else {
+    heroWrap.style.display = 'none';
+  }
   const body = (lang==='es'&&post.body_es) ? post.body_es : post.body_en;
   document.getElementById('article-content').innerHTML = parseMarkdown(body||'');
   showPage('article');
 }
 
-// ── SIMPLE MARKDOWN PARSER ──
+// ── ENHANCED MARKDOWN PARSER ──
 function parseMarkdown(md) {
   if (!md) return '';
-  return md
+  let html = md
+    // Custom tags FIRST (before other processing)
+    .replace(/\[stat\]([\s\S]*?)\[\/stat\]/g, (_, content) => {
+      const parts = content.trim().split('\n');
+      const number = parts[0].trim();
+      const label  = parts[1] ? parts[1].trim() : '';
+      return `<div class="article-stat-box"><span class="stat-number">${number}</span>${label ? `<div class="stat-label">${label}</div>` : ''}</div>`;
+    })
+    .replace(/\[highlight\]([\s\S]*?)\[\/highlight\]/g, (_, content) => {
+      return `<div class="article-highlight"><p>${content.trim()}</p></div>`;
+    })
+    // Images: ![alt](url)
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" loading="lazy">')
+    // Headings
     .replace(/^## (.+)$/gm,  '<h2>$1</h2>')
     .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    // Horizontal rule
+    .replace(/^---$/gm, '<hr class="article-divider">')
+    // Bold & italic
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    // Blockquote (styled pull quote)
     .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
+    // Bullets
     .replace(/^- (.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>\n?)+/g, m => `<ul>${m}</ul>`)
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/^(?!<[hublp])(.+)$/gm, '<p>$1</p>')
-    .replace(/<p><\/p>/g, '')
-    .replace(/<p>(<[hublp])/g, '$1')
-    .replace(/(<\/[hublp][^>]*>)<\/p>/g, '$1');
+    .replace(/(<li>[\s\S]*?<\/li>\n?)+/g, m => `<ul>${m}</ul>`);
+  // Wrap remaining lines in <p> — skip lines already wrapped in block elements
+  html = html.split('\n').map(line => {
+    const trimmed = line.trim();
+    if (!trimmed) return '';
+    if (/^<(h[23]|ul|li|blockquote|div|img|hr)/.test(trimmed)) return trimmed;
+    if (trimmed.endsWith('</h2>') || trimmed.endsWith('</h3>') || trimmed.endsWith('</blockquote>') || trimmed.endsWith('</div>') || trimmed.endsWith('</ul>') || trimmed.endsWith('/>') || trimmed === '<hr class="article-divider">') return trimmed;
+    return `<p>${trimmed}</p>`;
+  }).filter(Boolean).join('\n');
+  return html;
 }
 
 // Load blog posts when blog page is opened
@@ -2306,6 +2376,7 @@ async function adminSavePost(status) {
     category:   document.getElementById('admin-category').value,
     emoji:      document.getElementById('admin-emoji').value.trim() || '📝',
     gradient:   document.getElementById('admin-gradient').value.trim() || 'linear-gradient(135deg,#1A0D4B,#5B3FAB)',
+    hero_image: document.getElementById('admin-hero-image').value.trim() || null,
     status:     status,
     published_at: status === 'published' ? new Date().toISOString() : null
   };
@@ -2378,6 +2449,7 @@ async function adminEditPost(id) {
   document.getElementById('admin-category').value      = p.category || 'Strategy';
   document.getElementById('admin-emoji').value         = p.emoji || '';
   document.getElementById('admin-gradient').value      = p.gradient || '';
+  document.getElementById('admin-hero-image').value    = p.hero_image || '';
   document.getElementById('admin-form-title').textContent = 'Editing: ' + p.title_en;
   adminTab('write');
   document.querySelector('.admin-wrap').scrollIntoView({behavior:'smooth'});
@@ -2392,7 +2464,7 @@ async function adminDeletePost(id, title) {
 
 function adminClearForm() {
   ['admin-editing-id','admin-title-en','admin-title-es','admin-excerpt-en','admin-excerpt-es',
-   'admin-body-en','admin-body-es','admin-emoji','admin-gradient'].forEach(id => {
+   'admin-body-en','admin-body-es','admin-emoji','admin-gradient','admin-hero-image'].forEach(id => {
     document.getElementById(id).value = '';
   });
   document.getElementById('admin-category').value = 'Med Spas';
