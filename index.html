@@ -579,8 +579,9 @@ section{padding:120px 48px}
 
 /* ── LOOP ── */
 .loop-section{background:var(--mist);padding:120px 48px}
-.loop-track{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;margin-bottom:56px}
-@media(max-width:900px){.loop-track{grid-template-columns:repeat(2,1fr);gap:24px}}
+.loop-track{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;margin-bottom:56px}
+@media(max-width:1100px){.loop-track{grid-template-columns:repeat(3,1fr);gap:24px}}
+@media(max-width:700px){.loop-track{grid-template-columns:repeat(2,1fr);gap:24px}}
 .loop-step{padding:40px 28px;position:relative;text-align:center}
 .loop-step:not(:last-child)::after{content:'';position:absolute;top:64px;right:-1px;width:24px;height:2px;background:linear-gradient(to right,var(--violet),rgba(91,63,190,.2));z-index:2}
 @media(max-width:900px){.loop-step::after{display:none!important}}
@@ -1118,7 +1119,7 @@ section{padding:120px 48px}
     <div class="section-header center reveal">
       <span class="section-eyebrow" data-en="The System" data-es="El Sistema">The System</span>
       <h2 class="section-title" data-en="The Luxury Patient Loop" data-es="El Ciclo del Paciente de Lujo">The Luxury Patient Loop</h2>
-      <p class="section-sub" data-en="Four automated steps that turn one-time visits into a $25K lifetime relationship — bilingual, no app required." data-es="Cuatro pasos automatizados que convierten visitas únicas en relaciones de $25K de por vida — bilingüe, sin aplicación.">Four automated steps that turn one-time visits into a $25K lifetime relationship — bilingual, no app required.</p>
+      <p class="section-sub" data-en="A tiered reward system that keeps patients engaged from visit one all the way to the grand finale — bilingual, automated, no app required." data-es="Un sistema de recompensas escalonado que mantiene a los pacientes comprometidos desde la primera visita hasta el gran final — bilingüe, automatizado, sin aplicación.">A tiered reward system that keeps patients engaged from visit one all the way to the grand finale — bilingual, automated, no app required.</p>
     </div>
     <div class="loop-track">
       <div class="loop-step reveal">
@@ -1133,20 +1134,58 @@ section{padding:120px 48px}
         <div class="ls-title" data-en="Bilingual AI Follow-Up" data-es="Seguimiento de IA Bilingüe">Bilingual AI Follow-Up</div>
         <p class="ls-desc" data-en='"Hola Sarah, ¿lista para tu próximo tratamiento?" — personalized, automated, timed perfectly. EN + ES from day one.' data-es='"Hola Sarah, ¿lista para tu próximo tratamiento?" — personalizado, automatizado, en el momento exacto. EN + ES desde el día uno.'>"Hola Sarah, ¿lista para tu próximo tratamiento?" — personalized, automated, timed perfectly. EN + ES from day one.</p>
       </div>
-      <div class="loop-step reveal d2">
+      <div class="loop-step reveal d2" style="position:relative">
+        <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold-bright);color:var(--ink);font-size:10px;font-weight:800;padding:3px 12px;border-radius:100px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap" data-en="MILESTONE REWARD" data-es="RECOMPENSA HITO">MILESTONE REWARD</div>
         <div class="ls-num">3</div>
-        <div class="ls-icon">✈️</div>
-        <div class="ls-title" data-en="Vacation Reward" data-es="Recompensa de Vacaciones">Vacation Reward</div>
-        <p class="ls-desc" data-en="Rebook and earn a Complimentary 3-Day Hotel Stay*. The hook that makes your loyalty program unforgettable." data-es="Reserva y gana una Estadía de Hotel Complementaria de 3 Días*. El gancho que hace tu programa de lealtad inolvidable.">Rebook and earn a Complimentary 3-Day Hotel Stay*. The hook that makes your loyalty program unforgettable.</p>
+        <div class="ls-icon">🍽️</div>
+        <div class="ls-title" data-en="Dining Reward Unlocked" data-es="Recompensa de Cena Desbloqueada">Dining Reward Unlocked</div>
+        <p class="ls-desc" data-en="3rd visit or 5-star review triggers an instant dining reward — a small win that builds the habit of coming back. The wallet card updates automatically." data-es="La 3ra visita o una reseña de 5 estrellas activa una recompensa de cena instantánea — un pequeño logro que construye el hábito de regresar. La tarjeta se actualiza automáticamente.">3rd visit or 5-star review triggers an instant dining reward. The wallet card updates automatically.</p>
       </div>
-      <div class="loop-step reveal d3">
+      <div class="loop-step reveal d3" style="position:relative">
+        <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--violet);color:white;font-size:10px;font-weight:800;padding:3px 12px;border-radius:100px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap" data-en="GRAND FINALE" data-es="GRAN FINAL">GRAND FINALE</div>
         <div class="ls-num">4</div>
+        <div class="ls-icon">✈️</div>
+        <div class="ls-title" data-en="Hotel Stay Earned" data-es="Estadía de Hotel Ganada">Hotel Stay Earned</div>
+        <p class="ls-desc" data-en="1,000 points unlocks a Complimentary 3-Day Hotel Stay* — Cancún, Orlando, or the Bahamas. The reward that makes your practice unforgettable." data-es="1,000 puntos desbloquea una Estadía de Hotel Complementaria de 3 Días* — Cancún, Orlando o las Bahamas. La recompensa que hace tu clínica inolvidable.">1,000 points unlocks a Complimentary 3-Day Hotel Stay*. The reward that makes your practice unforgettable.</p>
+      </div>
+      <div class="loop-step reveal d4">
+        <div class="ls-num">5</div>
         <div class="ls-icon">⭐</div>
         <div class="ls-title" data-en="Auto Review + Firewall" data-es="Reseña Automática + Escudo">Auto Review + Firewall</div>
         <p class="ls-desc" data-en="Happy patients auto-post 5-star reviews. Unhappy ones route to you privately first. Reputation protects itself." data-es="Los pacientes felices publican reseñas de 5 estrellas automáticamente. Los insatisfechos llegan a ti primero, en privado. La reputación se cuida sola.">Happy patients auto-post 5-star reviews. Unhappy ones route to you privately first. Reputation protects itself.</p>
       </div>
     </div>
-    <div class="text-center"><button class="btn btn-outline" onclick="showPage('demo')" data-en="Try the Interactive Demo →" data-es="Ver el Demo Interactivo →">Try the Interactive Demo →</button></div>
+
+    <!-- Tiered Reward Ladder visual -->
+    <div class="reveal" style="margin-top:56px;background:var(--ink);border-radius:var(--r-lg);padding:36px 40px">
+      <div style="text-align:center;margin-bottom:28px">
+        <span style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(201,148,10,.7)" data-en="The Reward Ladder" data-es="La Escalera de Recompensas">The Reward Ladder</span>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,32px);font-weight:700;color:var(--white);margin-top:6px" data-en="Every milestone is rewarded — not just the finish line" data-es="Cada hito se recompensa — no solo la meta final">Every milestone is rewarded — not just the finish line</h3>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);padding:24px 20px;text-align:center">
+          <div style="font-size:32px;margin-bottom:10px">🥉</div>
+          <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(201,148,10,.7);margin-bottom:6px" data-en="Bronze · Milestone" data-es="Bronce · Hito">Bronze · Milestone</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:6px" data-en="Dining Reward" data-es="Recompensa de Cena">Dining Reward</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.5" data-en="3rd visit or 5-star review. Instant gratification that builds the rebooking habit." data-es="3ra visita o reseña de 5 estrellas. Gratificación instantánea que construye el hábito de regresar.">3rd visit or 5-star review. Instant gratification that builds the rebooking habit.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);padding:24px 20px;text-align:center">
+          <div style="font-size:32px;margin-bottom:10px">🥈</div>
+          <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(201,148,10,.7);margin-bottom:6px" data-en="Silver · Referral" data-es="Plata · Referido">Silver · Referral</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:6px" data-en="Dining Reward" data-es="Recompensa de Cena">Dining Reward</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.5" data-en="Send a referral and earn instantly. New friend gets a welcome dining offer too — double-sided." data-es="Envía un referido y gana al instante. El nuevo amigo también recibe una oferta de bienvenida.">Send a referral and earn instantly. New friend gets a welcome dining offer too — double-sided.</div>
+        </div>
+        <div style="background:linear-gradient(135deg,rgba(91,63,190,.3),rgba(232,185,35,.1));border:1px solid rgba(232,185,35,.3);border-radius:var(--r-lg);padding:24px 20px;text-align:center">
+          <div style="font-size:32px;margin-bottom:10px">🏆</div>
+          <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:6px" data-en="Platinum · Grand Finale" data-es="Platino · Gran Final">Platinum · Grand Finale</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:6px" data-en="3-Day Hotel Stay*" data-es="Estadía de Hotel de 3 Días*">3-Day Hotel Stay*</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.65);line-height:1.5" data-en="1,000 points. Cancún, Orlando, or the Bahamas. The North Star that makes patients never want to leave." data-es="1,000 puntos. Cancún, Orlando o las Bahamas. La estrella del norte que hace que los pacientes nunca quieran irse.">1,000 points. Cancún, Orlando, or the Bahamas. The North Star that makes patients never want to leave.</div>
+        </div>
+      </div>
+      <p style="font-size:12px;color:rgba(255,255,255,.25);text-align:center;margin-top:16px" data-en="*Room rate covered. Flights, taxes &amp; resort fees not included. One per household per 12 months. 30-day advance booking required. 21+ with valid ID." data-es="*Tarifa de habitación cubierta. Vuelos, impuestos y tarifas de resort no incluidos. Una por hogar por 12 meses. Reserva con 30 días de anticipación. 21+ con identificación válida.">*Room rate covered. Flights, taxes &amp; resort fees not included. One per household per 12 months. 30-day advance booking required. 21+ with valid ID.</p>
+    </div>
+
+    <div class="text-center" style="margin-top:32px"><button class="btn btn-outline" onclick="showPage('demo')" data-en="Try the Interactive Demo →" data-es="Ver el Demo Interactivo →">Try the Interactive Demo →</button></div>
   </div>
 </section>
 
@@ -1201,9 +1240,9 @@ section{padding:120px 48px}
       </div>
       <div class="hiw-card reveal d1">
         <span class="hiw-day" data-en="Day 2" data-es="Día 2">Day 2</span>
-        <span class="hiw-icon">✈️</span>
-        <h3 class="hiw-title" data-en="Vacation Rewards Live + Review Firewall On" data-es="Recompensas de Vacaciones Activas + Escudo de Reseñas">Vacation Rewards Live + Review Firewall On</h3>
-        <p class="hiw-desc" data-en="Your luxury vacation reward system activates. Happy patients get routed to Google for their 5-star review. Unhappy patients go to you privately first." data-es="Tu sistema de recompensas de vacaciones de lujo se activa. Los pacientes felices van a Google para su reseña de 5 estrellas. Los insatisfechos llegan primero a ti, en privado.">Your luxury vacation reward system activates. Happy patients get routed to Google for their 5-star review. Unhappy patients go to you privately first.</p>
+        <span class="hiw-icon">🍽️</span>
+        <h3 class="hiw-title" data-en="Milestone Dining Rewards + Hotel Stay Activated" data-es="Recompensas de Cena por Hitos + Estadía de Hotel Activada">Milestone Dining Rewards + Hotel Stay Activated</h3>
+        <p class="hiw-desc" data-en="Your tiered reward system goes live. Dining rewards fire automatically at visit 3 or a 5-star review. The hotel stay kicks in at 1,000 points. Happy patients route to Google. Unhappy ones come to you privately first." data-es="Tu sistema de recompensas escalonado se activa. Las recompensas de cena se activan automáticamente en la visita 3 o una reseña de 5 estrellas. La estadía de hotel se activa a los 1,000 puntos. Los pacientes felices van a Google. Los insatisfechos llegan primero a ti, en privado.">Your tiered reward system goes live. Dining rewards fire at visit 3. Hotel stay unlocks at 1,000 points. The reputation firewall runs automatically.</p>
       </div>
       <div class="hiw-card reveal d2">
         <span class="hiw-day" data-en="Day 3" data-es="Día 3">Day 3</span>
@@ -1242,7 +1281,8 @@ section{padding:120px 48px}
         <ul class="price-features">
           <li><span class="pf-check">✓</span><span data-en="Bilingual AI follow-up (EN + ES)" data-es="Seguimiento de IA bilingüe (EN + ES)">Bilingual AI follow-up (EN + ES)</span></li>
           <li><span class="pf-check">✓</span><span data-en="Apple/Google Wallet loyalty card" data-es="Tarjeta de lealtad Apple/Google Wallet">Apple/Google Wallet loyalty card</span></li>
-          <li><span class="pf-check">✓</span><span data-en="Complimentary 3-Day Hotel Stay reward system*" data-es="Sistema de Estadía de Hotel Complementaria de 3 Días*">Complimentary 3-Day Hotel Stay reward system*</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Milestone dining rewards (visit 3 + review)" data-es="Recompensas de cena por hitos (visita 3 + reseña)">Milestone dining rewards (visit 3 + review)</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Complimentary 3-Day Hotel Stay at 1,000 pts*" data-es="Estadía de Hotel Complementaria a 1,000 pts*">Complimentary 3-Day Hotel Stay at 1,000 pts*</span></li>
           <li><span class="pf-check">✓</span><span data-en="Review firewall + 5★ automation" data-es="Escudo de reseñas + automatización 5★">Review firewall + 5★ automation</span></li>
           <li><span class="pf-check">✓</span><span data-en="Live revenue dashboard" data-es="Panel de ingresos en vivo">Live revenue dashboard</span></li>
           <li><span class="pf-check">✓</span><span data-en="Full onboarding + setup included" data-es="Integración completa + configuración incluida">Full onboarding + setup included</span></li>
@@ -1261,6 +1301,7 @@ section{padding:120px 48px}
         <div class="price-divider"></div>
         <ul class="price-features">
           <li><span class="pf-check">✓</span><span data-en="Everything in Founding Pilot" data-es="Todo lo del Piloto Fundador">Everything in Founding Pilot</span></li>
+          <li><span class="pf-check">✓</span><span data-en="Double-sided referral rewards (advocate + new patient)" data-es="Recompensas de referidos dobles (defensor + nuevo paciente)">Double-sided referral rewards (advocate + new patient)</span></li>
           <li><span class="pf-check">✓</span><span data-en="Custom branded experience" data-es="Experiencia con tu marca personalizada">Custom branded experience</span></li>
           <li><span class="pf-check">✓</span><span data-en="Haitian Creole + Portuguese (add-on)" data-es="Criollo haitiano + Portugués (complemento)">Haitian Creole + Portuguese (add-on)</span></li>
           <li><span class="pf-check">✓</span><span data-en="Priority support" data-es="Soporte prioritario">Priority support</span></li>
